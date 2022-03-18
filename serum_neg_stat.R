@@ -141,4 +141,37 @@ gt_export <- mutate_export %>%
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
 candidates <- read_tsv("indo.tsv") %>% 
+  dplyr::mutate(sp.id = rownames(.)) %>% 
   dplyr::as_tibble()
+## ------------------------------------- 
+## search pubchem
+mutate_inchi_curl(candidates$inchikey2D, candidates$sp.id)
+## gather data
+pub_instance <- gather_inchi_curl() %>% 
+  dplyr::rename(.id = sp.id)
+## ------------------ 
+mutate_auto_classy(pub_instance, cl = 20)
+## gather classyfire
+class <- gather_classyfire(class = "Indoles and derivatives", inchi_df = pub_instance)
+## ------------------------------------- 
+## annotate sirius results with classification
+simp_candi <- candidates %>% 
+  merge(class, by.x = "inchikey2D", by.y = "inchi2d", all.x = T) %>% 
+  dplyr::filter(classification == "Indoles and derivatives") %>% 
+  dplyr::select(.id, inchikey2D, name, classification, tanimotoSimilarity) %>% 
+  dplyr::mutate(sp.id = rownames(.)) %>% 
+  dplyr::as_tibble()
+## ---------------------------------------------------------------------- 
+system("rm -r inchi_pub")
+## re-collate compound via pubchem
+mutate_inchi_curl(simp_candi$inchikey2D, simp_candi$sp.id, get = "IUPACName")
+## gather
+name_df <- gather_inchi_curl() %>% 
+  dplyr::distinct(sp.id, .keep_all = T)
+## -------------------------------------  
+indo_export <- simp_candi %>% 
+  merge(name_df, by = "sp.id", all.x = T) %>% 
+  dplyr::mutate(name = ifelse(name == "null", IUPACName, name)) %>%
+  dplyr::as_tibble()
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
