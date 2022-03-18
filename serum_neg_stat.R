@@ -140,4 +140,5 @@ gt_export <- mutate_export %>%
 ## here, classyfireR is used to add annotation of classification
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
-
+candidates <- read_tsv("indo.tsv") %>% 
+  dplyr::as_tibble()
