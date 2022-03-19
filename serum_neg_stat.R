@@ -99,27 +99,16 @@ library(MetaboAnalystR)
 p_col <- c("pro_model#q_value", "pro_model#log2.fc")
 ## ------------------ 
 detach("package:dplyr")
-# metabo_idenfication <- meta_metabo_pathway(export, mz_rt, p_col = p_col,
-                                           # ppm = 10,
-                                           # p_cutoff = 0.05,
-                                           # db_pathway = "hsa_mfn",
-                                           # ion_mode = "negative") ## `key`, `as_col`
+# metabo_idenfication <- meta_metabo_pathway(export, mz_rt, p_col = p_col, ppm = 10, p_cutoff = 0.05, db_pathway = "hsa_mfn", ion_mode = "negative") ## `key`, `as_col`
 subm_list <- meta_metabo_pathway(export, mz_rt, p_col = p_col, only_return = T)
 ## the submit file is got and name as "tmp.txt"
 ## ------------------------------------- 
 ## collate file that download from Web of MetaboAnalyst
-metabo_results <- metabo_collate()
+metabo_results <- metabo_collate(path = "~/Desktop")
 ## ------------------------------------- 
 mutate_mz_rt <- dplyr::mutate(mz_rt, rt = rt * 60)
-## ------------------ 
-metabos <- metabo_results %>% 
-  lapply(dplyr::rename, mz = Query.Mass, rt = Retention.Time) %>%
-  lapply(merge, mutate_mz_rt, by = c("mz", "rt")) %>% 
-  lapply(dplyr::mutate,
-         info = paste0(pathway,  " ---- Gamma: ", Gamma, " ---- Hits.sig: ", Hits.sig)) %>% 
-  lapply(dplyr::select, id, name, info) %>% 
-  lapply(dplyr::as_tibble)
-## ----------------------------------------------------------------------
+## get id
+metabos <- metabo_get_id_via_mz_rt(metabo_results, mutate_mz_rt)
 ## gather export with metabos
 mutate_export <- lapply(metabos, merge, y = export, by = "id", all.x = T) %>% 
   lapply(dplyr::arrange, name) %>%
@@ -152,35 +141,77 @@ pub_instance <- gather_inchi_curl() %>%
 ## ------------------ 
 mutate_auto_classy(pub_instance, cl = 20)
 ## gather classyfire
-class <- gather_classyfire(class = "Indoles and derivatives", inchi_df = pub_instance)
-## ------------------------------------- 
-## annotate sirius results with classification
-simp_candi <- candidates %>% 
-  merge(class, by.x = "inchikey2D", by.y = "inchi2d", all.x = T) %>% 
-  dplyr::filter(classification == "Indoles and derivatives") %>% 
-  dplyr::select(.id, inchikey2D, name, classification, tanimotoSimilarity) %>% 
-  dplyr::mutate(sp.id = rownames(.)) %>% 
-  dplyr::as_tibble()
+simp_candi <- meta_gather_pub_classyfire_sirius(pub_instance, "Indoles and derivatives", candidates)
 ## ---------------------------------------------------------------------- 
 system("rm -r inchi_pub")
 ## re-collate compound via pubchem
 mutate_inchi_curl(simp_candi$inchikey2D, simp_candi$sp.id, get = "IUPACName")
+system("rm -r inchi_pub")
 ## gather
 name_df <- gather_inchi_curl() %>% 
   dplyr::distinct(sp.id, .keep_all = T)
-## -------------------------------------  
-indo_export <- simp_candi %>% 
-  merge(name_df, by = "sp.id", all.x = T) %>% 
-  dplyr::mutate(name = ifelse(name == "null", IUPACName, name)) %>%
-  dplyr::select(.id, name, classification, tanimotoSimilarity) %>% 
-  dplyr::rename(id = .id, info = classification) %>% 
-  merge(export, by = "id", all.y = T) %>% 
-  dplyr::filter(is.na(name) == F) %>% 
-  dplyr::arrange(desc(tanimotoSimilarity)) %>% 
-  dplyr::as_tibble()
-## ------------------------------------- 
+## as export
+indo_export <- meta_re_collate_iupac_via_inchi(simp_candi, name_df, export)
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
 ## mannualy adjust name >>> syno_backup
 gt_indo_export <- indo_export %>% 
   pretty_table(spanner = T, shorter_name = F, default = T)
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## the manipulation across through classyfire. therefore if databse without
+## the compounds, the classification annotation possibly be leaving out
+## this step re-search some compouns
+mutate_inchi_curl_syno(candidates$inchikey2D, candidates$sp.id)
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## some specific structure need to search
+comple <- read_tsv("indo_and_phenol.txt") %>% 
+  dplyr::mutate(inchikey2D = stringr::str_extract(inchi, "^[A-Z]{1,1000}"))
+## ----------------------------------------------------------------------
+## ----------------------------------------------------------------------
+## ----------------------------------------------------------------------
+## phenol structure candidates
+phenol <- read_tsv("phenol.tsv") %>% 
+  dplyr::as_tibble()
+## inchikey2D search
+search_results <- lapply(comple$inchikey2D, inchikey2d_search,
+                         db = candidates)
+# inchikey2d_search(inchikey2D, db, col = "inchikey2D")
+## ---------------------------------------------------------------------- 
+## ----------------------------------------------------------------------
+## ----------------------------------------------------------------------
+## ----------------------------------------------------------------------
+comple_formula <- inchikey_get_formula(comple$inchi) %>% 
+  dplyr::distinct(inchikey, .keep_all = T)
+## get possibly precursor
+precursor <- formula_adduct_mass(comple_formula$MolecularFormula)
+names(precursor) <-  comple$name
+## ------------------------------------- 
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## precursor search
+sig_mz_rt <- dplyr::mutate(mz_rt, sig = ifelse(id %in% export$id, T, F))
+mz_search <- multi_formula_adduct_align(precursor, sig_mz_rt) %>% 
+  data.table::rbindlist(idcol = T, fill = T) %>% 
+  dplyr::rename(info = .id) %>% 
+  dplyr::mutate(id = as.character(id))
+## ------------------------------------- 
+much_export <- meta_summarise %>%
+  meta_compound_filter(vip = vip, dose = "high",
+                       l_abs_log_fc = 0, l_q_value = 1, l_vip = 0)
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+mz_search_export <- merge(mz_search, much_export, by = "id", all.x = T) %>% 
+  dplyr::filter(is.na(vip) == F)
+## -------------------------------------
+gt_mz_search_export <- mz_search_export %>% 
+  pretty_table(spanner = T, shorter_name = F, default = T, title = "indo compound search",
+               subtitle = paste0("All search is >>> ", paste(comple$name, collapse = " | ")))
+## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
