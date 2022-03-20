@@ -168,17 +168,17 @@ mutate_inchi_curl_syno(candidates$inchikey2D, candidates$sp.id)
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
 ## some specific structure need to search
-comple <- read_tsv("indo_and_phenol.txt") %>% 
+comple <- read_tsv("ete.tsv") %>% 
   dplyr::mutate(inchikey2D = stringr::str_extract(inchi, "^[A-Z]{1,1000}"))
 ## ----------------------------------------------------------------------
 ## ----------------------------------------------------------------------
 ## ----------------------------------------------------------------------
-## phenol structure candidates
-phenol <- read_tsv("phenol.tsv") %>% 
-  dplyr::as_tibble()
-## inchikey2D search
-search_results <- lapply(comple$inchikey2D, inchikey2d_search,
-                         db = candidates)
+# ## phenol structure candidates
+# phenol <- read_tsv("phenol.tsv") %>% 
+#   dplyr::as_tibble()
+# ## inchikey2D search
+# search_results <- lapply(comple$inchikey2D, inchikey2d_search,
+#                          db = candidates)
 # inchikey2d_search(inchikey2D, db, col = "inchikey2D")
 ## ---------------------------------------------------------------------- 
 ## ----------------------------------------------------------------------
@@ -210,7 +210,7 @@ mz_search_export <- merge(mz_search, much_export, by = "id", all.x = T) %>%
   dplyr::filter(is.na(vip) == F)
 ## -------------------------------------
 gt_mz_search_export <- mz_search_export %>% 
-  pretty_table(spanner = T, shorter_name = F, default = T, title = "indo compound search",
+  pretty_table(spanner = T, shorter_name = F, default = T, title = "Arachidonic acid compound search",
                subtitle = paste0("All search is >>> ", paste(comple$name, collapse = " | ")))
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
