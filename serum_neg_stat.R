@@ -195,7 +195,7 @@ names(precursor) <-  comple$name
 ## ---------------------------------------------------------------------- 
 ## precursor search
 sig_mz_rt <- dplyr::mutate(mz_rt, sig = ifelse(id %in% export$id, T, F))
-mz_search <- multi_formula_adduct_align(precursor, sig_mz_rt) %>% 
+mz_search <- multi_formula_adduct_align(precursor, sig_mz_rt, mz_tol = 0.002) %>% 
   data.table::rbindlist(idcol = T, fill = T) %>% 
   dplyr::rename(info = .id) %>% 
   dplyr::mutate(id = as.character(id))
