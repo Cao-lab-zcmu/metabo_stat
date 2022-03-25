@@ -168,7 +168,7 @@ mutate_inchi_curl_syno(candidates$inchikey2D, candidates$sp.id)
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
 ## some specific structure need to search
-comple <- read_tsv("ete.tsv") %>% 
+comple <- read_tsv("indo_and_phenol.tsv") %>% 
   dplyr::mutate(inchikey2D = stringr::str_extract(inchi, "^[A-Z]{1,1000}"))
 ## ----------------------------------------------------------------------
 ## ----------------------------------------------------------------------
@@ -195,7 +195,7 @@ names(precursor) <-  comple$name
 ## ---------------------------------------------------------------------- 
 ## precursor search
 sig_mz_rt <- dplyr::mutate(mz_rt, sig = ifelse(id %in% export$id, T, F))
-mz_search <- multi_formula_adduct_align(precursor, sig_mz_rt, mz_tol = 0.002) %>% 
+mz_search <- multi_formula_adduct_align(precursor, sig_mz_rt, mz_tol = 0.005) %>% 
   data.table::rbindlist(idcol = T, fill = T) %>% 
   dplyr::rename(info = .id) %>% 
   dplyr::mutate(id = as.character(id))

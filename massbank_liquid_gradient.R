@@ -19,6 +19,23 @@ mutate_supp <- supp %>%
 comment_type <- mutate_supp$comment %>% 
   unique()
 ## ---------------------------------------------------------------------- 
+## Chromatography relative 
+# test <- comment_type[c(17, 18, 19, 21, 22, 56)]
+# test <- dplyr::filter(mutate_supp, comment %in% test) %>% 
+#   by_group_as_list("comment") %>% 
+#   lapply(dplyr::rename, evaluate = record) %>% 
+#   lapply(table_app, prop = F) %>% 
+#   lapply(function(v){
+#            df <- data.table::data.table(class = names(v), value = unlist(v, use.names = F))
+#            return(df)
+#       }) %>% 
+#   data.table::rbindlist(idcol = T) %>% 
+#   dplyr::mutate(class = paste0(1:nrow(.), ": ", stringr::str_extract(class, "^.{1,20}"), "..."))
+# ## visualization
+# generic_horizon_bar(test,
+#                     title = "chromatography conditions",
+#                     save = "~/Pictures/chroma_condition.svg")
+## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
 ## for most important annotation, filter to get RT
