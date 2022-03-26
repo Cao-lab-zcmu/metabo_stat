@@ -176,8 +176,7 @@ dominant_list <- list[which(names(list) %in% dominant_stat$classification)]
 ## get the sirius summary. this results has integrated with cosmic
 sirius_results <- read_tsv("compound_identifications.tsv") %>%
   as_tibble()
-sirius <- dplyr::select(sirius_results, formulaRank, InChIkey
-2D, id) %>%
+sirius <- dplyr::select(sirius_results, formulaRank, InChIkey2D, id) %>%
   dplyr::mutate(.id = stringr::str_extract(id, "(?<=_)[a-z]{1,9}[0-9]{1,5}$")) %>%
   dplyr::select(.id, InChIkey2D, formulaRank) %>%
   dplyr::rename(inchikey2D = InChIkey2D)
@@ -249,7 +248,7 @@ candidates_accuracy <- stat_topn_candidates_accuracy(dominant_stat$classificatio
 horizon_bar_accuracy(candidates_accuracy, title = "all candidates accuracy",
                      savename = "mcnebula_results/mutate50_candidates_accuracy_bar.svg",
                      return_p = F)
-roman_convert("mcnebula_results/candidates_accuracy_bar.svg")
+roman_convert("mcnebula_results/mutate50_candidates_accuracy_bar.svg")
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
