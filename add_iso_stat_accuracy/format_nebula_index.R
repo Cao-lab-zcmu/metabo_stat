@@ -16,4 +16,3 @@ class_nebula_list <- extra::by_group_as_list(class_nebula, "name")
 list <- list_merge_df(class_nebula_list, class_meta, by = ".id", all.x = T)
 list <- lapply(list, select_app,
                col = c(".id", "hierarchy", "Ontology"))
-

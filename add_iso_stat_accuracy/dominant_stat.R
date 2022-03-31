@@ -41,4 +41,3 @@ mutate_horizon_bar_accuracy(dominant_stat, title = "clustering accuracy",
                             extra_sides_df = extra_dominant,
                             return_p = F)
 roman_convert("mcnebula_results/cluster_accuracy_bar.svg")
-
