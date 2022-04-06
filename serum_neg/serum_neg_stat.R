@@ -14,7 +14,7 @@ palette <- c(control = "grey", model = "#374E55FF", drug = "#00A087FF",
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
 ## R codes for meta analyses
-file <- "./batch_serum_neg.csv"
+# file <- "./batch_serum_neg.csv"
 feature_csv <- data.table::fread(file) %>%
   dplyr::as_tibble()
 ## ----------------------------------------------------------------------  
