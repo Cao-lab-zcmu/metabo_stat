@@ -39,6 +39,7 @@ extra_dominant <- merge(extra_stat_table, dplyr::select(dominant_stat, classific
 mutate_horizon_bar_accuracy(dominant_stat, title = "clustering accuracy",
                             savename = "mcnebula_results/cluster_accuracy_bar.svg",
                             extra_sides_df = extra_dominant,
+                            extra_col_max = 500,
                             return_p = F)
 roman_convert("mcnebula_results/cluster_accuracy_bar.svg")
 
