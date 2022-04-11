@@ -13,6 +13,7 @@ lapply(envir_name, function(name){
          assign(name, new.env(), envir = parent.frame(2))
 })
 ## ---------------------------------------------------------------------- 
-path <- c("",
-          "/media/echo",
-          "/media/echo/")
+path <- c("/media/echo/DATA/yellow/iso_gnps_pos",
+          "/media/echo/DATA/yellow/noise_gnps_pos",
+          "/media/echo/h_noise_gnps_pos")
+## ---------------------------------------------------------------------- 
