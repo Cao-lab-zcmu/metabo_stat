@@ -29,3 +29,32 @@ pbapply::pbmapply(function(path, envir_name, var){
                     )}, path, envir_name,
           MoreArgs = list(var = var))
 ## ---------------------------------------------------------------------- 
+## as list
+lapply(var, function(var){
+         list <- lapply(parse(text = paste0(envir_name, "$", var)), eval)
+         names(list) <- envir_name
+         assign(paste0("list_", var), list, envir = parent.frame(2))
+         return()
+          })
+# ---------------------------------------------------------------------- 
+## get classification data
+lapply("/media/wizard/back/test_mcnebula/gnps_pos/.RData",
+       function(file){
+         load(file)
+         .MCn.class_tree_data <<- .MCn.class_tree_data
+         return()
+       })
+## plot results
+## ------------------------------------- 
+## MCnebula
+mutate2_horizon_bar_accuracy(list_dominant_stat,
+                            title = "MCnebula tolerance",
+                            savename = "mc_noise_tolerance_bar.svg",
+                            extra_list = list_extra_dominant)
+## ------------------------------------- 
+## MolnetEnhancer
+mutate2_horizon_bar_accuracy(list_molnet_dominant_stat,
+                            title = "MolnetEnhancer tolerance",
+                            savename = "molnet_noise_tolerance_bar.svg",
+                            extra_list = list_m_extra_dominant)
+## ---------------------------------------------------------------------- 
