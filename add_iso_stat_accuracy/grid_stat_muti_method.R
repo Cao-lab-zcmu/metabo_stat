@@ -56,5 +56,11 @@ mutate2_horizon_bar_accuracy(list_dominant_stat,
 mutate2_horizon_bar_accuracy(list_molnet_dominant_stat,
                             title = "MolnetEnhancer tolerance",
                             savename = "molnet_noise_tolerance_bar.svg",
-                            extra_list = list_m_extra_dominant)
-## ---------------------------------------------------------------------- 
+                            extra_list = list_m_extra_dominant,
+                            l_ratio = 62,
+                            m_ratio = 110,
+                            y_cut_left = c(50, 700),
+                            y_cut_right = c(800, 2500),
+                            y_cut_left_breaks = c(50, seq(100, 700, by = 200)),
+                            y_cut_right_breaks = c(1400, 2000),
+                            width = 24)
