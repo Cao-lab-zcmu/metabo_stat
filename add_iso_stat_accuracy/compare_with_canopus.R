@@ -1,22 +1,20 @@
 ## ------------------------------------- 
 ## ------------------------------------- 
 ## ------------------------------------- 
-## compare cluster accuracy of MCnebula with molnetEnhancer
+## compare cluster accuracy of MCnebula with canopus
 ## ------------------------------------- 
 ## ------------------------------------- 
 ## ------------------------------------- 
-molnet_path <- "mcnebula_results/gnps/molnet/output_network/ClassyFireResults_Network.txt"
-molnet_raw <- read_tsv(molnet_path)
+canopus_path <- "canopus_summary.tsv"
+canopus_raw <- read_tsv(canopus_path)
 ## ---------------------------------------------------------------------- 
 ## re_shape the data
-molnet <- dplyr::select(molnet_raw, `cluster index`, ends_with("class")) %>% 
-  dplyr::rename(.id = `cluster index`) %>% 
-  dplyr::mutate(.id = paste0("gnps", .id))
+canopus <- dplyr::select(canopus_raw, name, `level 5`, subclass, class, superclass) %>% 
+  dplyr::rename(level5 = `level 5`, .id = name) %>% 
+  dplyr::mutate(.id = stringr::str_extract(.id, "(?<=_)[^_]{1,}$"))
 ## ------------------------------------- 
-## format for function: stat_results_class 
-## ------------------------------------- 
-molnet_list <- pbapply::pblapply(colnames(molnet)[2:4],
-                      function(col, df = molnet){
+canopus_list <- pbapply::pblapply(colnames(canopus)[2:ncol(canopus)],
+                      function(col, df = canopus){
                         list <- by_group_as_list(df, col) %>% 
                           lapply(dplyr::select, .id) %>% 
                           .[!names(.) %in% c("", "no matches")] %>% 
@@ -26,53 +24,56 @@ molnet_list <- pbapply::pblapply(colnames(molnet)[2:4],
                         return(list)
                       })
 ## ---------------------------------------------------------------------- 
-## unlist
-parallel_molnet <- unlist(molnet_list, recursive = F)
+parallel_canopus <- unlist(canopus_list, recursive = F)
   # .[names(.) %in% dominant_stat$classification]
 ## discard null
 use_class <- mapply(function(df, number){
                           if(is.data.frame(df))
                             return(number)
-                      }, parallel_molnet, 1:length(parallel_molnet)) %>% 
+                      }, parallel_canopus, 1:length(parallel_canopus)) %>% 
   unlist(use.names = F)
-parallel_molnet <- parallel_molnet[use_class]
+parallel_canopus <- parallel_canopus[use_class]
 ## ------------------------------------- 
 ## stat via classyfire results
-molnet_stat_list <- mapply(stat_results_class, parallel_molnet, names(parallel_molnet),
+canopus_stat_list <- mapply(stat_results_class, parallel_canopus, names(parallel_canopus),
                            path = "classyfire", SIMPLIFY = F)
 ## stat ratio of ture or false
-molnet_stat_table <- lapply(molnet_stat_list, table_app, prop = T)
+canopus_stat_table <- lapply(canopus_stat_list, table_app, prop = T)
 ## ------------------------------------- 
 ## gather data
-molnet_dominant_stat <- data.table::rbindlist(molnet_stat_table, fill = T, idcol = T) %>%
+canopus_dominant_stat <- data.table::rbindlist(canopus_stat_table, fill = T, idcol = T) %>%
   dplyr::rename(classification = .id) %>%
   dplyr::summarise_all(na_as)
-## ------------------------------------- 
-## ------------------------------------- 
-## ------------------------------------- 
-## sides plot
-## ------------------------------------- 
-## ------------------------------------- 
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
 # sum number in each classification
-m_extra_stat_table <- lapply(molnet_stat_list, table_app, prop = F) %>%
+canopus_extra_stat_table <- lapply(canopus_stat_list, table_app, prop = F) %>%
   data.table::rbindlist(fill = T, idcol = T) %>%
   dplyr::rename(classification = .id) %>%
   dplyr::summarise_all(na_as)
-m_extra_dominant <- merge(m_extra_stat_table, dplyr::select(molnet_dominant_stat, classification),
+canopus_extra_dominant <- merge(canopus_extra_stat_table, dplyr::select(canopus_dominant_stat, classification),
                         by = "classification", all.y = T) %>%
   mutate(., sum = apply(dplyr::select(., 2:4), 1, sum)) %>%
   dplyr::select(classification, sum)
+## ---------------------------------------------------------------------- 
+## ----------------------------------------------------------------------
+## filter substructral class
+canopus_dominant_stat <- dplyr::filter(canopus_dominant_stat, false <= 0.4)
+## the same filter of extra_dominant
+canopus_extra_dominant <- dplyr::filter(canopus_extra_dominant,
+                                        classification %in% canopus_dominant_stat$classification)
 ## ----------------------------------------------------------------------
 ## ----------------------------------------------------------------------
 ## ----------------------------------------------------------------------
-## ----------------------------------------------------------------------
-mutate_horizon_bar_accuracy(molnet_dominant_stat, title = "MolnetEnhancer accuracy",
-                            savename = "mcnebula_results/molnet_accuracy_bar.svg",
-                            extra_sides_df = m_extra_dominant,
+mutate_horizon_bar_accuracy(canopus_dominant_stat, title = "Canopus accuracy",
+                            savename = "mcnebula_results/canopus_accuracy_bar.svg",
+                            extra_sides_df = canopus_extra_dominant,
                             palette = ggsci::pal_locuszoom()(7),
                             width = 19,
                             l_ratio = 85,
                             m_ratio = 150,
                             return_p = F)
-roman_convert("mcnebula_results/molnet_accuracy_bar.svg")
+roman_convert("mcnebula_results/canopus_accuracy_bar.svg")
 
