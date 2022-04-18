@@ -6,4 +6,4 @@
 ## bio_generate_child_nebula
 ## bio_visualize_child_nenula
 ## bio_annotate_nebula
-
+## hits_class

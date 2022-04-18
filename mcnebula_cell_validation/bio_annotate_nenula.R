@@ -11,12 +11,12 @@ stat_palette <- c(sur = .MCn.palette[1],
                   mor = .MCn.palette[2])
 ## ---------------------------------------------------------------------- 
 ## draw child nebula
-annotate_child_nebulae("Steroids and steroid derivatives",
+annotate_child_nebulae("Lysophosphatidylcholines",
                        output=".",
+                       ## pie diagrame setting
+                       # ratio_df = test_ratio,
+                       # palette_stat = stat_palette,
                        ## biomarker tracing
                        nodes_mark = mark_df,
-                       palette = mark_palette,
-                       ## pie diagrame setting
-                       ratio_df = test_ratio,
-                       palette_stat = stat_palette)
+                       palette = mark_palette)
 
