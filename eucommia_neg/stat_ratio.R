@@ -35,4 +35,3 @@ log.fc_stat <- mean.feature_stat %>%
                 log2fc = log2(`EU-Pro` / `EU-Raw`)) %>% 
   dplyr::filter(abs(log2fc) >= 1)
 ## ---------------------------------------------------------------------- 
-
