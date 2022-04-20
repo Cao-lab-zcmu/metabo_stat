@@ -1,6 +1,12 @@
 ## stat peak area
 mzmine_table <- "mcnebula_results/mzmine_table.tsv" %>% 
   read_tsv()
+## ------------------------------------- 
+mz_rt <- mzmine_table %>% 
+  dplyr::select(1:3) %>% 
+  dplyr::rename(.id = 1, mz = 2, rt = 3) %>% 
+  dplyr::mutate(.id = as.character(.id))
+## ------------------------------------- 
 ## reset name
 colnames(mzmine_table) <- gsub("\\.mzML Peak area", "", colnames(mzmine_table))
 ## metadata
@@ -29,9 +35,9 @@ mean.feature_stat <- mzmine_table %>%
   dplyr::as_tibble()
 ## ---------------------------------------------------------------------- 
 ## ten times fold change
-log.fc_stat <- mean.feature_stat %>% 
+log.fc_stat.ori <- mean.feature_stat %>% 
   dplyr::mutate(`EU-Pro` = `EU-Pro` + 1,
                 `EU-Raw` = `EU-Raw` + 1,
-                log2fc = log2(`EU-Pro` / `EU-Raw`)) %>% 
+                log2fc = log2(`EU-Pro` / `EU-Raw`))
+log.fc_stat <- log.fc_stat.ori %>% 
   dplyr::filter(abs(log2fc) >= 1)
-## ---------------------------------------------------------------------- 
