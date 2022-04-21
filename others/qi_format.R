@@ -1,12 +1,15 @@
 ## format qi csv as metaboanalyst input
 ## read as raw data
-file_set <- list.files(pattern = "csv$")
+file_set <- list.files(pattern = "csv$") %>%
+  .[!grepl("format", .)]
 pbapply::pblapply(file_set, function(file){
                     metadata <- qi_get_format(file, metadata = T)
                     ## ---------------------------------------------------------------------- 
                     df <- qi_get_format(file)
                     ## ------------------------------------- 
-                    select <- c("Control", "HFD")
+                    select <- metadata$group %>%
+                      unique() %>%
+                      .[1:2]
                     ## ------------------------------------- 
                     export <- qi_as_metabo_inte.table(df, metadata, select)
                     ## ------------------------------------- 
