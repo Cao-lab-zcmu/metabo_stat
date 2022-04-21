@@ -1,6 +1,6 @@
 ## format qi csv as metaboanalyst input
 ## read as raw data
-file <- "mice fece.csv"
+file_set <- list.files(pattern = "csv$")
 pbapply::pblapply(file_set, function(file){
                     metadata <- qi_get_format(file, metadata = T)
                     ## ---------------------------------------------------------------------- 
