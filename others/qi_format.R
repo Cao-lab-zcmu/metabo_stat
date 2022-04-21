@@ -1,12 +1,17 @@
 ## format qi csv as metaboanalyst input
 ## read as raw data
 file <- "mice fece.csv"
+pbapply::pblapply(file_set, function(file){
+                    metadata <- qi_get_format(file, metadata = T)
+                    ## ---------------------------------------------------------------------- 
+                    df <- qi_get_format(file)
+                    ## ------------------------------------- 
+                    select <- c("Control", "HFD")
+                    ## ------------------------------------- 
+                    export <- qi_as_metabo_inte.table(df, metadata, select)
+                    ## ------------------------------------- 
+                    savename <- paste0(file, ".format.csv")
+                    write.table(export, savename, sep = ",", col.names = T, row.names = F, quote = F)
+})
 ## ------------------------------------- 
-metadata <- qi_get_format(file, metadata = T)
-## ---------------------------------------------------------------------- 
-df <- qi_get_format(file)
-## ------------------------------------- 
-select <- c("Control", "HFD")
-## ------------------------------------- 
-export <- qi_as_metabo_inte.table(df, metadata, select)
 
