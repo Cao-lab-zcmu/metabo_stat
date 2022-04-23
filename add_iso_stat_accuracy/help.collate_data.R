@@ -1,0 +1,36 @@
+library(usethis)
+library(devtools)
+library(data.table)
+library(dplyr)
+library(ggplot2)
+library(ggraph)
+library(ggsci)
+library(ggtext)
+library(grid)
+library(igraph)
+library(MSnbase)
+library(pbapply)
+library(reshape2)
+library(stringr)
+library(svglite)
+library(tidygraph)
+library(tidyr)
+library(rsvg)
+library(ChemmineOB)
+library(ChemmineR)
+library(grImport2)
+load_all("~/MCnebula/")
+load_all("~/extra/")
+## ---------------------------------------------------------------------- 
+common_compounds <- "/media/echo/DATA/yellow/common_compounds.tsv" %>% 
+  read_tsv()
+## ---------------------------------------------------------------------- 
+nebula_index.backup <- .MCn.nebula_index
+.MCn.nebula_index <- dplyr::filter(.MCn.nebula_index, .id %in% common_compounds$.id)
+meta.backup <- meta
+meta <- dplyr::filter(meta, .id %in% common_compounds$.id)
+source("~/metabo_stat/add_iso_stat_accuracy/format_nebula_index.R")
+source("~/metabo_stat/add_iso_stat_accuracy/idenfication_stat.R")
+source("~/metabo_stat/add_iso_stat_accuracy/dominant_stat.R")
+source("~/metabo_stat/add_iso_stat_accuracy/compare_with_molnet.R")
+

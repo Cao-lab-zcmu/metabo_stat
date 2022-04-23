@@ -22,12 +22,13 @@ path <- c("/media/echo/DATA/yellow/iso_gnps_pos",
           "/media/echo/DATA/yellow/h_noise_gnps_pos")
 ## ---------------------------------------------------------------------- 
 ## batch extraction
-pbapply::pbmapply(function(path, envir_name, var){
-                    load(paste0(path, "/", ".RData"))
-                    lapply(var, function(var){
+pbapply::pbmapply(function(path, envir_name, VAR){
+                    load(paste0(path, "/.RData"))
+                    lapply(VAR, function(var){
                              assign(var, eval(parse(text = var)), envir = get(envir_name)) }
-                    )}, path, envir_name,
-          MoreArgs = list(var = var))
+                    )
+          }, path, envir_name,
+          MoreArgs = list(VAR = var))
 ## ---------------------------------------------------------------------- 
 ## as list
 lapply(var, function(var){
@@ -38,7 +39,7 @@ lapply(var, function(var){
           })
 # ---------------------------------------------------------------------- 
 ## get classification data
-lapply("/media/wizard/back/test_mcnebula/gnps_pos/.RData",
+lapply("/media/echo/DATA/yellow/h_noise_gnps_pos/.RData",
        function(file){
          load(file)
          .MCn.class_tree_data <<- .MCn.class_tree_data

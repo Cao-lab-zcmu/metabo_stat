@@ -13,6 +13,11 @@ molnet <- dplyr::select(molnet_raw, `cluster index`, ends_with("class")) %>%
   dplyr::rename(.id = `cluster index`) %>% 
   dplyr::mutate(.id = paste0("gnps", .id))
 ## ------------------------------------- 
+if(exists("common_compounds")){
+  cat("## commoun_compounds data.frame find. do filter\n")
+  molnet <- dplyr::filter(molnet, .id %in% common_compounds$.id)
+}
+## ------------------------------------- 
 ## format for function: stat_results_class 
 ## ------------------------------------- 
 molnet_list <- pbapply::pblapply(colnames(molnet)[2:4],
