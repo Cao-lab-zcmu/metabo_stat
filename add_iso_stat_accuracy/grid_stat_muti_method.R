@@ -65,3 +65,10 @@ mutate2_horizon_bar_accuracy(list_molnet_dominant_stat,
                             y_cut_left_breaks = c(50, seq(100, 700, by = 200)),
                             y_cut_right_breaks = c(1400, 2000),
                             width = 24)
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+plot.facet_compare(list_extra_dominant,
+                   list_m_extra_dominant,
+                   title = "Clustering comparation",
+                   savename = "facet_compare.svg")
