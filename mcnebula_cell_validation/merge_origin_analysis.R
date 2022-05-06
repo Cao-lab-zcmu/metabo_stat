@@ -9,12 +9,15 @@ origin_analysis <- readxl::read_xlsx("mmc3.xlsx", skip = 1) %>%
                 origin_rt = RT)
 sub_origin <- dplyr::select(origin_analysis, 1:3)
 ## ------------------------------------- 
-mzmine_results <- fread("align.csv") %>% 
+mzmine_results <- fread("re_align.csv") %>% 
   dplyr::as_tibble()
 ## select col
 mutate_mzmine <- mzmine_results %>% 
   dplyr::select(1:3) %>% 
   dplyr::rename(.id = `row ID`, mz = `row m/z`, rt = `row retention time`)
+## ------------------------------------- 
+mz_rt <- mutate_mzmine %>% 
+  dplyr::mutate(.id = as.character(.id))
 ## ---------------------------------------------------------------------- 
 ## do merge
 merge_df <- numeric_round_merge(mutate_mzmine, sub_origin,

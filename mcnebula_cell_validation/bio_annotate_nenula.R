@@ -15,7 +15,7 @@ ratio_df <- merge(merge_df[, c("origin_id", ".id")], mean.feature_stat,
 ## draw child nebula
 ## index
 ## tmp_nebula_index$name %>% unique
-annotate_child_nebulae("Steroids and steroid derivatives",
+annotate_child_nebulae("Phenylpropanoic acids",
                        layout = "fr",
                        output=".",
                        ## pie diagrame setting

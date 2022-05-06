@@ -11,7 +11,7 @@ visualize_child_nebulae(output = getwd(), nodes_mark = mark_df, palette = mark_p
                         remove_legend_lab = T,
                         legend_fill = T,
                         legend_position = "bottom",
-                        width = 15, height = 20)
+                        width = 18, height = 25)
 ## ---------------------------------------------------------------------- 
 ## for nebula legend
 in.df <- dplyr::filter(sirius_efs25, .id %in% names(mark_palette)) %>% 
