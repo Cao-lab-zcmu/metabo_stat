@@ -4,7 +4,7 @@
 mark_df <- data.table::data.table(.id = in.re_efs25.id, mark = paste0(in.re_efs25.id))
 ## set mark_palette
 pal <- pal_rickandmorty()(12)
-mark_palette <- c(colorRampPalette(pal)(length(in.re_efs25.id)), "#709AE1FF")
+mark_palette <- c(colorRampPalette(pal)(length(in.re_efs25.id)), "#D9D9D9")
 names(mark_palette) <- c(paste0(in.re_efs25.id), "Others")
 ## visualize_child_nebulae
 visualize_child_nebulae(output = getwd(), nodes_mark = mark_df, palette = mark_palette,
@@ -28,7 +28,15 @@ in.df <- dplyr::filter(sirius_efs25, .id %in% names(mark_palette)) %>%
 ## draw palette as annotation
 re_mark_palette <- mark_palette
 names(re_mark_palette) <- c(in.df$anno, "Others")
-show_palette(re_mark_palette, font_size = 15, width = 3)
+## ------------------------------------- 
+## sort according to orign id
+re_mark_palette <- re_mark_palette %>% 
+  names() %>% 
+  stringr::str_extract(., "(?<= )[0-9]{1,}(?=[\\)])|Others") %>% 
+  order() %>% 
+  re_mark_palette[.]
+## ------------------------------------- 
+show_palette(re_mark_palette, font_size = 15, width = 3, re_order = F)
 ## -------------------------------------
 ## merge main network with legend of palette
 main <- read_svg("child_nebulae.svg")

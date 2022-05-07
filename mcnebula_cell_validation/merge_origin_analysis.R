@@ -21,7 +21,7 @@ mz_rt <- mutate_mzmine %>%
 ## ---------------------------------------------------------------------- 
 ## do merge
 merge_df <- numeric_round_merge(mutate_mzmine, sub_origin,
-                                main_col = "mz", sub_col = "origin_mz", num.tol = 0.005) %>% 
+                                main_col = "mz", sub_col = "origin_mz", num.tol = 0.01) %>% 
   dplyr::filter(abs(rt - origin_rt) <= 0.3) %>% 
   dplyr::as_tibble()
 ## ---------------------------------------------------------------------- 

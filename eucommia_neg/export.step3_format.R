@@ -1,23 +1,10 @@
 ## ---------------------------------------------------------------------- 
-exclude <- c(
-             # "Lignan glycosides",
-             "Sugar acids and derivatives",
-             "Glucuronic acid derivatives",
-             # "Fatty acyl glycosides",
-             # "Medium-chain fatty acids",
-             # "Phenolic glycosides",
-             "Fatty acyl glycosides"
-             # "Long-chain fatty acids"
-)
-## ---------------------------------------------------------------------- 
 export <- export.supp %>% 
   ## exclude useless
   dplyr::select(-IUPACName) %>% 
   ## relocate name
   dplyr::relocate(name, .id, mz, `massErrorPrecursor(ppm)`, rt) %>% 
   dplyr::relocate(inchikey2D, smiles, .after = last_col()) %>% 
-  ## ------------------  manually exclude
-  dplyr::filter(!Classification %in% all_of(exclude)) %>%
   ## get hierarchy rank
   get_hierarchy.in_df(col = "Classification") %>% 
   ## duplicated in class

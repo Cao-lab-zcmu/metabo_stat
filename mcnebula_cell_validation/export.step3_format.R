@@ -15,8 +15,10 @@ export <- export.supp %>%
   dplyr::select(-hierarchy) %>% 
   ## order df
   dplyr::arrange(Classification, name) %>% 
-  dplyr::rename(id = .id, `precursor m/z` = mz,
-                `RT (min)` = rt, formula = molecularFormula,
+  dplyr::rename(id = .id, 
+                formula = molecularFormula,
+                `precursor m/z` = mz,
+                `RT (min)` = rt,
                 `tanimoto similarity` = tanimotoSimilarity,
                 `InChIKey planar` = inchikey2D,
                 `mass error (ppm)` = `massErrorPrecursor(ppm)`) %>% 
