@@ -27,3 +27,4 @@ ac_compound.docu$inchikey2d %in% .MCn.structure_set$inchikey2D
 # ac_compound.struc_set <- .MCn.structure_set %>% 
   # dplyr::filter(inchikey2D %in% ac_compound.docu$inchikey2d)
 ## ---------------------------------------------------------------------- 
+
