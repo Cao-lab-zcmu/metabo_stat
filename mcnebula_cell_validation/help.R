@@ -3,6 +3,7 @@
 ## merge_origin_analysis
 ## stat_ratio
 ## find_biomarker
+## find_ac_compounds
 ## re_identification
 ## bio_generate_child_nebula
 ## bio_visualize_child_nenula

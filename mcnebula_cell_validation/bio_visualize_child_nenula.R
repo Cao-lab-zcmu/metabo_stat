@@ -11,6 +11,8 @@ visualize_child_nebulae(output = getwd(), nodes_mark = mark_df, palette = mark_p
                         remove_legend_lab = T,
                         legend_fill = T,
                         legend_position = "bottom",
+                        nodes_stroke = 0,
+                        edges_color = "#D9D9D9",
                         width = 18, height = 25)
 ## ---------------------------------------------------------------------- 
 ## for nebula legend

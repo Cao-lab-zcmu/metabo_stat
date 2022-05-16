@@ -8,5 +8,5 @@ collate_ppcp(min_possess = 30, max_possess_pct = 0.07)
 generate_parent_nebula()
 generate_child_nebulae()
 visualize_parent_nebula()
-visualize_child_nebulae()
+visualize_child_nebulae(width = 15, height = 20, nodes_size_range = c(2, 4))
 

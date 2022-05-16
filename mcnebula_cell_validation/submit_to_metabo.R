@@ -5,6 +5,8 @@
 ba_idset <- lapply(list(
                         c("Bile acids, alcohols and derivatives",
                           "Lysophosphatidylcholines",
+                          "Acyl carnitines",
+                          "Lineolic acids and derivatives",
                           "Hydroxysteroids",
                           "Steroidal glycosides",
                           "Oxosteroids",

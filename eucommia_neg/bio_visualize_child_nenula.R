@@ -21,4 +21,12 @@ visualize_child_nebulae(output = "mcnebula_results/trace",
 file.rename("mcnebula_results/trace/child_nebulae.svg", "mcnebula_results/trace/struc_nebula.svg")
 ## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
+## visualize legend for nebula-index
+label_palette <- .MCn.palette_label[3:6]
+names(label_palette) <- Hmisc::capitalize(c("level 5", "subclass", "class", "superclass"))[4:1]
+mutate_show_palette(label_palette, font_size = 25,
+             width = 3,
+             title = "",
+             fill_lab = "Class-Hierarchy",
+             xlab = "", ylab = "", re_order = F)
 

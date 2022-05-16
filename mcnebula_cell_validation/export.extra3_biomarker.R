@@ -22,12 +22,13 @@ align.export <-  sirius_efs25.status %>%
 ## ------------------------------------- 
 ## format name
 mutate_set <- c("_", "rt", "mz", "molecularFormula",
-                "\\.id",
+                "(?<![a-z])id(?![a-z])",
+                "origin",
                 "tanimotoSimilarity", "inchikey2D")
 replace_set <- c(" ", "RT (min)", "precursor m/z", "formula",
-                 "id",
+                 "ID",
+                 "original",
                  "tanimoto similarity", "InChIKey planar")
 names(align.export) <- mapply_rename_col(mutate_set, replace_set, names(align.export))
 ## ------------------------------------- 
-pretty_table(align.export, group = F)
 
