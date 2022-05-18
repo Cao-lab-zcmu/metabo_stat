@@ -1,15 +1,20 @@
 ## read pdf as string document
-lite.bib <- "~/Documents/eucommia.bib"
+path <- "~/Documents/eucommia/"
+lite.bib <- paste0(path, "eucommia.bib")
 ## ------------------------------------- 
 ## use package 'bib2df' to parse .bib file
 lite.df <-  bib2df::bib2df(lite.bib)
 ## do filter
 lite.df.file <- lite.df %>% 
   ## keep with file
-  dplyr::filter(!is.na(FILE))
+  dplyr::filter(!is.na(FILE)) %>%
+  ## absolute path
+  dplyr::mutate(FILE = paste0(path, FILE)) %>%
+  ## filter according to year
+  dplyr::filter(YEAR >= 2000)
 ## ------------------------------------- 
 ## multi threashold read pdf
 pdf_list <- pbapply::pblapply(lite.df.file$FILE,
                               pdftools::pdf_ocr_text,
-                              cl = 6)
+                              cl = 15)
 
