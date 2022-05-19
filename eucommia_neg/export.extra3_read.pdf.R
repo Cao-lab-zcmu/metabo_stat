@@ -15,6 +15,13 @@ lite.df.file <- lite.df %>%
 ## ------------------------------------- 
 ## multi threashold read pdf
 pdf_list <- pbapply::pblapply(lite.df.file$FILE,
-                              pdftools::pdf_ocr_text,
-                              cl = 15)
+                              function(pdf){
+                                check <- try(text <- pdftools::pdf_ocr_text(pdf))
+                                if(class(check)[1] == "try-error"){
+                                  return("error")
+                                }else{
+                                  return(text)
+                                }
+                              })
+## ------------------------------------- 
 
