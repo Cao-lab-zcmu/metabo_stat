@@ -21,9 +21,9 @@ ba_idset <- lapply(list(
          ## id, mz, p-value, fc, rt
          df <- dplyr::filter(origin_analysis, origin_id %in% class_ori.id) %>% 
            dplyr::select(origin_id, origin_mz,
-           Infection_pvalue, Infection_FC,
-           # Mortality_pvalue, Mortality_FC,
-           origin_rt) %>% 
+                         Infection_pvalue, Infection_FC,
+                         # Mortality_pvalue, Mortality_FC,
+                         origin_rt) %>% 
            dplyr::filter(!is.na(Infection_pvalue) & Infection_pvalue != "NA")
          df.id <- dplyr::select(df, origin_id)
          ## data decoy 

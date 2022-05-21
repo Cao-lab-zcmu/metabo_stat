@@ -2,22 +2,28 @@
 ## ------------------------------------- 
 ## format table
 ## mz, rt, p-value, FC
-cid <- lapply(list(
-                   c("Bile acids, alcohols and derivatives",
+path.cid <- lapply(list(
+                   c(
+                     "Bile acids, alcohols and derivatives",
                      "Lysophosphatidylcholines",
-                     "Acyl carnitines",
+                     "Phenylpropanoic acids",
                      "Lineolic acids and derivatives",
                      "Hydroxysteroids",
                      "Steroidal glycosides",
                      "Oxosteroids",
                      "Androstane steroids",
-                     "Unsaturated fatty acids"
+                     "Unsaturated fatty acids",
+                     "Acyl carnitines"
                      )),
-              function(NAME, GROUP = "Infection"){
+              function(
+                       NAME,
+                       GROUP = "Infection",
+                       extra.compound = align.export$`InChIKey planar`
+                       ){
                 ## p_value
-                sym.p <- parse(text = paste0(GROUP, "_pvalue"))
+                sym.p <- paste0(GROUP, "_pvalue")
                 ## fc
-                sym.fc <- parse(text = paste0(GROUP, "_FC"))
+                sym.fc <- paste0(GROUP, "_FC")
                 ## ---------------------------------------------------------------------- 
                 ## class id
                 class_id <- dplyr::filter(tmp_nebula_index, name %in% NAME)$.id
@@ -26,19 +32,29 @@ cid <- lapply(list(
                 ## id, mz, p-value, fc, rt
                 df <- dplyr::filter(origin_analysis, origin_id %in% class_ori.id) %>% 
                   dplyr::select(origin_id, origin_mz,
-                                eval(sym.p), eval(sym.fc),
+                                all_of(c(sym.p, sym.fc)),
                                 origin_rt) %>% 
                   ## rename for easy use augments
-                  dplyr::rename(pvalue = eval(sym.p), fc = eval(sym.fc)) %>% 
+                  dplyr::rename(pvalue = all_of(sym.p), fc = all_of(sym.fc)) %>% 
+                  ## as.numeric
+                  dplyr::mutate(pvalue = as.numeric(pvalue)) %>% 
                   ## filter NA
                   dplyr::filter(!is.na(pvalue) & pvalue != "NA") %>% 
                   ## filter p-value < 0.05
                   dplyr::filter(pvalue < 0.05)
-                ## ---------------------------------------------------------------------- 
+                ## ------------------------------------- 
                 sig.id <- dplyr::filter(merge_df, origin_id %in% df$origin_id)$.id
                 ## get inchikey2D
-                sig.inchikey2d <- dplyr::filter(.MCn.structure_set, .id %in% sig.id)$inchikey2D
+                sig.inchikey2d <- dplyr::filter(.MCn.structure_set,
+                                                tanimotoSimilarity >= 0.5,
+                                                .id %in% sig.id)$inchikey2D
+                ## ------------------------------------- 
+                if(is.vector(extra.compound)){
+                  sig.inchikey2d <- unique(c(sig.inchikey2d, extra.compound))
+                }
                 ## ---------------------------------------------------------------------- 
+                ## get cid
+                ## ------------------------------------- 
                 rdata <- paste0("pubchem", "/", "inchikey.rdata")
                 ## extract as list
                 cid_inchikey <- extract_rdata_list(rdata, sig.inchikey2d) %>% 
@@ -51,9 +67,14 @@ cid <- lapply(list(
                 ## ------------------------------------- 
                 ## get cid
                 cid <- cid_inchikey$CID
+                ## output
+                cat(unlist(cid), sep = "\n", file = "~/Desktop/cid.tmp.txt")
+                ## ---------------------------------------------------------------------- 
+                ## get kegg ID
                 ## ------------------------------------- 
-                # dir.create("syno")
-                # pubchem_get_synonyms(cid, dir = "syno", curl_cl = 4)
+                ## ------------------------------------- 
+                ## output
+                # cat(unlist(kegg), sep = "\n", file = "~/Desktop/kegg.tmp.txt")
               return(cid)
               })
 
