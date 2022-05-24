@@ -45,9 +45,11 @@ path.cid <- lapply(list(
                 ## ------------------------------------- 
                 sig.id <- dplyr::filter(merge_df, origin_id %in% df$origin_id)$.id
                 ## get inchikey2D
-                sig.inchikey2d <- dplyr::filter(.MCn.structure_set,
-                                                tanimotoSimilarity >= 0.5,
-                                                .id %in% sig.id)$inchikey2D
+                sig.inchikey2d <<- dplyr::filter(.MCn.structure_set,
+                                                 tanimotoSimilarity >= 0.5,
+                                                 .id %in% sig.id)
+                ## ------------------------------------- 
+                sig.inchikey2d <- sig.inchikey2d$inchikey2D
                 ## ------------------------------------- 
                 if(is.vector(extra.compound)){
                   sig.inchikey2d <- unique(c(sig.inchikey2d, extra.compound))

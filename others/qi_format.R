@@ -14,7 +14,9 @@ pbapply::pblapply(file_set, function(file){
                     export <- qi_as_metabo_inte.table(df, metadata, select)
                     ## ------------------------------------- 
                     savename <- paste0(file, ".format.csv")
-                    write.table(export, savename, sep = ",", col.names = T, row.names = F, quote = F)
+                    write.table(export, savename,
+                                sep = ",", col.names = T,
+                                row.names = F, quote = F)
 })
 ## ------------------------------------- 
 
