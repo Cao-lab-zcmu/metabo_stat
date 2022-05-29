@@ -1,13 +1,17 @@
 ## select cols to export
 ## format table
-export.all <- export.struc_set %>% 
-  dplyr::select(.id, name, molecularFormula, tanimotoSimilarity, inchikey2D, smiles) %>% 
-  dplyr::arrange(inchikey2D, desc(tanimotoSimilarity)) %>% 
-  dplyr::distinct(inchikey2D, .keep_all = T) %>% 
-  ## get mz and rt
-  merge(mz_rt, by = ".id", all.x = T) %>%
-  dplyr::relocate(.id, mz, rt) %>% 
-  dplyr::as_tibble()
+if(exists("origin_analysis")){
+  source("~/outline/mcnebula_cell_validation/export.step1.1_order.p.R")
+}else{
+  export.all <- export.struc_set %>% 
+    dplyr::select(.id, name, molecularFormula, tanimotoSimilarity, inchikey2D, smiles) %>% 
+    dplyr::arrange(inchikey2D, desc(tanimotoSimilarity)) %>% 
+    dplyr::distinct(inchikey2D, .keep_all = T) %>% 
+    ## get mz and rt
+    merge(mz_rt, by = ".id", all.x = T) %>%
+    dplyr::relocate(.id, mz, rt) %>% 
+    dplyr::as_tibble()
+}
 ## ------------------------------------- 
 ## merge with classyfire Classification
 export.class <- export.all %>% 

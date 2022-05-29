@@ -67,6 +67,7 @@ path.cid <- lapply(list(
                   data.table::rbindlist(idcol = T) %>% 
                   dplyr::rename(inchikey2D = .id)
                 ## ------------------------------------- 
+                cid_inchikey <<- cid_inchikey
                 ## get cid
                 cid <- cid_inchikey$CID
                 ## output

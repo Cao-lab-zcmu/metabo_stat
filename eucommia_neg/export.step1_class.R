@@ -25,7 +25,8 @@ canopus_anno <- "canopus_summary.tsv" %>%
   ## get .id
   dplyr::mutate(.id = stringr::str_extract(.id, "[0-9]{1,}$")) %>% 
   reshape2::melt(id.vars = ".id", variable.name = "level", value.name = "canopus") %>% 
-  dplyr::filter(canopus %in% keep3$class, level != "most specific class",
+  dplyr::filter(level != "most specific class",
+                canopus != "",
                 .id %in% na.class.id) %>% 
   dplyr::select(.id, canopus) %>% 
   dplyr::as_tibble()

@@ -1,5 +1,5 @@
 ## draw ggraph
-set.seed(100)
+set.seed(2)
 layout_n <- ggraph::create_layout(tidy.graph, layout = "graphopt")
 ## palette
 gra.pal <- ggsci::pal_npg()(9)
@@ -8,15 +8,16 @@ p <- ggraph(layout_n) +
   geom_edge_fan(aes(edge_width = weight),
                 color = "black",
                 show.legend = F,
+                end_cap = ggraph::circle(3, 'mm'),
                 arrow = arrow(length = unit(2, 'mm'))) + 
   geom_node_point(aes(color = type,
                       shape = input_compound,
                       size = type),
                   stroke = 0.1) + 
   geom_node_text(aes(label = ifelse(type != "Reaction",
-                                    abb.name,
-                                    "")),
-                 size = 2,
+                                    NAME,
+                                    name)),
+                 size = 3,
                  family = "Times",
                  color = "black") +
   scale_shape_manual(values = c(`Input compound` = 15, `Others` = 16)) +
