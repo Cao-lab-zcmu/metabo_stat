@@ -59,30 +59,30 @@ apply(ba.stat.p, 1,
       })
 ## ---------------------------------------------------------------------- 
 ## legend
-        svg(paste0("ba.element/", "legend.svg"), bg = "transparent")
-        vec <- c(abb = "Group",
-                 NN = "NN",
-                 HN = "HN",
-                 HS = "HS",
-                 HM = "HM")
-        grid::grid.draw(p.rect)
-        ps <- grid::textGrob(paste0(vec[["abb"]]),
-                             y = 0.65,
-                             gp = grid::gpar(fontfamily = "Times",
-                                             fontface = "bold",
-                                             fontsize = 100,
-                                             col = "black"))
-        grid::grid.draw(ps)
-        ## ------------------------------------- 
-        df <- dplyr::bind_rows(vec) %>% 
-          dplyr::select(all_of(c("abb", "NN", "HN", "HS", "HM"))) %>% 
-          reshape2::melt(id.vars = "abb", variable.name = "group", value.name = "value")
-        p <- draw.p(df, var = F)
-        vp <- fast.view(
-                        ## x, y
-                        0.5, 0.4,
-                        ## width, height
-                        0.9, 0.25, c("center", "center"))
-        print(p, vp = vp)
-        dev.off()
+svg(paste0("ba.element/", "legend.svg"), bg = "transparent")
+vec <- c(abb = "Group",
+         NN = "NN",
+         HN = "HN",
+         HS = "HS",
+         HM = "HM")
+grid::grid.draw(p.rect)
+ps <- grid::textGrob(paste0(vec[["abb"]]),
+                     y = 0.65,
+                     gp = grid::gpar(fontfamily = "Times",
+                                     fontface = "bold",
+                                     fontsize = 100,
+                                     col = "black"))
+grid::grid.draw(ps)
+## ------------------------------------- 
+df <- dplyr::bind_rows(vec) %>% 
+  dplyr::select(all_of(c("abb", "NN", "HN", "HS", "HM"))) %>% 
+  reshape2::melt(id.vars = "abb", variable.name = "group", value.name = "value")
+p <- draw.p(df, var = F)
+vp <- fast.view(
+                ## x, y
+                0.5, 0.4,
+                ## width, height
+                0.9, 0.25, c("center", "center"))
+print(p, vp = vp)
+dev.off()
 

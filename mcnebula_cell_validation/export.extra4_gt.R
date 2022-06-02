@@ -7,7 +7,7 @@ bio_gt_table <- pretty_table(align.export,
                              default = F) %>% 
   ## add footnote
   ## name
-  tab_footnote(footnote = "The names were synonyms or IUPAC names of these compounds or their stereoisomers.",
+  tab_footnote(footnote = "The names are synonyms or IUPAC names of these compounds or their stereoisomers.",
                locations = cells_column_labels(columns = Name)) %>% 
   ## similarity
   tab_footnote(footnote = "Tanimoto similarities were obtained via CSI:fingerID for evaluation of compound fingerprints match.",
@@ -17,7 +17,7 @@ bio_gt_table <- pretty_table(align.export,
                locations = cells_column_labels(columns = `InChIKey planar`)) %>% 
   tab_footnote(footnote = "The ID was generated while MZmine2 processing and inherited in subsequent MCnebula workflow.",
                locations = cells_column_labels(columns = `ID`)) %>% 
-  tab_footnote(footnote = "The original ID, precursor m/z, RT were in line with those of features in study of Wozniak et al.",
+  tab_footnote(footnote = "The original ID, precursor m/z, RT are in line with those of features in study of Wozniak et al.",
                locations = cells_column_labels(columns = c(`Original ID`,
                                                            `Original precursor m/z`,
                                                            `Original RT (min)`))) %>% 

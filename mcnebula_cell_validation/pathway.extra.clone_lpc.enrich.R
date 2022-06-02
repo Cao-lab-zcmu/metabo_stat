@@ -3,11 +3,13 @@
 script.ba.subm <- "~/outline/mcnebula_cell_validation/submit_to_metabo.cid.R" %>% 
   data.table::fread(sep = NULL, header = F) %>% 
   dplyr::as_tibble()
+script.ba.subm[20, ] <- script.ba.subm[20, ] %>% 
+  sub("Infection", "Mortality", .)
 script.ba.subm[21, ] <- "extra.compound = NULL"
 ## ---------------------------------------------------------------------- 
 ## 6-15
 # script.ba.subm <- dplyr::slice(script.ba.subm, -(6:16))
-heat.class <- "Bile acids, alcohols and derivatives"
+heat.class <- "Lysophosphatidylcholines"
 script.ba.subm <- dplyr::bind_rows(script.ba.subm[1:6, ],
                                    c(V1 = paste0("'", heat.class, "'")),
                                    script.ba.subm[17:nrow(script.ba.subm), ])
@@ -48,7 +50,6 @@ ba.path.inchi <- merge(kegg, cid_inchikey, by.y = "CID", by.x = "PubChem", all.x
   dplyr::filter(KEGG %in% all_of(inmap)) %>% 
   dplyr::as_tibble()
 ## ------------------------------------- 
-# heat.class <- "Bile acids, alcohols and derivatives"
 source("~/outline/mcnebula_cell_validation/heatmap.path_step1_df.prep.R")
 text <- readLines("~/outline/mcnebula_cell_validation/heatmap.path_step2_draw.R")[1:12] %>% 
   paste0(collapse = "\n")
@@ -68,6 +69,5 @@ ba.stat <- data.table::data.table(heat.norm.df.l) %>%
   merge(nodes[, c("name", "NAME")], by.x = "KEGG", by.y = "name", all.x = T) %>% 
   distinct(origin_id, .keep_all = T) %>% 
   ## manual name
-  dplyr::mutate(abb = c("GCC", "βGCS", "TCDC", "GCCDC")) %>% 
   dplyr::as_tibble()
   ## calculate mean

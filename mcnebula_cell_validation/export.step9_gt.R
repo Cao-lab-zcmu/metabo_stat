@@ -6,12 +6,12 @@ gt_table <- pretty_table(dplyr::rename(export.dominant[, -ncol(export.dominant)]
                                        `Original ID` = `origin id`),
                          title = "Serum metabolomic compounds summary",
                          subtitle = "LC-MS in positive ion mode",
-                         footnote = "Compounds listed in table were identified from serum metabolomic dataset. These compounds were grouped by classes. As compounds not only belong to one class and also belong to its parent classes, for this case, the compounds were preferentially considered for subtile classes.",
+                         footnote = "Compounds listed in table were identified from serum metabolomic dataset. These compounds are grouped by classes. As compounds not only belong to one class and also belong to its parent classes, for this case, the compounds are preferentially grouped for subtile classes.",
                          default = F)
 ## add footnote
 ## name
 gt_table <- tab_footnote(gt_table,
-                         footnote = "The names were synonyms or IUPAC names of these compounds or their stereoisomers.",
+                         footnote = "The names are synonyms or IUPAC names of these compounds or their stereoisomers.",
                          locations = cells_column_labels(columns = Name))
 ## similarity
 
@@ -20,9 +20,9 @@ gt_table <- tab_footnote(gt_table, footnote = "Tanimoto similarities were obtain
 ## InChIKey
 gt_table <- tab_footnote(gt_table, footnote = "The 'InChIKey planar' is the first hash block of InChIKey that represents a molecular skeleton.",
                          locations = cells_column_labels(columns = `InChIKey planar`))
-gt_table <- tab_footnote(gt_table, footnote = "The ID was generated while MZmine2 processing and were inherited in subsequent MCnebula workflow.",
+gt_table <- tab_footnote(gt_table, footnote = "The ID was generated while MZmine2 processing and are inherited in subsequent MCnebula workflow.",
                          locations = cells_column_labels(columns = `ID`))
-gt_table <- tab_footnote(gt_table, footnote = "The original ID was in line with the feature ID in study of Wozniak et al.",
+gt_table <- tab_footnote(gt_table, footnote = "The original ID is in line with the feature ID in study of Wozniak et al.",
                          locations = cells_column_labels(columns = `Original ID`))
 
 gt_table <- tab_footnote(gt_table, footnote = "The mass error were obtained via SIRIUS while predicting formula of compounds.",
