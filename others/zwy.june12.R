@@ -13,15 +13,21 @@ visualize_parent_nebula()
 visualize_child_nebulae(width = 15, height = 20, nodes_size_range = c(2, 4))
 ## ---------------------------------------------------------------------- 
 ## Aminopyrimidines and derivatives
-nebula_name <- "Aminopyrimidines and derivatives"
+ratio_df <- data.table::fread("~/Downloads/shangzha0609.csv") %>% 
+  dplyr::select(-2, -3) %>%
+  dplyr::select(1:9) %>%
+  dplyr::rename(.id = 1)
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
+nebula_name <- "Peptidomimetics"
 annotate_child_nebulae(nebula_name,
                        layout = "fr",
                        ## pie diagrame setting
                        # nodes_mark = mark_df,
                        # palette = mark_palette,
-                       # ratio_df = mean.feature_stat,
-                       # palette_stat = stat_palette,
+                       ratio_df = ratio_df,
                        global.node.size = 0.8,
+                       width = 8,
                        theme_args = list(panel.background = element_rect(),
                                          panel.grid = element_line()))
 
