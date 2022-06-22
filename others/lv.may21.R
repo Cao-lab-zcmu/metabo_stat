@@ -58,7 +58,7 @@ file.list <- mapply(
                       df.long <- df %>% 
                         reshape2::melt(id.vars = c("No.", "name", "no.name"),
                                        variable.name = "sample", value.name = "value") %>% 
-                        dplyr::mutate(value = scale(value, center = T, scale = F)) %>% 
+                        dplyr::mutate(value = value - (max(value, na.rm = T) - min(value, na.rm = T)) / 2) %>% 
                         dplyr::as_tibble() %>% 
                         dplyr::filter(!is.na(value))
                       ## ------------------------------------- 
@@ -83,7 +83,7 @@ file.list <- mapply(
                       ## save
                       file.s <- paste0(file, ".svg")
                       if(grepl("gather", file)){
-                        height <- 32
+                        height <- 25
                       }else{
                         height = 14
                       }

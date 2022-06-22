@@ -1,0 +1,77 @@
+# Experimental record
+
+## *E. ulmodes* dose
+
+Pharmacopoeia (2020) dosage: 6 ~ 10 g
+
+```{r, eval = T, echo = T}
+
+library(dplyr)
+
+group <- c("control", "model", "raw.eu", "pro.eu", "positive", "extra")
+
+dose.meta <- data.table::data.table(No. = 1:length(group)) %>% 
+  dplyr::mutate(group = group,
+                drug = c("-", "-", "raw.eu", "pro.eu", "pos.drug", "MTA"),
+                n = 15,
+                low = ifelse(grepl("eu", drug), "5", "-"),
+                medium = ifelse(grepl("eu", drug), "10", "-"),
+                high = ifelse(grepl("eu", drug), "20", "-")) %>% 
+  dplyr::as_tibble()
+knitr::kable(dose.meta)
+
+```
+
+Known Variables
+
+$$
+\begin{aligned}
+D_{base} &= 15\ (g) \\
+w_{rat.weight} &= 400\ (g)\\
+w_{hum.weight} &= 60, 000\ (g) \\
+C_{cofficient} &= 6 \\
+T_{times} &= 28\ (day) \\
+n_{group.rat.number} &= 15 \\
+M_{group.h.m.l} &= 2 \times (5 + 10 + 20) \\
+&= 70 \ (multiple)
+\end{aligned}
+$$
+
+Require *E. ulmoides* ($W_{eu}$):
+
+$$
+\begin{aligned}
+W_{eu} &= D \times \frac{w_{rat.}}{w_{hum.}} \times C \times T \times n \times M \\
+&= 17640 \ (g) \\
+&= 17.640 \ (kg)
+\end{aligned}
+$$
+
+## *E. ulmoides* processing and extracting
+
+### Raw.eu
+
++ 10 kg *E. ulmoides*
++ ...
+
+### Pro.eu
+
++ 10 kg *E. ulmodes*
++ 20 g of salt per 1 kg (2% salt)
++ Salt is dissolved in water in a ratio of 1:20 (20 g dissolve in 400 ml water)
++ Stir-fry over moderate fire, until shreds are broken and the surface is charred black
+
+### Extract
+
++ Solvent: 70% Ethanol.
++ Ratio: E. ulmodes extract with 1:10 solvent.
+
+```{r}
+df <- data.table::data.table(
+  reagent = c("salt (g)",
+              "95% Ethanol (L)"), 
+  amount = c(400, "NA")
+)
+df <- dplyr::as_tibble(df)
+knitr::kable(df)
+```
