@@ -88,7 +88,7 @@ dge.list <- calcNormFactors(dge.list, method = "TMM")
 design <- model.matrix(~ 0 + dge.list$samples$group + dge.list$samples$lane)
 ## rename
 colnames(design) <- colnames(design) %>% 
-  extra::mapply_rename_col(c("dge.list$samples$group", "dge.list$samples$"),
+  mapply_rename_col(c("dge.list$samples$group", "dge.list$samples$"),
                            c("", ""), name = ., fixed = T)
 ## ---------------------------------------------------------------------- 
 ## make contrast
@@ -119,7 +119,6 @@ show <- summary(fdr.ebayes)
 ## ---------------------------------------------------------------------- 
 ## add logFC to rank
 ## ---------------------------------------------------------------------- 
-## ========== Run block ========== 
 fc_treat <- limma::treat(fit.cont, lfc = 1)
 ## fdr adjust
 fdr.fc_treat <- limma::decideTests(fc_treat)
@@ -127,4 +126,10 @@ fdr.fc_treat <- limma::decideTests(fc_treat)
 ## this also add gene annotation into dataframe
 basal.vs.ml <- limma::topTreat(fc_treat, coef = 2, n = Inf) %>% 
   dplyr::as_tibble()
+## ---------------------------------------------------------------------- 
+## ========== Run block ========== 
+## following load a Mm.c2 dataset
+load(system.file("extdata", "mouse_c2_v5p1.rda", package = "RNAseq123"))
+## select
+idx <- limma::ids2indices(Mm.c2, id = rownames(voom))
 
