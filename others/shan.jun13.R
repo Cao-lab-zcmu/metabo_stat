@@ -5,14 +5,14 @@ collate_structure()
 build_classes_tree_list()
 collate_ppcp(min_possess = 10, max_possess_pct = 0.1, filter_via_struc_score = NA)
 generate_parent_nebula(rm_parent_isolate_nodes = T)
-generate_child_nebulae(nebula_index = tmp_nebula_index)
+generate_child_nebulae()
 visualize_parent_nebula()
 ## ------------------------------------- 
 visualize_child_nebulae()
 ## ---------------------------------------------------------------------- 
 file.rename("mcnebula_results/child_nebulae.svg", "mcnebula_results/origin.svg")
 ## ---------------------------------------------------------------------- 
-nodes_mark <- data.frame(.id = c("339", "1222", "578"),
+nodes_mark <- data.frame(.id = c("527", "1222", "578"),
                          mark = c("Isoacetoside", "Apigenin", "Calceolarioside B")
                          )
 palette <- c(Isoacetoside = "yellow",
@@ -82,7 +82,7 @@ target_index <- method_summarize_target_index("Flavonoid glycosides")
 generate_child_nebulae(nebula_index = target_index)
 tmp_anno("Flavonoid glycosides", target_index)
 ## ------------------------------------- 
-annotate_node("339", ratio_df = stat,
+annotate_node("527", ratio_df = stat,
               nodes_mark = nodes_mark,
               palette = palette,
               palette_stat = palette_stat)

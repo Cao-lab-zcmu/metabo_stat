@@ -6,7 +6,7 @@ source("~/operation/superstart.R")
 initialize_mcnebula(".")
 collate_structure()
 build_classes_tree_list()
-collate_ppcp(min_possess = 10, max_possess_pct = 0.07, filter_via_struc_score = NA)
+collate_ppcp(min_possess = 20, max_possess_pct = 0.1)
 generate_parent_nebula(rm_parent_isolate_nodes = T)
 ## ---------------------------------------------------------------------- 
 generate_child_nebulae()
@@ -14,27 +14,30 @@ visualize_parent_nebula()
 visualize_child_nebulae(width = 15, height = 20, nodes_size_range = c(2, 4))
 ## ---------------------------------------------------------------------- 
 ## Aminopyrimidines and derivatives
-stat <- ratio_df <- data.table::fread("~/Downloads/shangzha0609.csv") %>% 
-  dplyr::select(-2, -3) %>%
-  dplyr::select(1:9) %>%
-  dplyr::rename(.id = 1)
-# stat <- format_quant_table("../sahngzha0609.csv", 
-#                            meta.group = c(blank = "KB", ref = "HB", raw = "RCQ", pro = "PCQ"))
+stat <- format_quant_table("../earlist.neg.csv", 
+                           meta.group = c(blank = "BLANK",
+                                          # ref.db = "^DB", ref.sa = "^SA",
+                                          # mu.pro = "^G",
+                                          raw = "^S", pro = "^J"))
 ## ------------------------------------- 
-color <- readxl::read_xlsx("~/Downloads/color.xlsx") 
-color <- dplyr::mutate(color, Color = paste0("#", Color))
-palette_stat <- color$Color
-names(palette_stat) <- color$Group
+palette_stat <- c(blank = "grey",
+                  # ref.db = "yellow", ref.sa = "#BBFF66",
+                  # mu.pro = "#DA70D6",
+                  raw = "lightblue", pro = "pink")
 ## ---------------------------------------------------------------------- 
+## mark Taxifolin and SARRACENIN
+formula.tax <- "C15H12O7"
+formula.sar <- "C11H14O5"
+id.tax <- dplyr::filter(.MCn.formula_set, molecularFormula == formula.tax)$.id
+id.sar <- dplyr::filter(.MCn.formula_set, molecularFormula == formula.sar)$.id
+## mark
 nodes_mark <- data.frame(
-                         .id = c(
-                                 "Others"
-                                 ),
-                         mark = c(
-                                  "Others"
-                         )
+  .id = c(id.tax, id.sar, "Others"),
+  mark = c(rep(c("tax", "sar"), c(length(id.tax), length(id.sar))), "Others")
 )
-palette <- c(Others = "#D9D9D9")
+palette <- c(Others = "#D9D9D9", tax = "#DDFF77", sar = "#CCCCFF")
+## ---------------------------------------------------------------------- 
+## ---------------------------------------------------------------------- 
 ## ---------------------------------------------------------------------- 
 tmp_anno <- function(nebula_name, nebula_index = .MCn.nebula_index){
   annotate_child_nebulae(
@@ -64,12 +67,16 @@ tmp_anno <- function(nebula_name, nebula_index = .MCn.nebula_index){
   )
 }
 ## ---------------------------------------------------------------------- 
-target_index <- method_summarize_target_index("Amino acids, peptides, and analogues")
-hq.structure <- dplyr::filter(.MCn.structure_set, tanimotoSimilarity >= 0.4)
+## Flavonoids
+## Dioxanes parent:Organoheterocyclic compounds
+## sar:structure, Hemiacetals
+target_class <- "Hemiacetals"
+target_index <- method_summarize_target_index(target_class)
+hq.structure <- dplyr::filter(.MCn.structure_set, tanimotoSimilarity >= 0.1)
 hq.target_index <- dplyr::filter(target_index, .id %in% hq.structure$.id)
 ## ---------------------------------------------------------------------- 
 ## re compute similarity
-spec.path <- method_target_spec_compare("Amino acids, peptides, and analogues",
+spec.path <- method_target_spec_compare(target_class,
                                         hq.target_index,
                                         edge_filter = 0.5)
 ## ---------------------------------------------------------------------- 
@@ -87,8 +94,16 @@ hq.amino <- dplyr::filter(hq.structure, .id %in% hq.target_index$.id)
 vis_via_molconvert(hq.amino$smiles, hq.amino$.id)
 ## ------------------------------------- 
 call_fun_mc.space("tmp_anno",
-                  list(nebula_name = "Amino acids, peptides, and analogues",
+                  list(nebula_name = target_class,
                        nebula_index = hq.target_index),
                   clear_start = F,
                   clear_end = F)
+## ---------------------------------------------------------------------- 
+mutate_stat <- dplyr::summarise_at(stat, 2:ncol(stat), log2) %>% 
+  dplyr::mutate(.id = stat$.id) %>% 
+  dplyr::mutate(log2fc = pro - raw,
+                change = ifelse(log2fc > 1, "up",
+                                ifelse(log2fc < -1, "down", "-"))) %>%
+  dplyr::relocate(.id, log2fc, change)
+## ---------------------------------------------------------------------- 
 
