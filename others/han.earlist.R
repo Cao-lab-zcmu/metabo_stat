@@ -15,9 +15,7 @@ visualize_child_nebulae(width = 15, height = 20, nodes_size_range = c(2, 4))
 ## @figure 
 
 # ```{r test, echo = F, fig.cap = "yourname"}
-# png <- magick::image_read("~/Pictures/digit.jpg")
-# png <- magick::image_resize(png, "300x")
-# grid::grid.raster(png)
+# show_png("~/Pictures/digit.jpg", "1000x")
 # ```
 
 ## ---------------------------------------------------------------------- 
