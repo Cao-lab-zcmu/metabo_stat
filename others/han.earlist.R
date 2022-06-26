@@ -11,6 +11,16 @@ generate_child_nebulae()
 visualize_parent_nebula()
 visualize_child_nebulae(width = 15, height = 20, nodes_size_range = c(2, 4))
 ## ---------------------------------------------------------------------- 
+## [introduction] read figure \@ref(fig:test)
+## @figure 
+
+# ```{r test, echo = F, fig.cap = "yourname"}
+# png <- magick::image_read("~/Pictures/digit.jpg")
+# png <- magick::image_resize(png, "300x")
+# grid::grid.raster(png)
+# ```
+
+## ---------------------------------------------------------------------- 
 ## [introduction] Format quantification table and summarise mean value for each group.
 stat <- format_quant_table("../earlist.neg.csv", 
                            meta.group = c(blank = "BLANK",
