@@ -12,9 +12,11 @@
 # bio_annotate_nebula
 # hits_class
 ## ---------------------------------------------------------------------- 
-# get_real_class
+## get_real_class
+# source("~/outline/mcnebula_cell_validation/get_real_class.R")
 # source("~/outline/mcnebula_cell_validation/export.step0_manual.select.class.R")
 # source("~/outline/mcnebula_cell_validation/export.step1_class.R")
+# source("~/outline/mcnebula_cell_validation/export.step1.5_iupacname.R")
 # source("~/outline/mcnebula_cell_validation/export.step2_name.diff.vari.R")
 # source("~/outline/mcnebula_cell_validation/export.step3_format.R")
 # source("~/outline/mcnebula_cell_validation/export.extra1_adduct.confi.R")
