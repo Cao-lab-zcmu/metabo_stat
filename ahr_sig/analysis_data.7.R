@@ -42,9 +42,34 @@ form.res <- lapply(form.res, function(lst){
 raw.res <- list.files(pattern = "processed") %>% 
   lapply(data.table::fread, skip = 2, header = F) 
 ## ------------------------------------- 
-## ========== Run block ========== 
 res <- mapply(form.res, raw.res,
               SIMPLIFY = F,
               FUN = function(form, raw){
-
+                ## convert data.table to tibble
+                raw <- dplyr::as_tibble(raw)
+                lst <- lapply(form, raw = raw,
+                              FUN = function(entry, raw){
+                                col <- c(1:4, entry$ncol)
+                                ## colnames of data.frame
+                                col.name <- c(ex.anno.cal$type, "log2FC", "p-value", "q-value")
+                                ## extract column
+                                df <- raw[, col]
+                                colnames(df) <- col.name
+                                ## filter data
+                                df <- dplyr::filter(df, abs(log2FC) > 0.3, `q-value` < 0.05)
+                                return(df)
+                    })
               })
+## ------------------------------------- 
+res <- unlist(res, recursive = F)
+## ------------------------------------- 
+contrast.entry <- names(res)
+contrast <- contrast.entry[c(3, 8, 9, 10)]
+res <- res[names(res) %in% contrast]
+## ------------------------------------- 
+## ========== Run block ========== 
+mapply(res, names(res), 
+       FUN = function(df, names){
+         write_tsv(df, paste0(names, "_results.tsv"))
+              })
+
