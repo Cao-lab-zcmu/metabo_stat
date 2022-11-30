@@ -23,7 +23,6 @@ group. <- meta.df$group
 design <- model.matrix(~ 0 + group.)
 ## contrast
 contr.matrix <- limma::makeContrasts(
-  ## treat with CH223191
   treat_i3ca.vs.contr = group.I3CA50uM - group.DMSO,
   levels = design
 )
@@ -36,7 +35,7 @@ res <- limma_downstream.eset(info[[1]], design, contr.matrix)
 res <- lapply(res, dplyr::mutate,
               ensembl = stringr::str_extract(gene_assignment, "ENS[A-Z][0-9]*"),
               symbol = stringr::str_extract(gene_assignment,
-                "(?<= |^)[A-Z]{1,}[0-9]{0,2}[A-Z]{1,}[0-9]{0,2}[A-Z]{0,}[0-9]{0,}(?= |$)")) %>% 
+                "(?<= |^)[A-Z]{1,}[0-9]{0,2}[A-Z]{1,}[0-9]{0,2}[A-Z]{0,}[0-9]{0,3}(?= |$)")) %>% 
   lapply(dplyr::relocate, ensembl, symbol)
 ## ------------------------------------- 
 ## ========== Run block ========== 
