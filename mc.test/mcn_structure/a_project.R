@@ -4,11 +4,6 @@
 ## external element
 grob.path <- ex_grob("path")
 grob.dir <- ex_grob("dir")
-grob.meta <- ex_grob("metadata")
-grob.meta_lib <- ex_grob("metadata_lib")
-grob.meta_net <- ex_grob("metadata_net")
-grob.table <- ex_grob("table")
-grob.menu <- ex_grob("menu")
 grob.api <- ex_grob("api")
 grob.files <- ex_grob("files")
 # draw(grob.table)
@@ -19,6 +14,7 @@ grob.files <- ex_grob("files")
 ## melody: palette
 type <- c("class", "slot", "sub.slot", "function", "custom")
 pal <- MCnebula2:::.as_dic(palette_set(mcn_5features)[-3], type, na.rm = T)
+pal[[ "report" ]] <- "black"
 
 ## weight
 name.slots <- slotNames(mcn_5features)
@@ -31,7 +27,7 @@ weight.project <-
          simplify = F,
          function(x) weight.project[[ x ]])
 
-grobs.project <- lst_grecti(names(weight.project), pal)
+grobs.project <- lst_grecti(names(weight.project), pal, , grecti2)
 
 # ==========================================================================
 # content
@@ -74,7 +70,7 @@ grob.formu <- into(glayer(), fml)
 ## get grob structure
 smi <- anno$smiles[5]
 grob.struc <- sym_chem(smi)
-grob.struc <- into(glayer(7), grob.struc)
+grob.struc <- ggather(into(glayer(6), grob.struc), vp = viewport(, , .7))
 ## classes
 gp.cir <- gpar(lwd = u(3, line), lty = "dotted")
 grob.gla <- gTree(children = gList(gtext("?", list(cex = 1.5, col = "red"), x = .7, y = .3),
@@ -93,9 +89,11 @@ grob.omit <- into(glayer(class.n), grob.omit)
 grob.groups <- frame_col(list(gomit = 1, gclasses = 1, gomit = 1),
                          list(gomit = grob.omit, gclasses = grob.classes))
 ## gather
-.grob.dataset <- frame_row(list(formu = 1, null = .2, struc = 1, null = .2, class = 1),
+more <- ggather(gltext("More data"), vp = viewport(, , .7))
+.grob.dataset <- frame_row(list(formu = 1, null = .2, struc = 1, null = .2, class = 1,
+                                null = .2, more = .3),
                           list(formu = grob.formu, struc = grob.struc, class = grob.groups,
-                               null = nullGrob()))
+                               null = nullGrob(), more = more))
 .grob.dataset <- gTree(children = gList(.grob.dataset), vp = viewport(, , .8, .8))
 ## into
 grobs.project$dataset %<>% into(.grob.dataset)
@@ -121,13 +119,13 @@ nodes <- frame_row(list(nodes.1 = 1, Nnull = .7, nodes.2 = 1),
 ## add arrow
 a1 <- setnullvp("id", list(x = .4, y = 0), nodes)
 a1. <- setnullvp("formu", list(x = .6, y = 1), nodes)
-a1 <- garrow(a1, a1., list(inflect = T, curvature = -.1, gp = .gpar_dotted_line))
+a1 <- garrow(a1, a1., list(inflect = T, curvature = -.1))
 a2 <- setnullvp("id", list(x = .5, y = 0), nodes)
 a2. <- setnullvp("fing", list(x = .5, y = 1), nodes)
-a2 <- garrow(a2, a2., list(inflect = T, curvature = .1))
+a2 <- garrow(a2, a2., list(inflect = T, curvature = .1, gp = .gpar_dotted_line))
 a3 <- setnullvp("id", list(x = .6, y = 0), nodes)
 a3. <- setnullvp("cano", list(x = .4, y = 1), nodes)
-a3 <- garrow(a3, a3., list(inflect = T, curvature = .1))
+a3 <- garrow(a3, a3., list(inflect = T, curvature = .1, gp = .gpar_dotted_line))
 .grob.confo <- gTree(children = gList(nodes, a1, a2, a3), vp = viewport(, , .8, .8))
 ## into
 grobs.project$conformation %<>% into(.grob.confo)
@@ -160,13 +158,8 @@ grobs.project$version %<>% into(.grob.version)
 if.ex <- grepl("version|path", names(weight.project))
 frame.project <- frame_row(weight.project, grobs.project, if.ex)
 .gene.vp <- viewport(, , width = unit(8 * 1.5, "line"),
-                     height = unit(35 * 1.5, "line"), name = "allProject", clip = "off")
+                     height = unit(35 * 1.5, "line"), clip = "off")
 .project <- gTree(children = gList(frame.project), vp = .gene.vp)
-
-## show project
-x11(, 7, 11)
-draw(.project)
-grid.ls(viewports = T)
 
 # ==========================================================================
 # line and arrow
@@ -179,10 +172,10 @@ a_gpar <-
          })
 # scales::show_col(pal.collate)
 a.set <- c("path", "conformation", "metadata", "api", "dataset")
-baf <- function(x, y) {
+baf <- function(x, y, width = u(1, line), height = u(3, line)) {
   rect <- grectn(bgp_args = gpar(lty = "solid"))@grob
   clip <- clipGrob(, , .7)
-  ggather(clip, rect, vp = viewport(x, y, u(1, line), u(3, line)))
+  ggather(clip, rect, vp = viewport(x, y, width, height))
 }
 for (i in 2:length(a.set)) {
   a1 <- setnullvp(a.set[i - 1], list(x = 1), .project)
@@ -192,13 +185,6 @@ for (i in 2:length(a.set)) {
   assign(paste0("baf", i - 1), baf(grobX(a1, 0), grobY(a1, 0)))
 }
 baf. <- baf(grobX(a1., 0), grobY(a1., 0))
-
 .project <- ggather(.project,
                     baf1, baf2, baf3, baf4, baf.,
                     arr1, arr2, arr3, arr4)
-
-pdf(tmp_pdf(), 7, 11)
-draw(.project)
-dev.off()
-
-op(tmp_pdf())

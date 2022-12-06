@@ -7,7 +7,7 @@ weight.mcn <-
   sapply(c("dataset", "reference", "backtrack"), simplify = F,
          function(x) weight.mcn[[x]])
 
-grobs.mcn <- lst_grecti(names(weight.mcn), pal, "sub.slot")
+grobs.mcn <- lst_grecti(names(weight.mcn), pal, "sub.slot", grecti2)
 
 # ==========================================================================
 # content
@@ -92,21 +92,79 @@ grobs.mcn$backtrack %<>% into(grob_trash)
 .size_subslot <- u(1, npc) - u(.5, line)
 frame.mcn <- frame_row(weight.mcn, grobs.mcn)
 frame.mcn <- ggather(frame.mcn, vp = viewport(, , .size_subslot, .size_subslot))
-.mcn <- grecti(form("mcn_dataset"), tfill = pal[[ "slot" ]])
+.mcn <- grecti2(form("mcn_dataset"), tfill = pal[[ "slot" ]])
 .mcn <- into(.mcn, frame.mcn)
 .mcn <- ggather(.mcn, vp = .gene.vp)
 
 ## show
-x11(, 7, 11)
-draw(.mcn)
-
-pdf(tmp_pdf(), 6, 11)
-frame_col(list(x = .5, y = .5), list(x = .project, n = nullGrob(), y = .mcn)) %>% 
-  draw()
-dev.off()
-
-op(tmp_pdf())
+# x11(, 7, 11)
+# draw(.mcn)
 
 # ==========================================================================
 # line and arrow
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+## link
+link <- c("dataset", "stardust_classes", "create_stardust_classes",
+          "dataset", "specific_candidate", "create_reference",
+          "dataset", "features_annotation", "create_features_annotation",
+          "specific_candidate", "features_annotation", "create_features_annotation",
+          "hierarchy", "stardust_classes", "create_stardust_classes",
+          "features_annotation", "nebula_index", "create_nebula_index",
+          "stardust_classes", "nebula_index", "create_nebula_index",
+          "stardust_classes", "backtrack", "cross_filter_stardust",
+          "backtrack", "stardust_classes", "backtrack_stardust"
+)
+link <- split(link, rep(1:(length(link) / 3), each = 3))
+link <- data.frame(t(do.call(cbind, link)))
+names(link) <- c("from", "to", "fun")
+## the attributes for arrow
+fun_pal <- ggsci::pal_d3("category20")(20)
+link <- dplyr::mutate(link,
+                      group = agroup(to, 1:10, integer(1)),
+                      group = ifelse(from == "backtrack", max(group) + 1, group),
+                      color = agroup(group, fun_pal),
+                      left = ifelse(from %in% c("dataset", "specific_candidate"), F, T),
+                      left = ifelse(to %in% c("specific_candidate", "stardust_classes"),
+                                    !left, left),
+                      up = ifelse(from == "backtrack", T, F),
+                      shift = ifelse(from %in% c("dataset", "backtrack"), 2, 2.5))
+
+## tools
+tools <- maparrow(.mcn, link)
+link <- tools$data
+
+## complex arr
+com_arr <- lapply(1:length(tools$arr_city),
+                  function(n) {
+                    rect <- c("create_stardust_classes", "cross_filter_stardust",
+                              "create_features_annotation", "backtrack_stardust")
+                    if (link$fun[[ n ]] %in% rect & !link$dup[[ n ]])
+                      tools$arr_city[[n]]
+                    else
+                      tools$arr_round[[n]]
+                  })
+
+## modify bafs
+bafs <- sapply(names(tools$bafs), simplify = F,
+               function(name){
+                 sub_name <- gsub("\\.[a-z]$", "", name)
+                 fun <- tools$bafs[[name]]
+                 if (sub_name == "backtrack")
+                   fun(h = u(2, line))
+                 else if (sub_name == "specific_candidate")
+                   fun(w = u(3, line))
+                 else if (sub_name == "dataset")
+                   fun()
+                 else
+                   fun(u(3, line), u(1, line))
+               })
+
+## show
+tmp.mcn <- do.call(ggather, c(list(.mcn), bafs, com_arr, tools$sags))
+draw(tmp.mcn)
+
+.mcn <- tmp.mcn
+link_b <- link
+tools_b <- tools
+
