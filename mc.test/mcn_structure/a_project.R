@@ -170,7 +170,7 @@ a_gpar <-
          function(col) {
            gpar(fill = col, col = col, lwd = u(2, line))
          })
-# scales::show_col(pal.collate)
+
 a.set <- c("path", "conformation", "metadata", "api", "dataset")
 baf <- function(x, y, width = u(1, line), height = u(3, line)) {
   rect <- grectn(bgp_args = gpar(lty = "solid"))@grob
@@ -185,6 +185,8 @@ for (i in 2:length(a.set)) {
   assign(paste0("baf", i - 1), baf(grobX(a1, 0), grobY(a1, 0)))
 }
 baf. <- baf(grobX(a1., 0), grobY(a1., 0))
+
+## gather
 .project <- ggather(.project,
                     baf1, baf2, baf3, baf4, baf.,
                     arr1, arr2, arr3, arr4)

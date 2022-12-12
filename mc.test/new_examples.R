@@ -13,7 +13,7 @@ target <-
 
 target
 
-ex_path <- "/home/echo/outline/test/example/"
+ex_path <- "/home/echo/outline/mc.test/example/"
 lapply(unique(unlist(target)),
        function(rd){
          path <- paste0(ex_path, rd, ".R")

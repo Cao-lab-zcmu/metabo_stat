@@ -161,10 +161,8 @@ bafs <- sapply(names(tools$bafs), simplify = F,
                })
 
 ## show
-tmp.mcn <- do.call(ggather, c(list(.mcn), bafs, com_arr, tools$sags))
-draw(tmp.mcn)
+.mcn <- do.call(ggather, c(list(.mcn), bafs, com_arr, tools$sags))
+# draw(.mcn)
 
-.mcn <- tmp.mcn
 link_b <- link
-tools_b <- tools
 

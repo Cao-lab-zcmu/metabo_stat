@@ -2,7 +2,7 @@
 # all grobs
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 .over <- frame_col(list(a = .5, b = .5, c = 1),
-                   list(a = .project, b = .mcn, c = tmp.nebulae))
+                   list(a = .project, b = .mcn, c = .nebulae))
 
 # ==========================================================================
 # line and arrow
@@ -128,4 +128,4 @@ draw(figure)
 dev.off()
 op(tmp_pdf())
 
-file.copy(tmp_pdf(), "~/Documents/figure.pdf")
+# file.copy(tmp_pdf(), "~/Documents/figure.pdf")

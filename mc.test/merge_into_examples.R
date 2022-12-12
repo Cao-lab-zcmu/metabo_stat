@@ -4,7 +4,7 @@ library(magrittr)
 script <- list.files(".", pattern = "\\.R$") %>% 
   sapply(readLines)
 
-ex_path <- "/home/echo/outline/test/example/"
+ex_path <- "/home/echo/outline/mc.test/example/"
 
 dontrun <- function(codes){
   codes <- c("#' @examples",

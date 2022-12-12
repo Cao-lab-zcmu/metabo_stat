@@ -252,10 +252,9 @@ sag <- tools_c$sags[[1]]
 sag$vp[[1]] <- cvp
 
 ## show
-tmp.nebulae <- do.call(ggather, c(list(.nebulae), bafs, arr, list(sag)))
+.nebulae <- do.call(ggather, c(list(.nebulae), bafs, arr, list(sag)))
 # draw(tmp.nebulae)
 
-.nebulae <- tmp.nebulae
 link_c <- link
 
 

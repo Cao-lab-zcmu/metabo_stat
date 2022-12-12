@@ -2,7 +2,6 @@ setwd("~/operation/sirius.test")
 # library(MCnebula2)
 
 test <- initialize_mcnebula(mcnebula())
-# test1 <- collate_data(test, ".f2_msms")
 test1 <- filter_structure(test)
 test1 <- create_reference(test1)
 test1 <- filter_formula(test1, by_reference=T)
@@ -66,9 +65,4 @@ re <- new_report(yaml = .yaml_default("de"),
 # writeLines(call_command(re), "test.Rmd")
 # rmarkdown::render("test.Rmd")
 
-MCnebula2_documents <-
-  list(introduction = readLines("~/Documents/mcnebula2/introduction.Rmd"),
-       setup = readLines("~/Documents/mcnebula2/setup.Rmd"),
-       abstract = readLines("~/Documents/mcnebula2/abstract.Rmd")
-  )
 
