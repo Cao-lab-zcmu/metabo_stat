@@ -8,7 +8,7 @@ generate_parent_nebula(rm_parent_isolate_nodes = T)
 generate_child_nebulae()
 visualize_parent_nebula()
 ## ------------------------------------- 
-visualize_child_nebulae()
+visualize_child_nebulae(width = 29, height = 35)
 ## ---------------------------------------------------------------------- 
 file.rename("mcnebula_results/child_nebulae.svg", "mcnebula_results/origin.svg")
 ## ---------------------------------------------------------------------- 

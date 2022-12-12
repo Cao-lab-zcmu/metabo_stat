@@ -8,6 +8,7 @@ gt_table <- pretty_table(dplyr::rename(export.dominant[, -ncol(export.dominant)]
                          subtitle = "LC-MS in positive ion mode",
                          footnote = "Compounds listed in table were identified from serum metabolomic dataset. These compounds are grouped by classes. As compounds not only belong to one class and also belong to its parent classes, for this case, the compounds are preferentially grouped for subtile classes.",
                          default = F)
+## ---------------------------------------------------------------------- 
 ## add footnote
 ## name
 gt_table <- tab_footnote(gt_table,

@@ -13,7 +13,7 @@ iupac <- extract_rdata_list("iupac_name/inchikey.rdata") %>%
   data.table::rbindlist(idcol = T, fill = T) %>% 
   dplyr::rename(inchikey2d = .id) %>% 
   ## filter na
-  dplyr::filter(is.na(x), !is.na(IUPACName)) %>% 
+  dplyr::filter(!is.na(IUPACName)) %>% 
   dplyr::select(1:3) %>%
   ## length of character
   dplyr::mutate(n.ch = nchar(IUPACName)) %>% 
