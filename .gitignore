@@ -1,1 +1,5 @@
 xcms_workflow.R
+
+*/*.rdata
+*/.R*
+mc.test/.R*

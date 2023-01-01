@@ -48,4 +48,4 @@ entity(dataset(project_dataset(mcn_serum))[[ ".f3_canopus" ]]) <- df3
 mcn_serum6501 <- mcn_serum
 format(object.size(mcn_serum6501), units = "MB")
 save(mcn_serum6501, file = "~/utils.tool/inst/extdata/mcn_serum6501.rdata")
-
+# load("~/utils.tool/inst/extdata/mcn_serum6501.rdata")

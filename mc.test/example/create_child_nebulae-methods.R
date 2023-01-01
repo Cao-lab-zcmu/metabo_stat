@@ -15,7 +15,7 @@ test1 <- compute_spectral_similarity(test1)
 ## default parameters
 create_child_nebulae()
 
-test1 <- create_child_nebulae(test1, 0.01, 5)
+test1 <- create_child_nebulae(test1, 0.01)
 ## see results
 igraph(child_nebulae(test1))
 ## write output for 'Cytoscape' or other network software

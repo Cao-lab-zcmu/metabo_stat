@@ -35,8 +35,6 @@ p <- ggraph(layout_n) +
   guides(size = "none",
          shape = guide_legend(override.aes = list(size = 4)),
          color = guide_legend(override.aes = list(size = 4))) +
-  # scale_color_manual(values = palette) +
-  # guides(color = guide_legend(override.aes = list(size = 8))) +
   labs(color = "Category", shape = "Type") +
   theme_grey() +
   theme(text = element_text(family = "Times"),
@@ -44,17 +42,13 @@ p <- ggraph(layout_n) +
         axis.text = element_blank(),
         axis.title = element_blank(),
         panel.background = element_rect(fill = "white"), 
-        # axis.line = element_blank(),
-        # legend.key.width = unit(1, "cm"),
-        # legend.key.height = unit(1, "cm"),
         legend.title = element_text(face = "bold", hjust = 0.2, family = "Times"),
         legend.text = element_text(family = "Times"),
         legend.background = element_rect(fill = "transparent"),
-        # legend.position = c(0.6,0.25),
         panel.grid = element_blank(),
         strip.text = element_text(face = "bold")
   )
-  ## ------------------------------------- 
+ 
   ggsave(p, file = "pathway.gg.svg", width = 11, height = 9)
   ## as png graph
   rsvg::rsvg_png("pathway.gg.svg", "pathway/pathway.png", width = 5000)

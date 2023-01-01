@@ -61,8 +61,3 @@ re <- new_report(yaml = .yaml_default("de"),
                  new_section(NULL, code_block =
                              new_code_block(codes = "re"))
 )
-
-# writeLines(call_command(re), "test.Rmd")
-# rmarkdown::render("test.Rmd")
-
-

@@ -27,7 +27,7 @@ hs.pathways <- rWikiPathways::listPathways('Homo sapiens')
 wiki.cpd <- pbapply::pblapply(hs.pathways$id,
                              function(id){
                                check <- 0
-                               while(check == 0 | class(check)[1] == "try-error"){
+                               while(check == 0 | inherits(check, "try-error")){
                                  check <- try(cpd <- rWikiPathways::getXrefList(id, 'Ch'),
                                               silent = T)
                                  return(cpd)

@@ -53,7 +53,7 @@ target <-
                }
                next
              }
-             if (grepl("^#' @param", text[i])) {
+             if (grepl("^#' @param|^#' @inheritParams", text[i])) {
                sig <- 2
                next
              }

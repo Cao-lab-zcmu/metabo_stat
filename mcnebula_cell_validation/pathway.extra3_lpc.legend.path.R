@@ -35,11 +35,14 @@ df <- dplyr::filter(df.or, name %in% all_of(ex)) %>%
                 x = 100)
 list <- c(list, list(df))
 lapply(list, function(df){
-         df <- dplyr::mutate(df,
-                             NAME = factor(NAME,
-                                           levels = c(NAME[which(grepl("^ |^$", NAME))],
-                                                      rev(sort(NAME[which(!grepl("^ |^$", NAME))])))
-                                           ))
+         df <-
+           dplyr::mutate(df,
+                         NAME = 
+                           factor(NAME,
+                                  levels =
+                                    c(NAME[which(grepl("^ |^$", NAME))],
+                                      rev(sort(NAME[which(!grepl("^ |^$", NAME))])))
+                                       ))
          p <- ggplot(df,
                      aes(x = x, y = NAME, label = NAME)) +
             geom_text(family = "Times", hjust = 0, size = 5) +

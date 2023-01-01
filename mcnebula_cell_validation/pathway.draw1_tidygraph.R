@@ -1,6 +1,6 @@
 ## ggraph to draw plot
 tidy.graph <- tidygraph::as_tbl_graph(graph)
-## ---------------------------------------------------------------------- 
+
 ## nodes
 nodes <- tidy.graph %>%
   tidygraph::activate(nodes) %>%
@@ -28,7 +28,7 @@ nodes <- tidy.graph %>%
                               }),
                 type = unname(type),
                 input_compound = ifelse(name %in% inmap, "Input compound", "Others"))
-## ------------------------------------- 
+
 ## output
 if(!file.exists("pathway"))
   dir.create("pathway")
@@ -38,12 +38,12 @@ write_tsv(nodes, "pathway/open_with_excel.nodes.tsv")
 igraph::write_graph(graph,
                     file = "pathway/open_with_cytoscape.graphml",
                     format = "graphml")
-## ------------------------------------- 
+
 ## edges
 edges <- tidy.graph %>%
   tidygraph::activate(edges) %>%
   ## rename the col of value of compare spectra
   dplyr::as_tibble()
-## ---------------------------------------------------------------------- 
+
 tidy.graph <- tidygraph::tbl_graph(nodes = nodes, edges = edges)
 
