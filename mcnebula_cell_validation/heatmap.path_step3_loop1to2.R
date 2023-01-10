@@ -1,9 +1,9 @@
-## ------------------------------------- 
+ 
 heat.class <- c(
                 "Acyl carnitines",
                 "Lysophosphatidylcholines",
                 "Bile acids, alcohols and derivatives")
-## ---------------------------------------------------------------------- 
+ 
 mapply(
        function(heat.class, short.name){
          cat("## Processing class", heat.class, "\n")
@@ -14,4 +14,4 @@ mapply(
          ggsave(p, filename = paste0(short.name, ".svg"),  height = 10, width = 35)
          rsvg::rsvg_png(paste0(short.name, ".svg"), paste0(short.name, ".png"), width = 10000)
        }, heat.class, c("ac", "lpc", "ba"))
-## ---------------------------------------------------------------------- 
+ 

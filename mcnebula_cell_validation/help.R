@@ -1,18 +1,17 @@
 ## ## download data from MASSIVE
-# get_metadata
-# mcnebula_run
+# ~/outline/mcnebula_cell_validation/get_metadata.R
+# ~/outline/mcnebula_cell_validation/mcnebula_run.R
 
-# merge_origin_analysis
-# stat_ratio
-# find_biomarker
-# find_ac_compounds
-# re_identification
-# bio_generate_child_nebula
-# bio_visualize_child_nenula
-# bio_annotate_nebula
-# hits_class
+# ~/outline/mcnebula_cell_validation/merge_origin_analysis.R
+# ~/outline/mcnebula_cell_validation/stat_ratio.R
+# ~/outline/mcnebula_cell_validation/find_biomarker.R
+# ~/outline/mcnebula_cell_validation/find_ac_compounds.R
+# ~/outline/mcnebula_cell_validation/re_identification.R
+# ~/outline/mcnebula_cell_validation/bio_generate_child_nebula.R
+# ~/outline/mcnebula_cell_validation/bio_visualize_child_nenula.R
+# ~/outline/mcnebula_cell_validation/bio_annotate_nebula.R
+# ~/outline/mcnebula_cell_validation/hits_class.R
 
-## get_real_class
 # ~/outline/mcnebula_cell_validation/get_real_class.R
 # ~/outline/mcnebula_cell_validation/export.step0_manual.select.class.R
 # ~/outline/mcnebula_cell_validation/export.step1_class.R
@@ -25,7 +24,7 @@
 
 # ~/outline/mcnebula_cell_validation/export.extra3_biomarker.R
 # ~/outline/mcnebula_cell_validation/export.extra4_gt.R
-# export.extra5_syno
+# ~/outline/mcnebula_cell_validation/export.extra5_syno.R
 
 ## get CID
 # ~/outline/mcnebula_cell_validation/submit_to_metabo.cid.R
@@ -43,18 +42,18 @@
 # ~/outline/mcnebula_cell_validation/pathway.draw2_ggraph.R
 
 ## wikipathway
-# wikipathway.step0_get.all.meta.R
+# ~/outline/mcnebula_cell_validation/wikipathway.step0_get.all.meta.R
 
 ## HMDB
-# hmdb.step0_download_format.R
+# ~/outline/mcnebula_cell_validation/hmdb.step0_download_format.R
 
 ## step1 and 2 were implement in:
-# heatmap.path_step3_loop1to2.R
-# heatmap.path_step4_gather.png.R
+# ~/outline/mcnebula_cell_validation/heatmap.path_step3_loop1to2.R
+# ~/outline/mcnebula_cell_validation/heatmap.path_step4_gather.png.R
 
-## grid.draw1_element.R
+# ~/outline/mcnebula_cell_validation/grid.draw1_element.R
 
-## pathway.extra1_ba.enrich.R
-## pathway.extra2_ba.element.R
-## pathway.extra3_lpc.legend.path.R
+# ~/outline/mcnebula_cell_validation/pathway.extra1_ba.enrich.R
+# ~/outline/mcnebula_cell_validation/pathway.extra2_ba.element.R
+# ~/outline/mcnebula_cell_validation/pathway.extra3_lpc.legend.path.R
 

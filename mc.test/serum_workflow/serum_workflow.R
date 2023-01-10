@@ -1,5 +1,5 @@
 # ==========================================================================
-# workflow to process data and output report
+# workflow to process data and output report (Serum)
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 ## Initialize
@@ -362,6 +362,9 @@ s8.1 <- new_section2(
     "classes of Nebulae)."),
   rblock({
     mcn2 <- set_nodes_color(mcn2, use_tracer = T)
+    palette_stat(melody(mcn2)) <- c(
+      NN = "#B6DFB6", HN = "#ACDFEE", HS = "#EBA9A7", HM = "grey70"
+    )
     ac <- "Acyl carnitines"
     lpc <- "Lysophosphatidylcholines"
     ba <- "Bile acids, alcohols and derivatives"
@@ -401,6 +404,27 @@ s8.4 <- new_section2(
 s8.4.fig1 <- include_figure(f8.4, "ef", "The annotated feature of ID: 2068")
 
 s8.5 <- c("See results", ref(s8.4.fig1), ".")
+
+notShow1 <- new_section2(
+  c("Combine the images."),
+  rblock({
+    p.ac <- into(grecta("a"), as_grob(visualize(mcn2, ac, annotate = T)))
+    p.lpc <- into(grecta("a"), as_grob(visualize(mcn2, lpc, annotate = T)))
+    p.ba <- into(grecta("b"), as_grob(visualize(mcn2, ba, annotate = T)))
+    p.node <- into(grecta("b"), grid::grid.grabExpr(show_node(mcn2, ef)))
+    dev.off()
+    grob.ac_node <- frame_row(c(p.ac = 1, p.node = .5), namel(p.ac, p.node))
+    grob.ac_node <- ggather(grob.ac_node, vp = viewport(, , .95, .95))
+    grob.lpc_ba <- frame_row(c(p.lpc = 1, p.ba = 1), namel(p.lpc, p.ba))
+    grob.lpc_ba <- ggather(grob.lpc_ba, vp = viewport(, , .95, .95))
+    pdf(paste0(tmp, "/fig.ac_node.pdf"), 9, 10)
+    draw(grob.ac_node)
+    dev.off()
+    pdf(paste0(tmp, "/fig.lpc_ba.pdf"), 9, 13)
+    draw(grob.lpc_ba)
+    dev.off()
+  })
+)
 
 ## Output identification table
 s10 <- new_heading("Query compounds", 2)
@@ -467,6 +491,7 @@ s10.6 <- new_section2(
     class <- pick_class(key2d, class.rdata)
     feas$class <- class
     feas.table <- rename_table(feas)
+    write_tsv(feas.table, paste0(tmp, "/compounds_format.tsv"))
   })
 )
 
@@ -558,6 +583,116 @@ s11.7 <- new_section2(
 s11.7.fig1 <- include_figure(f11.71, "ba", "Enrichment of Pagerank of BA compounds")
 s11.7.fig2 <- include_figure(f11.72, "lpc", "Enrichment of Pagerank of LPC compounds")
 
+## Heatmap analysis
+s12 <- new_heading("Heatmap analysis", 2)
+
+s12.1 <- new_section2(
+  c("Since the quantitative data obtained by merging contain many missing values,",
+    "they need to be processed before plotting the heat map:",
+    "For each subset of data, the missing values will be filled with the average",
+    "value; if the set is all missing values, they will be filled with zero."),
+  rblock({
+    hp.data <- handling_na(
+      features_quantification(mcn2),
+      metadata = sample_metadata(mcn2)
+    )
+  })
+)
+
+s12.2 <- new_section2(
+  c("Convert wide data to long data; log transform the values; if there is a",
+    "value 0, replace it with 1/10 of the minimum value of the value column."),
+  rblock({
+    hp.data <- log_trans(hp.data)
+  })
+)
+
+s12.3 <- new_section2(
+  c("Draw heat maps for three chemical classes."),
+  rblock({
+    names(focus) <- c("ACs", "BAs", "LPCs")
+    hp.lst <- plot_heatmap(focus, hp.data, metadata, pal_group = palette_stat(mcn2))
+    ggsave(f12.31 <- paste0(tmp, "/ac_heatmap.pdf"), hp.lst[[1]], width = 13, height = 4)
+    ggsave(f12.32 <- paste0(tmp, "/ba_heatmap.pdf"), hp.lst[[2]], width = 13, height = 7)
+    ggsave(f12.33 <- paste0(tmp, "/lpc_heatmap.pdf"), hp.lst[[3]], width = 13, height = 4)
+  })
+)
+
+s12.4.fig1 <- include_figure(f12.31, "acHp", "Heatmap of ACs")
+s12.4.fig2 <- include_figure(f12.32, "baHp", "Heatmap of BAs")
+s12.4.fig3 <- include_figure(f12.33, "lpcHp", "Heatmap of LPCs")
+
+s12.5 <- c("As shown in figure,",
+  paste0("Fig. ", get_ref(s12.4.fig1), ", ", get_ref(s12.4.fig2), ", and ",
+    get_ref(s12.4.fig3)),
+  "ACs and BAs implied a high correlation with disease,",
+  "while LPCs showed a relatively weak correlation."
+)
+
+notShow2 <- new_section2(
+  c("Combined heatmap."),
+  rblock({
+    grobs.hp <- lapply(hp.lst, function(p) grid::grid.grabExpr(print(p)))
+    grobs.hp <- lapply(1:3,
+      function(n, x = c("a", "b", "c")) {
+        into(grecta(x[n]), grobs.hp[[ n ]])
+      })
+    names(grobs.hp) <- names(hp.lst)
+    grobs.hp <- frame_row(c(ACs = 1, BAs = 1.5, LPCs = 1), grobs.hp)
+    grobs.hp <- ggather(grobs.hp, vp = viewport(, , .95, .95))
+    pdf(paste0(tmp, "/hps.pdf"), 13, 15)
+    draw(grobs.hp)
+    dev.off()
+  })
+)
+
+s15 <- new_heading("Verify Identification", 1)
+
+s15.1 <- new_section2(
+  c("In research of Wozniak et al, a subset of ACs compounds were identified. In",
+    "addition, four top rank metabolites were identified. However, Most of the",
+    "top 25 metabolites (EFS rank) were not identified."),
+  rblock({
+    ac_names <- c("Palmitoyl-carnitine", "Octanoyl-carnitine",
+      "Acetyl-carnitine", "Hexanoyl-carnitine",
+      "Decanoyl-carnitine")
+    ac_inchikey2d <- c("XOMRRQXKHMYMOC", "CXTATJFJDMJMIY",
+      "RDHQFKQIGNGIED", "VVPRQWTYSNDTEA",
+      "LZOSYCMHQXPBFU")
+    names(ac_inchikey2d) <- ac_names
+    other_4m <- c(
+      "Hepc", "D-erythro-Sphingosine-1-phosphate", "L-THYROXINE",
+      "Decanoyl-L-carnitine"
+    )
+    other_4m_inchikey2d <- c(
+      "BDPQVGIMLZYZQA", "DUYSYHSSBDVJSM", "XUIIKFGFIJCVMT",
+      "LZOSYCMHQXPBFU"
+    )
+    other_4m.seq <- unlist(lapply(other_4m, grep,
+        x = origin$Spectral_Library_Match, ignore.case = T))
+    other_4m <- origin[other_4m.seq, ]
+    origin.top25 <- c(349, 746, 854, 228, 320, 971, 2532, 670, 92, 1363,
+      13, 798, 1379, 1947, 4146, 736, 1656, 464, 731, 289,
+      4431, 3865, 476, other_4m$Unique_ID)
+    origin.top25.featureID <-
+      dplyr::filter(merged, oid %in% origin.top25)$.features_id
+  })
+)
+
+s15.2 <- new_section2(
+  c("Confirm which compounds were identified:"),
+  rblock({
+    ac_inchikey2d %in% features_annotation(mcn2)$inchikey2d
+    other_4m_inchikey2d %in% features_annotation(mcn2)$inchikey2d
+    reIdentify.origin.top25 <- dplyr::filter(features_annotation(mcn2),
+      .features_id %in% origin.top25.featureID)
+    reIdentify.origin.top25 <- dplyr::select(
+      reIdentify.origin.top25, .features_id, tani.score, inchikey2d
+    )
+    print(reIdentify.origin.top25, n = Inf)
+  }, args = list(eval = T))
+)
+
 ## Session infomation
 s100 <- new_heading("Session infomation", 1)
 
@@ -590,5 +725,5 @@ seqs <- search_heading(report, "^Initialize|^Statistic")
 report <- insert_layers(report, seqs[1], h1)
 report <- insert_layers(report, seqs[2], h2)
 
-writeLines(call_command(report), file.report <- paste0(tmp, "/report.rmd"))
+render_report(report, file.report <- paste0(tmp, "/report.rmd"))
 rmarkdown::render(file.report)

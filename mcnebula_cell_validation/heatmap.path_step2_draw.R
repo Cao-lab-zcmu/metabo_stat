@@ -10,12 +10,12 @@ heat.norm.df.l <- dplyr::as_tibble(heat.norm.df.l) %>%
                 value = log2(value),
                 value = scale(value, scale = F)) %>% 
   dplyr::rename(no.name = .id)
-## ------------------------------------- 
+ 
 ## tile heatmap
 p <- tile_heatmap(heat.norm.df.l)
-## ---------------------------------------------------------------------- 
+ 
 ## classify
-## ---------------------------------------------------------------------- 
+ 
 p <- do.call(
              function(df, p){
                df <- dplyr::rename(df, class = name, no.name = .id) %>% 
@@ -32,20 +32,20 @@ p <- do.call(
                return(p)
              }, list(df = heat.index, p = p)
 )
-## ---------------------------------------------------------------------- 
+ 
 ## add tree
-## ---------------------------------------------------------------------- 
+ 
 heat.norm.df.w <- tidyr::spread(heat.norm.df.l, key = sample, value = value) %>% 
   ## format for hclust
   data.frame()
 rownames(heat.norm.df.w) <- heat.norm.df.w$no.name
 heat.norm.df.w <- heat.norm.df.w %>% 
   dplyr::select(-1, -2)
-## ------------------------------------- 
+ 
 p <- add_tree.heatmap(heat.norm.df.w, p)
-## ---------------------------------------------------------------------- 
+ 
 ## sample group
-## ---------------------------------------------------------------------- 
+ 
 p <- do.call(
              function(df, p, pal){
                df <- dplyr::rename(df,
