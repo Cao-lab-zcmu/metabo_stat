@@ -96,6 +96,8 @@ frame.mcn <- ggather(frame.mcn, vp = viewport(, , .size_subslot, .size_subslot))
 .mcn <- into(.mcn, frame.mcn)
 .mcn <- ggather(.mcn, vp = .gene.vp)
 
+## show
+# x11(, 7, 11)
 # draw(.mcn)
 
 # ==========================================================================
@@ -103,16 +105,15 @@ frame.mcn <- ggather(frame.mcn, vp = viewport(, , .size_subslot, .size_subslot))
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 ## link
-link <- c(
-  # "dataset", "stardust_classes", "create_stardust_classes",
-  # "dataset", "specific_candidate", "create_reference",
-  # "dataset", "features_annotation", "create_features_annotation",
-  # "specific_candidate", "features_annotation", "create_features_annotation",
-  # "hierarchy", "stardust_classes", "create_stardust_classes",
-  # "features_annotation", "nebula_index", "create_nebula_index",
-  # "stardust_classes", "nebula_index", "create_nebula_index",
-  "stardust_classes", "backtrack", "cross_filter_stardust",
-  "backtrack", "stardust_classes", "backtrack_stardust"
+link <- c("dataset", "stardust_classes", "create_stardust_classes",
+          "dataset", "specific_candidate", "create_reference",
+          "dataset", "features_annotation", "create_features_annotation",
+          "specific_candidate", "features_annotation", "create_features_annotation",
+          "hierarchy", "stardust_classes", "create_stardust_classes",
+          "features_annotation", "nebula_index", "create_nebula_index",
+          "stardust_classes", "nebula_index", "create_nebula_index",
+          "stardust_classes", "backtrack", "cross_filter_stardust",
+          "backtrack", "stardust_classes", "backtrack_stardust"
 )
 link <- split(link, rep(1:(length(link) / 3), each = 3))
 link <- data.frame(t(do.call(cbind, link)))
@@ -120,14 +121,14 @@ names(link) <- c("from", "to", "fun")
 ## the attributes for arrow
 fun_pal <- ggsci::pal_d3("category20")(20)
 link <- dplyr::mutate(link,
-  group = agroup(to, 1:10, integer(1)),
-  group = ifelse(from == "backtrack", max(group) + 1, group),
-  color = agroup(group, fun_pal),
-  left = ifelse(from %in% c("dataset", "specific_candidate"), F, T),
-  left = ifelse(to %in% c("specific_candidate", "stardust_classes"),
-    !left, left),
-  up = ifelse(from == "backtrack", T, F),
-  shift = ifelse(from %in% c("dataset", "backtrack"), 2, 2.5))
+                      group = agroup(to, 1:10, integer(1)),
+                      group = ifelse(from == "backtrack", max(group) + 1, group),
+                      color = agroup(group, fun_pal),
+                      left = ifelse(from %in% c("dataset", "specific_candidate"), F, T),
+                      left = ifelse(to %in% c("specific_candidate", "stardust_classes"),
+                                    !left, left),
+                      up = ifelse(from == "backtrack", T, F),
+                      shift = ifelse(from %in% c("dataset", "backtrack"), 2, 2.5))
 
 ## tools
 tools <- maparrow(.mcn, link)

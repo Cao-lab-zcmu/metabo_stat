@@ -119,7 +119,7 @@ set.seed(10)
 ## filter
 reference(mcn_dataset(test1))$nebula_index %<>%
   dplyr::filter(class.name %in% sample(unique(class.name), 9))
-test1 <- create_parent_nebula(test1, 0.01, 5, T)
+test1 <- create_parent_nebula(test1, 0.01, T)
 test1 <- create_child_nebulae(test1, 0.01, 5)
 test1 <- create_parent_layout(test1)
 test1 <- create_child_layouts(test1)
@@ -154,17 +154,17 @@ vis <- frame_col(list(vis = 4, legendG = 1), namel(vis, legendG))
 .grob.vis <- vis
 
 ## report
-rept <- grecti("Report: Workflow", tfill = pal[["report"]],
+rept <- grecti("Report: Title", tfill = pal[["report"]],
                tgp_args = list(col = "transparent"), borderF = 1.5)
-head <- gtext("4.4 Create Nebulae", x = 0, hjust = 0)
-head2 <- gtext("4.5. Visualize Nebulae", x = 0, hjust = 0)
+head <- gtext("1. Heading", x = 0, hjust = 0)
+head2 <- gtext("2. Heading", x = 0, hjust = 0)
 fig <- into(grectn(), gtext("Fig.", list(cex = 3)))
 des <- gtext("Description...", x = .1, hjust = 0)
 code <- into(grectn("grey95", , list(col = "transparent")),
              gtext("## code",
                    list(font = c(plain = 1)), x = .1, hjust = 0))
 mores <- gltext("More sections")
-cont <- frame_row(c(mores = .3, head = .3, des = .2, code = .3,
+cont <- frame_row(c(head = .3, des = .2, code = .3,
                     head2 = .3, fig = 1, des = .2, code = .3, mores = .3),
                   namel(head2, head, fig, des, code, mores))
 cont <- ggather(cont, vp = viewport(, , .8, .8))
@@ -199,9 +199,9 @@ weight.nebulae <- weight.nebulae[c(1, 3, 2)]
 
 ## link
 link <- c(
-  "grid_layout", "vis2", "visualize_all",
-  "viewports", "vis2", "visualize_all",
-  "ggset", "vis2", "visualize_all"
+          "grid_layout", "vis2", "visualize_all",
+          "viewports", "vis2", "visualize_all",
+          "ggset", "vis2", "visualize_all"
 )
 link <- split(link, rep(1:(length(link) / 3), each = 3))
 link <- data.frame(t(do.call(cbind, link)))
@@ -210,12 +210,11 @@ names(link) <- c("from", "to", "fun")
 fun_pal <- ggsci::pal_d3("category20")(20)
 fun_pal <- fun_pal[!fun_pal %in% unique(link_b$color)]
 link <- dplyr::mutate(link,
-  group = agroup(to, 1:10, integer(1)),
-  color = agroup(group, fun_pal),
-  left = F, up = F,
-  shift = 2,
-  dup = duplicated(group)
-)
+                      group = agroup(to, 1:10, integer(1)),
+                      color = agroup(group, fun_pal),
+                      left = F, up = F,
+                      shift = 2,
+                      dup = duplicated(group))
 
 ## tools
 tools_c <- maparrow(.nebulae, link, list(ggset = "child_nebulae.*::ggset"))
@@ -252,8 +251,9 @@ cvp <- garrow_city(tools_c$nulls$ggset$r, tools_c$nulls$ggset$t, F, F,
 sag <- tools_c$sags[[1]]
 sag$vp[[1]] <- cvp
 
+## show
 .nebulae <- do.call(ggather, c(list(.nebulae), bafs, arr, list(sag)))
-# draw(.nebulae)
+# draw(tmp.nebulae)
 
 link_c <- link
 
