@@ -18,7 +18,8 @@ files <- c(
   "/home/echo/utils.tool/inst/extdata/svg",
   "/home/echo/utils.tool/inst/extdata/toActiv30.rdata",
   "/home/echo/utils.tool/inst/extdata/toBinary5.rdata",
-  "/home/echo/utils.tool/inst/extdata/toAnno5.rdata"
+  "/home/echo/utils.tool/inst/extdata/toAnno5.rdata",
+  "/home/echo/utils.tool/inst/extdata/evaluation.tar.gz"
 )
 
 lapply(files, file.copy, to = "~/exMCnebula2/inst/extdata",

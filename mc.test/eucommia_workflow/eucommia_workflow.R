@@ -1,11 +1,22 @@
 # ==========================================================================
 # workflow to process data and output report (Eucomma)
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+devtools::load_all("~/MCnebula2")
+devtools::load_all("~/exMCnebula2")
+
 # workflow(mode = "print")
 
 s0.1 <- new_section("Abstract", 1, reportDoc$abstract, NULL)
 
-s0.2 <- new_section("Introduction", 1, reportDoc$introduction, NULL)
+s0.2 <- new_section("Introduction", 1,
+  c(reportDoc$introduction, "",
+    "*Eucommia ulmoides Oliv.* (*E.  ulmoides*), as a traditional",
+    "Chinese medicine (TCM), after being processed with saline water, was",
+    "applied to the treatment of renal diseases for a long time in China.",
+    "Due to its complex composition, discovering chemical",
+    "changes during processing (such as processed with saline water) is challenging.",
+    "We would next demonstrate the addressing of this challenge with MCnebula, which",
+    "may be enlightening for the study of phytopharmaceuticals."), NULL)
 
 s0.3 <- new_section("Set-up", 1, reportDoc$setup,
   rblock({
@@ -236,16 +247,26 @@ s7.7 <- new_section2(
   })
 )
 
+s7.8 <- new_section2(
+  c("Check the results."),
+  rblock({
+    top.list[[1]]
+  }, args = list(eval = T, echo = T))
+)
+
 ## Set tracer in Child-Nebulae
 s8 <- new_heading("Set tracer in Child-Nebulae", 2)
 
 s8.1 <- new_section2(
   reportDoc$tracer,
   rblock({
-    n <- 100
-    tops <- top.list[[1]]$.features_id[1:n]
-    palette_set(melody(mcn)) <- colorRampPalette(palette_set(mcn))(length(tops))
-    mcn2 <- set_tracer(mcn, tops)
+    n <- 20
+    tops <- select_features(
+      mcn2, tani.score_cutoff = .5, order_by_coef = 1, togather = T
+    )
+    top20 <- tops[1:n]
+    palette_set(melody(mcn)) <- colorRampPalette(palette_set(mcn))(n)
+    mcn2 <- set_tracer(mcn, top20)
     mcn2 <- create_child_nebulae(mcn2)
     mcn2 <- create_child_layouts(mcn2)
     mcn2 <- activate_nebulae(mcn2)
@@ -265,17 +286,13 @@ s8.2 <- new_section2(
 s8.2.fig1 <- include_figure(f8.2, "tracer", "Tracing top features in Child-Nebulae")
 
 s8.3 <- c("A part of the top features are marked with colored nodes in",
-          "Child-Nebulae", ref(s8.2.fig1), ".",
-          "These features are at least identified with chemical molecular",
-          "formula. Those that are not identified, or the Nebula-Index data do",
-          "not contain the chemical class to which these features belong, are",
-          "absent from the Figure.")
+          "Child-Nebulae", paste0(ref(s8.2.fig1), "."))
 
 ## Quantification in Child-Nebulae
 s9 <- new_heading("Quantification in Child-Nebulae", 2)
 
 s9.1 <- new_section2(
-  c("Show Fold Change (HM versus HS) in Child-Nebulae."),
+  c("Show Fold Change (Pro versus Raw) in Child-Nebulae."),
   rblock({
     palette_gradient(melody(mcn2)) <- c("blue", "grey90", "red")
     mcn2 <- set_nodes_color(mcn2, "logFC", top.list[[1]])
@@ -302,13 +319,15 @@ s10.0 <- new_section2(
 )
 
 s10.1 <- new_section2(
-  c("Next, let us focus on 'Furanoid lignans' and 'Iridoids and derivatives'."),
+  c("Next, let us focus on 'Lignans, neolignans and related compounds' and",
+    "'Iridoids and derivatives'. They were representative chemical classes in",
+    "E. ulmoides."),
   rblock({
     mcn2 <- set_nodes_color(mcn2, use_tracer = T)
     palette_stat(melody(mcn2)) <- c(
       Pro = "#EBA9A7", Raw = "#ACDFEE", Blank = "grey80"
     )
-    lig <- "Furanoid lignans"
+    lig <- "Lignans, neolignans and related compounds"
     iri <- "Iridoids and derivatives"
     mcn2 <- annotate_nebula(mcn2, lig)
     mcn2 <- annotate_nebula(mcn2, iri)
@@ -325,6 +344,9 @@ s10.2 <- new_section2(
   })
 )
 
+# pngGrob <- zoom_pdf(f10.2.2, dpi = 1000, position = c(.3, .5))
+# grid.draw(pngGrob)
+
 s10.2.fig1 <- include_figure(f10.2.1, "lig", paste0("Annotated Nebulae: ", lig))
 s10.2.fig2 <- include_figure(f10.2.2, "iri", paste0("Annotated Nebulae: ", iri))
 
@@ -337,14 +359,14 @@ s10.4 <- new_section2(
   c("Use the `show_node` function to get the annotation details",
     "for a feature. For example:"),
   rblock({
-    ef <- "1314"
-    pdf(f10.4 <- paste0(tmp, "/features_", ef, ".pdf"), 12, 4)
+    ef <- "1642"
+    pdf(f10.4 <- paste0(tmp, "/features_", ef, ".pdf"), 10, 6)
     show_node(mcn2, ef)
     dev.off()
   })
 )
 
-s10.4.fig1 <- include_figure(f10.4, "ef", "The annotated feature of ID: 1314")
+s10.4.fig1 <- include_figure(f10.4, "ef", "The annotated feature of ID: 1642")
 
 s10.5 <- c(
   "See results", ref(s10.4.fig1),
@@ -427,23 +449,155 @@ s11.7 <- new_section2(
   }, args = list(eval = T))
 )
 
-## Plot MS/MS spectra of top 'features'
-s12 <- new_heading("Plot MS/MS spectra of top 'features'", 2)
+## Plot spectra of top 'features'
+s12 <- new_heading("Plot spectra of top 'features'", 2)
 
 s12.1 <- new_section2(
   c("Drawing of MS/MS spectra of top 'features'."),
   rblock({
-    tops.hq <- tops[tops %in% feas$.features_id]
-    mcn2 <- draw_structures(mcn2, .features_id = tops.hq)
+    mcn2 <- draw_structures(mcn2, .features_id = top20)
     pdf(f12.1 <- paste0(tmp, "/msms_tops_identified.pdf"), 12, 10)
-    plot_msms_mirrors(mcn2, tops.hq)
+    plot_msms_mirrors(mcn2, top20)
     dev.off()
   })
 )
 
 s12.2 <- include_figure(f12.1, "msmsTops", "MS/MS spectra of top features (identified)")
 
-s12.3 <- c("See results", ref(s12.2), ".")
+s12.3 <- c("See results", paste0(ref(s12.2), "."))
+
+s12.5 <- new_section2(
+  c("Plot EIC spectra of top 'features'.",
+    "(Since the code below requires .mzML mass spectrometry data, these files are too",
+    "large to be stored in a package, so the code below will not be run. But we have",
+    "saved the result data.)"),
+  rblock({
+    metadata$file <- paste0(metadata$sample, ".mzML")
+    data <- plot_EIC_stack(top20, metadata,
+      quant.path = paste0(tmp, "/features.csv"),
+      mzml.path = "/media/echo/back/thermo_mzML_0518/",
+      palette = palette_stat(mcn2)
+    )
+    save(data, file = paste0(tmp, "/eic_data.rdata"))
+  }, F)
+)
+
+s12.6 <- new_section2(
+  c("Load the saved data and draw the figure."),
+  rblock({
+    load(paste0(tmp, "/eic_data.rdata"))
+    pdf(f12.6 <- paste0(tmp, "/eic_tops_identified.pdf"), 12, 10)
+    print(data$p)
+    dev.off()
+  })
+)
+
+s12.7 <- new_section2(
+  c("Or use following to re-plot the 'ggplot' object."),
+  rblock({
+    data <- plot_EIC_stack(data = data, palette = palette_stat(mcn2))
+  }, F, args = list(eval = F))
+)
+
+s12.8 <- include_figure(f12.6, "eic",
+  "Extracted Ions Chromatograph (EIC) of top features (identified)")
+
+s12.9 <- c("See results", paste0(ref(s12.8), "."),
+  "It can be assumed that 1642, 1785, and 2321 are newly generated compounds after",
+  "the processing. According to Fig. \\@ref(fig:tracer), they were belong to chemical",
+  "classes of 'Iridoids and derivatives', 'Dialkyl ethers' and",
+  "'Phenylpropanoids and polyketides'."
+)
+
+s13 <- new_heading("Discover more around top 'features' in Child-Nebulae", 2)
+
+s13.1 <- new_section2(
+  c("Plot the Child-Nebulae of the two chemical classes that we have not annotated",
+    "yet."),
+  rblock({
+    dia <- "Dialkyl ethers"
+    phe <- "Phenylpropanoids and polyketides"
+    mcn2 <- annotate_nebula(mcn2, dia)
+    mcn2 <- annotate_nebula(mcn2, phe)
+    p <- visualize(mcn2, dia, annotate = T)
+    ## c(.3, .4)
+    ggsave(f13.1.1 <- paste0(tmp, "/dia_child.pdf"), p, width = 6, height = 4)
+    p <- visualize(mcn2, phe, annotate = T)
+    ## c(.5, .8)
+    ggsave(f13.1.2 <- paste0(tmp, "/phe_child.pdf"), p, width = 6, height = 4)
+  })
+)
+
+s13.2 <- new_section2(
+  c("Draw their partial views and put them together."),
+  rblock({
+    grob_iri <- zoom_pdf(f10.2.2, c(.28, .515), c(.1, .1), dpi = 3000)
+    grob_dia <- zoom_pdf(f13.1.1, c(.25, .3), c(.1, .1), dpi = 3000)
+    grob_phe <- zoom_pdf(f13.1.2, c(.465, .825), c(.06, .06), dpi = 3000)
+    local_1642 <- into(grecta("a"), grob_iri)
+    local_1785 <- into(grecta("b"), grob_dia)
+    local_2321 <- into(grecta("c"), grob_phe)
+    locals <- frame_row(c(local_1642 = 1, local_1785 = 1, local_2321 = 1),
+      namel(local_1642, local_1785, local_2321))
+  })
+)
+
+s13.3 <- new_section2(
+  c("We found interesting adjacent compounds (ID:2110 and ID:854) in `local_1642`,",
+    "which has a similar chemical structure to 'feature' 1642."),
+  rblock({
+    grob_struc2110 <- grid.grabExpr(show_structure(mcn2, "2110"))
+    grob_struc2110 <- into(grecta("d"), grob_struc2110)
+    grob_struc854 <- grid.grabExpr(show_structure(mcn2, "854"))
+    grob_struc854 <- into(grecta("e"), grob_struc854)
+    grob_msms2110 <- as_grob(plot_msms_mirrors(mcn2, c("2110", "854"), structure_vp = NULL))
+    grob_msms2110 <- into(grecta("f"), grob_msms2110)
+  })
+)
+
+s13.4 <- new_section2(
+  c("Again, we don't run the following code, but we save the results."),
+  rblock({
+    data <- plot_EIC_stack(c("2110", "854"), metadata,
+      quant.path = paste0(tmp, "/features.csv"),
+      mzml.path = "/media/echo/back/thermo_mzML_0518/",
+      palette = palette_stat(mcn2)
+    )
+    save(data, file = paste0(tmp, "/eic_data2110.rdata"))
+  }, F)
+)
+
+s13.5 <- new_section2(
+  c("Load the data and convert picture."),
+  rblock({
+    load(paste0(tmp, "/eic_data2110.rdata"))
+    grob_eic2110 <- as_grob(data$p)
+    grob_eic2110 <- into(grecta("g"), grob_eic2110)
+  })
+)
+
+s13.6 <- new_section2(
+  c("Draw the final figure."),
+  rblock({
+    frame <- frame_col(c(grob_struc2110 = 1, grob_struc854 = 1),
+      namel(grob_struc2110, grob_struc854))
+    frame <- frame_row(c(frame = 1, grob_msms2110 = 1, grob_eic2110 = 1),
+      namel(frame, grob_msms2110, grob_eic2110))
+    frame <- frame_col(c(locals = 1, frame = 1.5),
+      namel(locals, frame))
+    frame <- ggather(frame, vp = viewport(, , .95, .95))
+    pdf(f13.6 <- paste0(tmp, "/complex.pdf"), 14, 10)
+    draw(frame)
+    dev.off()
+  })
+)
+
+s13.7 <- include_figure(f13.6, "complex",
+  "Discover chemical changes using MCnebula")
+
+s13.8 <- c("It can be speculated that the changes in the levels of ID 1642 and ID 845 were",
+  "caused by structural changes of ID 2110 during the processing, which may have",
+  "involved reactions such as dehydration and rearrangement (Fig. \\@ref(fig:complex)).")
 
 s100 <- new_heading("Session infomation", 1)
 
@@ -457,8 +611,6 @@ s100.1 <- rblock({
 
 sections <- gather_sections()
 report <- do.call(new_report, sections)
-yaml(report)[1] <- c("title: Analysis on Eucommia dataset")
+yaml(report)[1] <- c("title: Analysis on *E. ulmoides* dataset")
 render_report(report, file <- paste0(tmp, "/report.Rmd"))
 rmarkdown::render(file)
-
-
