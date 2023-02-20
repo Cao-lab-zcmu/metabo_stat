@@ -448,6 +448,8 @@ s10.2 <- new_section2(
     "and then sorts and de-duplicates it."),
   rblock({
     feas <- features_annotation(mcn2)
+    feas <- merge(feas, top.list[[2]], by = ".features_id", all.x = T)
+    feas <- dplyr::mutate(feas, arrange.rank = adj.P.Val)
     feas <- format_table(feas, export_name = NULL)
     key2d <- feas$inchikey2d
   })
@@ -500,6 +502,32 @@ s10.7 <- new_section2(
   rblock({
     feas.table
   }, args = list(eval = T))
+)
+
+s10.8 <- new_section2(
+  c( "Filtering our results based on the ranking of 'features' (top 25 of EFS",
+      "and MWU) and identification by Wozniak et al."),
+  rblock({
+    origin_top50 <- dplyr::select(
+      origin_top50, oid = 1, EFS_Rank, MW_Rank,
+      Spectral_Library_Match
+    )
+    feas.otop <- dplyr::select(merged, .features_id, oid)
+    feas.otop <- merge(origin_top50, feas.otop, all.x = T, by = "oid")
+    feas.otop <- merge(
+      feas.otop, features_annotation(mcn2),
+      all.x = T, by = ".features_id"
+    )
+    feas.otop.format <- format_table(
+      feas.otop, filter = NULL,
+      select = c("oid", "EFS_Rank", "MW_Rank", "Spectral_Library_Match", .select_format),
+      export_name = c(oid = "# Original ID", EFS_Rank = "# EFS_Rank",
+        MW_Rank = "# MW_Rank",
+        Spectral_Library_Match = "# Spectral_Library_Match",
+        .export_name)
+    )
+    write_tsv(feas.otop.format, paste0(tmp, "/oTop50_compounds_format.tsv"))
+  })
 )
 
 ## Pathway enrichment 
@@ -617,6 +645,15 @@ s12.3 <- new_section2(
     ggsave(f12.33 <- paste0(tmp, "/lpc_heatmap.pdf"), hp.lst[[3]], width = 13, height = 4)
   })
 )
+
+# test <- plot_heatmap(focus, hp.data, metadata, pal_group = palette_stat(mcn2), clust_col = F)
+# test <- lapply(test, function(x) grid.grabExpr(print(x)))
+# names(test)
+# # [1] "ACs"  "BAs"  "LPCs"
+# test.p <- frame_row(c(ACs = 1, BAs = 1.5, LPCs = 1), test)
+# pdf(paste0(tmp, "/test_heatmap.pdf"), width = 13, height = 18)
+# draw(test.p)
+# dev.off()
 
 s12.4.fig1 <- include_figure(f12.31, "acHp", "Heatmap of ACs")
 s12.4.fig2 <- include_figure(f12.32, "baHp", "Heatmap of BAs")

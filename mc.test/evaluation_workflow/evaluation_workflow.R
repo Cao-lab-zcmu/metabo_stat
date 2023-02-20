@@ -2,9 +2,6 @@
 # script for evaluation
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-devtools::load_all("~/MCnebula2")
-devtools::load_all("~/exMCnebula2")
-
 s0.1 <- new_heading("Introduction", 1)
 
 s0.2 <- c(
@@ -624,6 +621,15 @@ s2.592 <- c("As shown", paste0(ref(s2.591), ","),
   "MCnebula2 has a higher noise tolerance than MolNetEnhancer.",
 )
 
+s2.59 <- new_heading("Summary", 3)
+
+s2.591 <- new_section2(
+  c(),
+  rblock({
+
+  })
+)
+
 s2.7 <- new_heading("Evaluate accuracy of identification", 2)
 
 s2.8 <- new_section2(
@@ -657,10 +663,7 @@ s2.81 <- new_section2(
 )
 
 s2.82 <- c(
-  "For all identified compounds, the average false rate was",
-  paste0(idRes.summary$false, "%."),
-  "Set 0.5 for 'tani.score' as threshold, the average false rate was",
-  paste0(idRes.5.summary$false, "%.")
+  "For all identified compounds, the average false rate was", paste0(idRes.summary$false, "%."), "Set 0.5 for 'tani.score' as threshold, the average false rate was", paste0(idRes.5.summary$false, "%.")
 )
 
 s2.83 <- new_section2(
@@ -669,21 +672,6 @@ s2.83 <- new_section2(
     vis <- visualize_idRes(list(`No cut-off` = idRes, `0.5 cut-off` = idRes.5))
     pdf(f2.83 <- paste0(tmp, "/identified_accuracy.pdf"), 6, 9)
     draw(vis)
-    dev.off()
-  })
-)
-
-notShow1 <- new_section2(
-  c("Combine plot."),
-  rblock({
-    classify <- visualize_comparison(dominant_res, res_molnet)
-    classify <- into(grecta("a"), classify)
-    structure <- visualize_idRes(list(`No cut-off` = idRes, `0.5 cut-off` = idRes.5))
-    structure <- into(grecta("b"), structure)
-    grobs <- frame_col(c(classify = 1.5, structure = 1), namel(classify, structure))
-    grobs <- ggather(grobs, vp = viewport(, , .95, .95))
-    pdf(paste0(tmp, "/compare_accuracy.pdf"), 14, 9)
-    draw(grobs)
     dev.off()
   })
 )

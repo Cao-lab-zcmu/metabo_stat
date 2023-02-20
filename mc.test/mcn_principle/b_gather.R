@@ -27,12 +27,11 @@ sep <- segmentsGrob(.5, .1, .5, .9)
 content <- frame_col(c(c1 = 1, c2 = .7), namel(c1, c2))
 quantity <- grectn_frame(zo(content, h = .7), gtext0("quantity"), zo = F)
 
-
 ## score
 struc <- into(glayer(4), struc_2095)
 ## gather
-content <- frame_col(c(struc = 1, arr = .3, p.box = 1, arr = .3, mp.bar = 1),
-                     namel(struc, arr, p.box, mp.bar))
+content <- frame_col(c(struc = 1, arr = .3, p.box = 1, arr = .3, p.ring2 = 1),
+                     namel(struc, arr, p.box, p.ring2))
 score <- grectn_frame(zo(content, h = .8), gtext0("score"), zo = F)
 
 ## identical
@@ -53,12 +52,11 @@ cross <- into(cross, obj)
 
 prin <- frame_col(c(inner = 1, null = .1, stardust = .7, null = .1, cross = 3.5),
                   namel(inner, stardust, cross, null = nullGrob()))
-vp <- viewport(, , u(50, line), u(35, line))
+vp <- viewport(, , .95, .95)
 prin <- ggather(prin, vp = vp)
 
-pdf(tmp_pdf(), 11, 8)
+pdf(tmp_pdf(), 11, 7)
 draw(prin)
 dev.off()
-op(tmp_pdf())
-
-file.copy(tmp_pdf(), "~/Documents/figure_mech.pdf")
+# op(tmp_pdf())
+# file.copy(tmp_pdf(), "/mnt/data/wizard/Documents/article/MCnebula2/figure_mech.pdf", T)

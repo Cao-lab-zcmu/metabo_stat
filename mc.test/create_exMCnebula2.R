@@ -7,7 +7,7 @@ new_package.fromFiles("~/exMCnebula2",
     "query_inchikey.R", "query_classification.R", "query_others.R",
     "output_identification.R", "pick_annotation.R", "alignment_merge.R",
     "pathway_enrichment.R", "cross_select.R", "exReport.R", "plot_EIC_stack.R"),
-  path = "~/utils.tool/R/")
+  path = "~/utils.tool/R/", exclude = c("MSnbase", "MetaboAnalystR"))
 
 # list.files("~/utils.tool/inst/extdata", full.names = T)
 files <- c(

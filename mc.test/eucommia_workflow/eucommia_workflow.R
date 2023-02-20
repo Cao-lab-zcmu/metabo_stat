@@ -1,8 +1,6 @@
 # ==========================================================================
 # workflow to process data and output report (Eucomma)
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-devtools::load_all("~/MCnebula2")
-devtools::load_all("~/exMCnebula2")
 
 # workflow(mode = "print")
 
@@ -395,6 +393,8 @@ s11.2 <- new_section2(
     "and then sorts and de-duplicates it."),
   rblock({
     feas <- features_annotation(mcn2)
+    feas <- merge(feas, top.list[[1]], by = ".features_id", all.x = T)
+    feas <- dplyr::mutate(feas, arrange.rank = adj.P.Val)
     feas <- format_table(feas, export_name = NULL)
     key2d <- feas$inchikey2d
   })
