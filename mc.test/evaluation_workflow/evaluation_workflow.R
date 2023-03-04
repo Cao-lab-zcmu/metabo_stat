@@ -624,9 +624,103 @@ s2.592 <- c("As shown", paste0(ref(s2.591), ","),
 s2.59 <- new_heading("Summary", 3)
 
 s2.591 <- new_section2(
-  c(),
+  c("The following data is available."),
   rblock({
+    res_parallel <- attr(vis, "data")
+    comman_class <- unique(res_parallel[[1]]$class.name)
+    res_mcnebula <- dominant_res
+    res_molnet
+    summary_mcnebula <- summary
+    summary_molnet
+  })
+)
 
+s2.592 <- new_section2(
+  c("Also required:"),
+  rblock({
+    res_mcnebula_common <- lapply(
+      res_mcnebula, dplyr::filter, class.name %in% comman_class
+    )
+    res_molnet_common <- lapply(
+      res_molnet, dplyr::filter, class.name %in% comman_class
+    )
+    summary_mcnebula_common <- lapply(res_mcnebula_common, summarise)
+    summary_molnet_common <- lapply(res_molnet_common, summarise)
+  })
+)
+
+s2.593 <- new_section2(
+  c("Draw the figure:"),
+  rblock({
+    lst_molnet <- visualize_summary(summary_molnet_common)
+    lst_mcnebula <- visualize_summary(summary_mcnebula_common)
+    vis <- lapply(namel(lst_mcnebula, lst_molnet),
+      function(lst) {
+        bar <- as_grob(lst$p.num)
+        ring <- list(
+          p.ratioRelFal = as_grob(lst$p.ratioRelFal$p.m),
+          p.ratioSt = as_grob(lst$p.ratioSt$p.m)
+        )
+        frame <- frame_col(c(p.ratioSt = 2, p.ratioRelFal = 3), ring)
+        frame_col(c(bar = 2, frame = 5), c(namel(bar), namel(frame)))
+      })
+    vis <- frame_row(c(lst_mcnebula = 1, lst_molnet = 1), vis)
+    label_mcnebula <- gtext90("MCnebula", "#4DBBD5FF")
+    label_molnet <- gtext90("GNPS", "#E64B35FF")
+    group_labels <- frame_row(c(label_mcnebula = 1, null = .1, label_molnet = 1),
+      namel(label_mcnebula, label_molnet, null = nullGrob()))
+    vis2 <- frame_col(c(group_labels = .1, vis = 5), namel(group_labels, vis))
+    legend <- frame_col(c(null = 2, p.ratioSt = 2, p.ratioRelFal = 3),
+      list(null = nullGrob(), p.ratioRelFal = lst_molnet$p.ratioRelFal$p.l,
+        p.ratioSt = lst_molnet$p.ratioSt$p.l))
+    vis3 <- frame_row(c(vis2 = 5, legend = .5), namel(vis2, legend))
+    label_sum <- gtext90("Sum number", "#709AE1FF", 0)
+    label_false <- gtext90("Relative false rate", "#FED439FF", 0)
+    label_stab <- gtext90("Stability", "#91D1C2", 0)
+    title_labels <- frame_col(
+      c(null = .2, label_sum = 2, null = .1, label_stab = 2, null = .1, label_false = 3), 
+      namel(label_sum, label_false, label_stab, null = nullGrob())
+    )
+    vis4 <- frame_row(
+      c(title_labels = 1, null = .5, vis3 = 15), 
+      namel(title_labels, vis3, null = nullGrob())
+    )
+    vis4 <- ggather(vis4, vp = viewport(, , .95, .95))
+    pdf(f2.59 <- paste0(tmp, "/evaluation_summary.pdf"), 15, 5)
+    draw(vis4)
+    dev.off()
+  })
+)
+
+s2.594 <- include_figure(f2.59, "summary", "Evaluation sumary for MCnebula and benchmark method")
+
+s2.595 <- c("Under the same conditions (common chemical classes), MCnebula outperforms the",
+  "benchmark method (Fig. \\@ref(fig:summary)).",
+  "The formula for Relative false rate:",
+  "- RelativeFalseRate = 1 - (1 - FalseRate) * (1 - AverageLostRate)"
+)
+
+notShow1 <- new_section2(
+  c("Combine figure..."),
+  rblock({
+    vis_summary <- into(grecta("a"), vis4)
+    vis_classify <- visualize_comparison(dominant_res, res_molnet,
+      from = c("MCnebula", "GNPS"))
+    vis_classify <- into(grecta("b"), vis_classify)
+    vis_id <- visualize_idRes(list(`No cut-off` = idRes, `0.5 cut-off` = idRes.5))
+    vis_id <- into(grecta("c"), vis_id)
+    frame1 <- frame_col(
+      c(vis_classify = 1.5, vis_id = 1),
+      namel(vis_classify, vis_id)
+    )
+    frame2 <- frame_row(
+      c(vis_summary = 1, frame1 = 2),
+      namel(vis_summary, frame1)
+    )
+    frame2 <- ggather(frame2, vp = viewport(, , .95, .95))
+    pdf(paste0(tmp, "/compare_accuracy.pdf"), 14, 14)
+    draw(frame2)
+    dev.off()
   })
 )
 
@@ -663,7 +757,9 @@ s2.81 <- new_section2(
 )
 
 s2.82 <- c(
-  "For all identified compounds, the average false rate was", paste0(idRes.summary$false, "%."), "Set 0.5 for 'tani.score' as threshold, the average false rate was", paste0(idRes.5.summary$false, "%.")
+  "For all identified compounds, the average false rate was",
+  paste0(idRes.summary$false, "%."), "Set 0.5 for 'tani.score' as threshold,
+  the average false rate was", paste0(idRes.5.summary$false, "%.")
 )
 
 s2.83 <- new_section2(

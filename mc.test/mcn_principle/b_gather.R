@@ -25,19 +25,19 @@ c2 <- frame_col(c(ass = 1, arr = .3, mp.bar = 1), namel(ass, arr, mp.bar))
 sep <- segmentsGrob(.5, .1, .5, .9)
 ## gather
 content <- frame_col(c(c1 = 1, c2 = .7), namel(c1, c2))
-quantity <- grectn_frame(zo(content, h = .7), gtext0("quantity"), zo = F)
+quantity <- grectn_frame(zo(content, h = .7), gtext0("quantity  (Abundance selection)"), zo = F)
 
 ## score
 struc <- into(glayer(4), struc_2095)
 ## gather
 content <- frame_col(c(struc = 1, arr = .3, p.box = 1, arr = .3, p.ring2 = 1),
                      namel(struc, arr, p.box, p.ring2))
-score <- grectn_frame(zo(content, h = .8), gtext0("score"), zo = F)
+score <- grectn_frame(zo(content, h = .8), gtext0("score  (Goodness assessment)"), zo = F)
 
 ## identical
 identical <- frame_col(c(hier_tree = .7, arr = .15, p.upset = 1.4, null = .1, venn = .3),
                        namel(hier_tree, arr, venn, null = nullGrob(), p.upset))
-identical <- grectn_frame(identical, gtext0("identical"))
+identical <- grectn_frame(identical, gtext0("identical  (Identicality assessment)"))
 
 ## cross
 cross <- grecti3("cross filter", tfill = pal[[ "fun" ]])
@@ -55,7 +55,7 @@ prin <- frame_col(c(inner = 1, null = .1, stardust = .7, null = .1, cross = 3.5)
 vp <- viewport(, , .95, .95)
 prin <- ggather(prin, vp = vp)
 
-pdf(tmp_pdf(), 11, 7)
+pdf("figure_mech.pdf", 11, 7)
 draw(prin)
 dev.off()
 # op(tmp_pdf())

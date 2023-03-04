@@ -24,3 +24,32 @@ files <- c(
 
 lapply(files, file.copy, to = "~/exMCnebula2/inst/extdata",
        recursive = T)
+
+files2 <- list(
+  evaluation_workflow = c("/home/echo/outline/mc.test/evaluation_workflow/evaluation_workflow.R",
+    "~/tmp_backup/R/evaluation/report.pdf"),
+  eucommia_workflow = c("/home/echo/outline/mc.test/eucommia_workflow/eucommia_workflow.R",
+    "~/tmp_backup/R/eucommia/temp_data/report.pdf"),
+  serum_workflow = c("/home/echo/outline/mc.test/serum_workflow/serum_workflow.R",
+    "~/tmp_backup/R/serum/temp_data/report.pdf"),
+  mcn_principle = c("/home/echo/outline/mc.test/mcn_principle/a_elements.R",
+    "/home/echo/outline/mc.test/mcn_principle/b_gather.R",
+    "/home/echo/outline/mc.test/mcn_principle/figure_mech.pdf"),
+  mcn_structure = c("/home/echo/outline/mc.test/mcn_structure/a_project.R",
+    "/home/echo/outline/mc.test/mcn_structure/b_mcn_dataset.R",
+    "/home/echo/outline/mc.test/mcn_structure/c_nebulae.R",
+    "/home/echo/outline/mc.test/mcn_structure/d_across.R",
+    "/mnt/data/wizard/Documents/article/MCnebula2/data_stream.pdf")
+)
+
+path <- "~/exMCnebula2/inst/extdata/scripts_evaluation"
+dir.create(path)
+lapply(names(files2),
+  function(name) {
+    dir <- paste0(path, "/", name)
+    if (!file.exists(dir))
+      dir.create(dir)
+    lapply(files2[[ name ]], file.copy,
+      to = dir, overwrite = T, recursive = T)
+  })
+

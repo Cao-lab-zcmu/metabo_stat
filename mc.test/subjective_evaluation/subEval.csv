@@ -1,0 +1,16 @@
+Group,Item,MCnebula,SIRIUS,GNPS,MZmine,XCMS,MetaboAnalyst,MS-DIAL
+Identificaiton,MS1,**,**,**,-,**,**,**
+Identificaiton,Library match,***,***,***,-,**,-,**
+Identificaiton,Machine prediction,***,***,-,-,-,-,-
+Classifying,Structure based,**,-,***,-,-,-,-
+Classifying,MS/MS based,***,***,-,-,-,-,-
+Classifying,Select classes,***,-,-,-,-,-,-
+Visualize dataset,Spectral based,**,-,***,-,-,-,*
+Visualize dataset,Classes based,***,-,-,-,-,-,-
+Visualize dataset,Indepth annotation,***,-,***,-,-,-,-
+Others,Preprocessing,*,*,**,***,***,*,***
+Others,Statistics,**,-,-,**,**,***,**
+Others,Path enrichment,*,-,-,-,-,***,-
+Others,Report,***,-,-,-,-,**,-
+Usage,Availability,***,***,***,***,***,***,***
+Usage,Difficulty,**,*,**,***,***,*,*

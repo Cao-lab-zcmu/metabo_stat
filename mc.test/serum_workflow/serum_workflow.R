@@ -426,6 +426,41 @@ notShow1 <- new_section2(
   })
 )
 
+notShow1.5 <- new_section2(
+  c("Combine the image..."),
+  rblock({
+    ## b plot: ac
+    mcn2 <- set_nodes_color(mcn2, "logFC", top.list[[2]])
+    p.logfc.ac <- visualize(mcn2, ac, modify_stat_child)
+    p.logfc.ac <- into(grecta("b"), as_grob(p.logfc.ac))
+    ## a plot: ac
+    mcn2 <- set_nodes_color(mcn2, use_tracer = T)
+    p.tracer.ac <- visualize(mcn2, ac, modify_set_labs_and_unify_scale_limits)
+    ## legend for a and b
+    child_legend <- MCnebula2:::.get_legend(p.tracer.ac + guides(fill = "none"))
+    ## a plot: ac revise
+    p.tracer.ac <- visualize(mcn2, ac, modify_default_child)
+    p.tracer.ac <- into(grecta("a"), as_grob(p.tracer.ac))
+    ## c plot: annotated ac
+    p.ac <- into(grecta("c"), as_grob(visualize(mcn2, ac, annotate = T)))
+    ## d plot: node
+    p.node <- into(grecta("d"), grid::grid.grabExpr(show_node(mcn2, ef)))
+    ## gather theme
+    vis1 <- frame_col(
+      c(p.tracer.ac = 1, p.logfc.ac = 1, child_legend = .5),
+      namel(p.tracer.ac, p.logfc.ac, child_legend)
+    )
+    vis2 <- frame_row(
+      c(vis1 = 1, p.ac = 1.5, p.node = 1),
+      namel(vis1, p.ac, p.node)
+    )
+    vis2 <- ggather(vis2, vp = viewport(, , .95, .95))
+    pdf(paste0(tmp, "/fig.ac_node2.pdf"), 10, 14)
+    draw(vis2)
+    dev.off()
+  })
+)
+
 ## Output identification table
 s10 <- new_heading("Query compounds", 2)
 
