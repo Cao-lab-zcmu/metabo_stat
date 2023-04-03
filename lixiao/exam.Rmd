@@ -375,7 +375,8 @@ inclu.capt("./hsa04612.pathview.png")
 
 ## Github数据
 
-
+本次研究涉及的所有数据和脚本已上传至：
+<https://github.com/Cao-lab-zcmu/metabo_stat/tree/master/lixiao>。
 
 ## 附：操作截图
 

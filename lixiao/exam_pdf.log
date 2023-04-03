@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.6.6)  3 APR 2023 14:35
+This is XeTeX, Version 3.141592653-2.6-0.999993 (TeX Live 2022/dev/Debian) (preloaded format=xelatex 2022.6.6)  3 APR 2023 14:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1712,11 +1712,11 @@ File: thesis_fig/writeScript_capture.png Graphic file (type bmp)
 <thesis_fig/writeScript_capture.png>
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 951.
+(caption)                particular \caption on input line 957.
 See the caption package documentation for explanation.
 
 
-Overfull \hbox (12.10025pt too wide) in paragraph at lines 951--951
+Overfull \hbox (12.10025pt too wide) in paragraph at lines 957--957
 [] 
  []
 
@@ -1724,11 +1724,11 @@ File: thesis_fig/writeReport_capture.png Graphic file (type bmp)
 <thesis_fig/writeReport_capture.png>
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 955.
+(caption)                particular \caption on input line 961.
 See the caption package documentation for explanation.
 
 
-Overfull \hbox (12.10025pt too wide) in paragraph at lines 955--955
+Overfull \hbox (12.10025pt too wide) in paragraph at lines 961--961
 [][] 
  []
 
@@ -1737,11 +1737,11 @@ File: thesis_fig/outputReport_capture.png Graphic file (type bmp)
 <thesis_fig/outputReport_capture.png>
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 959.
+(caption)                particular \caption on input line 965.
 See the caption package documentation for explanation.
 
 
-Overfull \hbox (12.10025pt too wide) in paragraph at lines 959--959
+Overfull \hbox (12.10025pt too wide) in paragraph at lines 965--965
 [][] 
  []
 
@@ -1749,11 +1749,11 @@ File: thesis_fig/workDir_capture.png Graphic file (type bmp)
 <thesis_fig/workDir_capture.png>
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 963.
+(caption)                particular \caption on input line 969.
 See the caption package documentation for explanation.
 
 
-Overfull \hbox (12.10025pt too wide) in paragraph at lines 963--963
+Overfull \hbox (12.1076pt too wide) in paragraph at lines 969--969
 [][] 
  []
 
@@ -1762,41 +1762,41 @@ File: thesis_fig/manageRef.png Graphic file (type bmp)
 <thesis_fig/manageRef.png>
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 967.
+(caption)                particular \caption on input line 973.
 See the caption package documentation for explanation.
 
 
-Overfull \hbox (12.10025pt too wide) in paragraph at lines 967--967
+Overfull \hbox (12.10025pt too wide) in paragraph at lines 973--973
 [][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 976--979
+Underfull \hbox (badness 10000) in paragraph at lines 982--985
 
  []
 
 [19]
-Underfull \hbox (badness 10000) in paragraph at lines 980--983
+Underfull \hbox (badness 10000) in paragraph at lines 986--989
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 984--987
+Underfull \hbox (badness 10000) in paragraph at lines 990--993
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 988--991
+Underfull \hbox (badness 10000) in paragraph at lines 994--997
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 992--995
+Underfull \hbox (badness 10000) in paragraph at lines 998--1001
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 996--999
+Underfull \hbox (badness 10000) in paragraph at lines 1002--1005
 
  []
 
@@ -1806,10 +1806,10 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 23219 strings out of 476191
- 458595 string characters out of 5812073
- 933767 words of memory out of 5000000
- 43566 multiletter control sequences out of 15000+600000
+ 23221 strings out of 476191
+ 458621 string characters out of 5812073
+ 933806 words of memory out of 5000000
+ 43568 multiletter control sequences out of 15000+600000
  476476 words of font info for 109 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  86i,10n,128p,1005b,874s stack positions out of 5000i,500n,10000p,200000b,80000s

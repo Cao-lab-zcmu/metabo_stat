@@ -402,6 +402,11 @@ inclu.capt("./hsa04612.pathview.png")
 
 本次分析目的为探究类风湿性关节炎单核细胞衍生巨噬细胞的促炎症和代谢功能。巨噬细胞的激活和极化在炎症发展的前馈和反馈机制中起到了重要作用[@hu_regulation_2008]，了解其极化后功能的改变对治疗类风湿性关节炎具有启发意义。本次分析结果表明，相比于极化健康巨噬细胞（M2, IL-4处理组），类风湿关节炎单核细胞衍生的巨噬细胞（M1, LPC + IFN处理组）具有显著高表达的'PA28'基因（entrezid: 5720，见Tab. \@ref(tab:topAnno)），富集于'Antigen processing and presentation'和'Proteasome'通路（Tab. \@ref(tab:richRes)）。'PA28'基因可能成为治疗类风湿关节炎的临床用药靶点。
 
+## Github数据
+
+本次研究涉及的所有数据和脚本已上传至：
+<https://github.com/Cao-lab-zcmu/metabo_stat/tree/master/lixiao>。
+
 ## 附：操作截图
 
 ```{r fig12, eval = T, echo = F, fig.cap = "编写分析脚本（VIM界面）"}
