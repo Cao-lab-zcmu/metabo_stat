@@ -22,9 +22,8 @@ igraph(parent_nebula(test1))
 tmp <- tempdir()
 igraph::write_graph(
   igraph(parent_nebula(test1)),
-  file = paste0(tmp, "/parent_nebula.graphml",
-    format = "graphml"
-  )
+  file = paste0(tmp, "/parent_nebula.graphml"),
+  format = "graphml"
 )
 
 unlink(tmp, T, T)

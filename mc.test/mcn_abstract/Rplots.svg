@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="672px" height="672px" viewBox="0 0 672 672" version="1.1">
+  <metadata xmlns:gridsvg="http://www.stat.auckland.ac.nz/~paul/R/gridSVG/">
+    <gridsvg:generator name="gridSVG" version="1.7-4" time="2023-03-08 12:29:12"/>
+    <gridsvg:argument name="name" value="Rplots.svg"/>
+    <gridsvg:argument name="exportCoords" value="none"/>
+    <gridsvg:argument name="exportMappings" value="none"/>
+    <gridsvg:argument name="exportJS" value="none"/>
+    <gridsvg:argument name="res" value="96.12"/>
+    <gridsvg:argument name="prefix" value=""/>
+    <gridsvg:argument name="addClasses" value="FALSE"/>
+    <gridsvg:argument name="indent" value="TRUE"/>
+    <gridsvg:argument name="htmlWrapper" value="FALSE"/>
+    <gridsvg:argument name="usePaths" value="vpPaths"/>
+    <gridsvg:argument name="uniqueNames" value="TRUE"/>
+    <gridsvg:separator name="id.sep" value="."/>
+    <gridsvg:separator name="gPath.sep" value="::"/>
+    <gridsvg:separator name="vpPath.sep" value="::"/>
+  </metadata>
+  <g transform="translate(0, 672) scale(1, -1)">
+    <g id="gridSVG" fill="none" stroke="rgb(0,0,0)" stroke-dasharray="none" stroke-width="1" font-size="16.04" font-family="Helvetica, Arial, FreeSans, Liberation Sans, Nimbus Sans L, sans-serif" opacity="1" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-opacity="1" fill-opacity="0" font-weight="normal" font-style="normal">
+      <defs>
+        <clipPath id="gridSVG.clipPath.36.1">
+          <circle id="gridSVG.clipPath.36::GRID.circle.4174.1.1" cx="336" cy="336" r="336"/>
+        </clipPath>
+      </defs>
+      <g id="GRID.gTree.4176.1">
+        <g id="GRID.circle.4174.1">
+          <circle id="GRID.circle.4174.1.1" cx="336" cy="336" r="336"/>
+        </g>
+        <g id="GRID.gTree.4175.1">
+          <g id="clip.1" clip-path="url(#gridSVG.clipPath.36.1)">
+            <circle id="clip.1.1" cx="336" cy="672" r="100.8" fill="rgb(255,255,255)" fill-opacity="1"/>
+            <circle id="clip.1.2" cx="626.98" cy="504" r="100.8" fill="rgb(255,255,255)" fill-opacity="1"/>
+            <circle id="clip.1.3" cx="626.98" cy="168" r="100.8" fill="rgb(255,255,255)" fill-opacity="1"/>
+            <circle id="clip.1.4" cx="336" cy="0" r="100.8" fill="rgb(255,255,255)" fill-opacity="1"/>
+            <circle id="clip.1.5" cx="45.02" cy="168" r="100.8" fill="rgb(255,255,255)" fill-opacity="1"/>
+            <circle id="clip.1.6" cx="45.02" cy="504" r="100.8" fill="rgb(255,255,255)" fill-opacity="1"/>
+            <circle id="clip.1.7" cx="336" cy="672" r="100.8" fill="rgb(255,255,255)" fill-opacity="1"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

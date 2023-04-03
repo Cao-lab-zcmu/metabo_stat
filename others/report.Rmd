@@ -1,0 +1,488 @@
+---
+title: "MCnebula2 workflow for LC-MS/MS dataset analysis"
+bibliography: '`r system.file("extdata", "library.bib", package = "MCnebula2")`'
+csl: '`r system.file("extdata", "vancouver.csl", package = "MCnebula2")`'
+reference-section-title: "Reference"
+link-citations: true
+output:
+  bookdown::pdf_document2:
+    keep_tex: true
+    toc: true
+    toc_depth: 3
+    latex_engine: xelatex
+header-includes:
+  \definecolor{shadecolor}{RGB}{242,242,242}
+---
+
+# Abstract
+
+&ensp;&ensp; Untargeted mass spectrometry is a robust tool for biological
+research, but researchers universally time consumed by dataset parsing.  We
+developed MCnebula, a novel visualization strategy proposed with
+multidimensional view, termed multi-chemical nebulae, involving in scope of
+abundant classes, classification, structures, sub-structural characteristics
+and fragmentation similarity.  Many state-of-the-art technologies and popular
+methods were incorporated in MCnebula workflow to boost chemical discovery.
+Notably, MCnebula can be applied to explore classification and structural
+characteristics of unknown compounds that beyond the limitation of spectral
+library.  MCnebula was integrated in R package and public available for custom
+R statistical pipeline analysis.  Now, MCnebula2 (R object-oriented programming
+with S4 system) is further available for more friendly applications.
+
+# Introduction
+
+&ensp;&ensp; 
+We know that the analysis of untargeted LC-MS/MS dataset generally begin with
+feature detection.  It detects 'peaks' as features in MS^1^ data.  Each feature
+may represents a compound, and assigned with MS^2^ spectra.  The MS^2^ spectra
+was used to find out the compound identity.  The difficulty lies in annotating
+these features to discover their compound identity, mining out meaningful
+information, so as to serve further biological research.  Herein, a classified
+visualization method, called MCnebula, was used for addressing this difficulty.
+MCnebula utilizes the state-of-the-art computer prediction technology, SIRIUS
+workflow (SIRIUS, ZODIAC, CSI:fingerID, CANOPUS)[@duhrkop_sirius_2019; @bocker_sirius_2009; @duhrkop_searching_2015; @ludwig_database-independent_2020; @duhrkop_systematic_2021], for compound
+formula prediction, structure retrieve and classification prediction.  MCnebula
+integrates an abundance-based classes (ABC) selection algorithm into features
+annotation: depending on the user, MCnebula focuses chemical classes with more
+or less features in the dataset (the abundance of classes), visualizes them,
+and displays the features they involved; these classes can be dominant
+structural classes or sub-structural classes.  With MCnebula, we can switch
+from untargeted to targeted analysis, focusing precisely on the compound or
+chemical class of interest to the researcher.  
+
+# Set-up
+
+&ensp;&ensp; Load the R package used for analysis.  In the following analysis
+process, to illustrate the source of the function, we use the symbol `::` to
+mark the functions, e.g., `dplyr::filter`.  The functions that were not marked
+may source from MCnebula2 or the packages that R (version 4.2) loaded by
+default.  
+
+
+```{r, echo = TRUE, eval = FALSE}
+library(MCnebula2)
+library(exMCnebula2)
+```
+
+
+# Integrate data and Create Nebulae
+## Initialize analysis
+Set SIRIUS project path and its version to initialize mcnebula object.
+
+```{r, echo = TRUE, eval = FALSE}
+mcn <- mcnebula()
+mcn <- initialize_mcnebula(mcn, "sirius.v5", ".")
+ion_mode(mcn) <- "pos"
+```
+
+
+Create a temporary folder to store the output data.
+
+```{r, echo = TRUE, eval = FALSE}
+tmp <- paste0("temp_data")
+dir.create(tmp, F)
+export_path(mcn) <- tmp
+```
+
+
+## Filter candidates
+&ensp;&ensp; Suppose we predicted a potential compound represented by LC-MS/MS
+spectrum, and obtained the candidates of chemical molecular formula, structure
+and chemical class. These candidates include both positive and negative
+results: for chemical molecular formula and chemical structure, the positive
+prediction was unique; for chemical class, multiple positive predictions that
+belong to various classification were involved.  We did not know the exact
+negative and positive.  Normally, we ranked and filtered these according to the
+scores.  There were numerious scores, for isotopes, for mass error, for
+structural similarity, for chemical classes...  Which score selected to rank
+candidates depends on the purpose of research. Such as:
+
+- To find out the chemical structure mostly be positive, ranking the candidates
+  by structural score.
+- To determine whether the potential compound may be of a certain chemical
+  classes, ranking the candidates by the classified score.
+
+Ether by `filter_formula()`, `filter_structure()` or `filter_ppcp()`, the
+candidate with top score can be obtained.  However, for the three module
+(formula, structure, classes), sometimes thier top score candidates were not in
+line with each other.  That is, thier top score towards different chemical
+molecular formulas.  To find out the corresponding data in other modules,
+`create_reference()` should be performed to establish the 'specific_candidate'
+for subsequent filtering.  
+
+
+```{r, echo = TRUE, eval = FALSE}
+mcn <- filter_structure(mcn)
+mcn <- create_reference(mcn)
+mcn <- filter_formula(mcn, by_reference = T)
+```
+
+
+## Filter chemical classes
+&ensp;&ensp; The PPCP (Posterior Probability of Classification Prediction) data
+for each 'feature' contains the prediction of thousands of classes for the
+  potential compound (even if the chemical structure was unknown).  See
+  <http://www.nature.com/articles/s41587-020-0740-8> for details about the
+  prediction.  The data contains attributes of:
+
+- `class.name`: name of classes.
+- `pp.value`: value of posterior probability.  `hierarchy`: hierarchy of
+  classes in the taxonomy.  See
+  <https://jcheminf.biomedcentral.com/articles/10.1186/s13321-016-0174-y> for
+  details about hierarchy and taxonomy of chemical classification.
+- ...
+
+The method `create_stardust_classes()` use these inner attributes to filter
+classes candidates for each 'feature'.
+
+Compared to the chemical class filtering within PPCP data by
+`create_stardust_classes()`, the filtering within 'stardust_classes' data by
+`cross_filter_stardust()` is fundamentally different.
+
+- For `create_stardust_classes()`, the PPCP data belongs to each 'feature'.
+  When performing the filtering, only simple threshold conditions or absolute
+  conditions are set to filter the chemical classes; there is no crossover
+  between the different attributes and no crossover between the 'features'.
+  Therefore, we consider this as 'inner' filtering.
+- For `cross_filter_stardust()`, the data of the chemical classes and their
+  classified 'features', i.e.  'stardust_classes' data, were combined and then
+  grouped upon the chemical classes.  After grouping, each chemical class has a
+  certain quantity of "features".  When filtering, statistics may be performed
+  on 'features' data within a group; statistics may be performed on these data
+  in conjunction with 'features_annotation' data; and statistics may be
+  performed to compare groups with each other.  As its crossover, we consider
+  this as 'cross' filtering.
+
+Use `help(cross_filter_stardust)` to get more details about the algorithm.
+
+
+```{r, echo = TRUE, eval = FALSE}
+mcn <- create_stardust_classes(mcn)
+mcn <- create_features_annotation(mcn)
+mcn <- cross_filter_stardust(mcn, min_number = 30, max_ratio = 0.07)
+classes <- unique(stardust_classes(mcn)$class.name)
+table.filtered.classes <- backtrack_stardust(mcn)
+```
+
+
+Manually filter some repetitive classes or sub-structural classes.
+By means of Regex matching, we obtained a number of recurring
+name of chemical classes that would contain manay identical compounds
+as their sub-structure.
+
+```{r, echo = TRUE, eval = TRUE}
+classes
+pattern <- c(
+  "stero", "fatty acid", "pyr", "hydroxy", "^Ar",
+  "^Alk", "^Ben", "^orga", "^Carbo"
+)
+dis <- unlist(lapply(pattern, grep, x = classes, ignore.case = T))
+dis <- classes[dis]
+dis
+dis <- dis[-1]
+```
+
+
+Remove these classes.
+
+```{r, echo = TRUE, eval = FALSE}
+mcn <- backtrack_stardust(mcn, dis, remove = T)
+```
+
+
+## Create Nebulae
+Create Nebula-Index data. This data created based on 'stardust_classes' data.
+
+```{r, echo = TRUE, eval = FALSE}
+mcn <- create_nebula_index(mcn)
+```
+
+
+&ensp;&ensp; Whether it is all filtered by the algorithm provided by
+MCnebula2's function or custom filtered for some chemical classes, we now have
+a data called 'nebula_index'.  This data records a number of chemical classes
+and the 'features' attributed to them.  The subsequent analysis process or
+visualization will be based on it.  Each chemical class is considered as a
+'nebula' and its classified 'features' are the components of these 'nebulae'.
+In the visualization, these 'nebulae' will be visualized as networks. Formally,
+we call these 'nebulae' formed on the basis of 'nebula_index' data as
+Child-Nebulae. In comparison, when we put all the 'features' together to form a
+large network, then this 'nebula' is called Parent-Nebulae.
+
+
+```{r, echo = TRUE, eval = FALSE}
+mcn <- compute_spectral_similarity(mcn)
+mcn <- create_parent_nebula(mcn)
+mcn <- create_child_nebulae(mcn)
+```
+
+
+Create layouts for Parent-Nebula or Child-Nebulae visualizations.
+
+```{r, echo = TRUE, eval = FALSE}
+mcn <- create_parent_layout(mcn)
+mcn <- create_child_layouts(mcn)
+mcn <- activate_nebulae(mcn)
+```
+
+
+The available chemical classes for visualization and its
+sequence in storage.
+
+```{r, echo = TRUE, eval = TRUE}
+table.nebulae <- visualize(mcn)
+table.nebulae
+```
+
+
+Draw and save as .png or .pdf image files.
+
+```{r, echo = TRUE, eval = FALSE}
+fig.s <- 1.5
+p <- visualize(mcn, "parent")
+ggsave(f5.61 <- paste0(tmp, "/parent_nebula.png"), p)
+pdf(f5.62 <- paste0(tmp, "/child_nebula.pdf"), 12 * fig.s, 14 *
+  fig.s)
+visualize_all(mcn)
+dev.off()
+```
+
+
+```{r parent, echo = FALSE, eval = TRUE, message = FALSE, fig.cap = 'Parent-Nebula'}
+knitr::include_graphics("temp_data/parent_nebula.png")
+```
+
+```{r child, echo = FALSE, eval = TRUE, message = FALSE, fig.cap = 'Child-Nebulae'}
+knitr::include_graphics("temp_data/child_nebula.pdf")
+```
+
+In general, Parent-Nebulae
+(Fig. \@ref(fig:parent))
+is too informative to show, so Child-Nebulae
+(Fig. \@ref(fig:child))
+was used to dipict the abundant classes of features (metabolites)
+in a grid panel, intuitively. In a bird's eye view of
+Child-Nebulae, we can obtain many characteristics of features,
+involving classes distribution, structure identified accuracy, as
+well as spectral similarity within classes.
+
+# Nebulae for Downstream analysis
+## Statistic analysis
+Next we perform a statistical analysis with quantification data of the
+features. Note that the SIRIUS project does not contain quantification
+data of features, so our object `mcn` naturally does not contain
+that either. We need to get it from elsewhere.
+
+```{r, echo = TRUE, eval = FALSE}
+origin <- data.table::fread("features.csv")
+origin <- tibble::as_tibble(origin)
+```
+
+
+Now, let's check the columns in the table.
+
+```{r, echo = TRUE, eval = TRUE}
+origin
+```
+
+
+Remove the rest of the columns and keep only the columns for ID,
+m/z, retention time, and quantification.
+
+```{r, echo = TRUE, eval = FALSE}
+quant <- dplyr::select(origin, id = 1, dplyr::contains("Peak area"))
+colnames(quant) <- gsub("\\.mzML Peak area", "", colnames(quant))
+quant <- dplyr::mutate(quant, .features_id = as.character(id))
+```
+
+
+Create the metadata table and store it in the `mcn` object
+along with the quantification data.
+
+```{r, echo = TRUE, eval = FALSE}
+gp <- c(
+  Control = "^B", Model = "^M", QC = "^QC", Pos = "^POS",
+  Treat_low = "^CL", Treat_medium = "^CM", Treat_high = "^CH"
+)
+metadata <- MCnebula2:::group_strings(colnames(quant), gp, "sample")
+features_quantification(mcn) <- dplyr::select(quant, -id)
+sample_metadata(mcn) <- metadata
+```
+
+
+&ensp;&ensp; Variance analysis was used as a way to detect whether there were
+differences between the experimental and control groups and whether the
+differences were significant. Linear models are an effective tool for variance
+analysis, and it permit very general analyses. The 'limma' package
+[@gentleman_limma_2005] integrates a number of functions for creating linear
+models and regression analysis. The statistical analysis provided in MCnebula2
+is mainly built around the functions in the 'limma' package.  
+
+In the following we use the
+`binary_comparison` function for variance analysis.
+To accommodate the downstream analysis of gene
+expression that the `limma` package was originally used for, we
+should log2-transform and centralize this data
+(use the default parameter 'fun_norm' of `binary_comparison()`).
+
+```{r, echo = TRUE, eval = FALSE}
+mcn <- binary_comparison(mcn, Model - Control, Pos - Model, Treat_high -
+  Model, Treat_medium - Model, Treat_low - Model)
+top.list <- top_table(statistic_set(mcn))
+```
+
+
+Check the results.
+
+```{r, echo = TRUE, eval = TRUE}
+top.list[1]
+```
+
+
+## Set tracer in Child-Nebulae
+&ensp;&ensp; Tracking top features obtained by Variance analysis in Nebulae
+provides insight not only into the chemical classes of these top features, but
+also into other features (may be analogous metabolites). Other features are not
+among the top ranked features, but they may contain key features that were
+missed due to algorithmic specificity. By tracking top features, it is possible
+to revisit all features at the overall data level.
+
+
+```{r, echo = TRUE, eval = FALSE}
+n <- 50
+tops <- select_features(mcn,
+  tani.score_cutoff = 0.5, order_by_coef = 1,
+  coef = 1, togather = T
+)
+top20 <- tops[1:n]
+palette_set(melody(mcn)) <- colorRampPalette(palette_set(mcn))(n)
+mcn2 <- set_tracer(mcn, top20)
+mcn2 <- create_child_nebulae(mcn2)
+mcn2 <- create_child_layouts(mcn2)
+mcn2 <- activate_nebulae(mcn2)
+mcn2 <- set_nodes_color(mcn2, use_tracer = T)
+```
+
+
+Draw and save the image.
+
+```{r, echo = TRUE, eval = FALSE}
+pdf(
+  f8.2 <- paste0(tmp, "/tracer_child_nebula.pdf"), 12 * 1.2,
+  14 * 1.2
+)
+visualize_all(mcn2)
+dev.off()
+```
+
+
+```{r tracer, echo = FALSE, eval = TRUE, message = FALSE, fig.cap = 'Tracing top features in Child-Nebulae'}
+knitr::include_graphics("temp_data/tracer_child_nebula.pdf")
+```
+
+A part of the top features are marked with colored nodes in
+Child-Nebulae
+(Fig. \@ref(fig:tracer)).
+
+Tops in classes: 
+
+```{r, echo = TRUE, eval = TRUE}
+showTops <- select_features(mcn,
+  tani.score_cutoff = 0.5, order_by_coef = 1,
+  coef = 1,
+)
+showTops
+```
+
+
+## Set tracer in Child-Nebulae (customize the top Features)
+Use custom defined Features to perform tracing mode of Child-Nebulae.
+The table was from:
+
+```{r, echo = TRUE, eval = FALSE}
+tb <- openxlsx::read.xlsx("../manual_id.xlsx")
+topsM <- tb[[2]]
+topsM <- as.character(topsM[!is.na(topsM)])
+```
+
+
+Similar to above section:
+
+```{r, echo = TRUE, eval = FALSE}
+mcn2 <- set_tracer(mcn, topsM)
+mcn2 <- create_child_nebulae(mcn2)
+mcn2 <- create_child_layouts(mcn2)
+mcn2 <- activate_nebulae(mcn2)
+mcn2 <- set_nodes_color(mcn2, use_tracer = T)
+```
+
+
+Draw and save the image.
+
+```{r, echo = TRUE, eval = FALSE}
+pdf(f9.3 <- paste0(tmp, "/tracer_child_nebula_manual.pdf"), 12 *
+  1.2, 14 * 1.2)
+visualize_all(mcn2)
+dev.off()
+```
+
+
+## Annotate Nebulae
+Now, the available Nebulae contains:
+
+```{r, echo = TRUE, eval = TRUE}
+table.nebulae2 <- visualize(mcn2)
+table.nebulae2
+```
+
+
+Next, let us focus on Indoles and derivatives
+
+```{r, echo = TRUE, eval = FALSE}
+mcn2 <- set_nodes_color(mcn2, use_tracer = T)
+colTreat <- colorRampPalette(c("lightblue", "blue"))(5)[1:3]
+palette_stat(melody(mcn2)) <- c(
+  Control = "#B6DFB6", Model = "grey70",
+  QC = "white", Pos = "lightyellow", Treat_low = colTreat[1],
+  Treat_medium = colTreat[2], Treat_high = colTreat[3]
+)
+indo <- "Indoles and derivatives"
+mcn2 <- annotate_nebula(mcn2, indo)
+```
+
+
+Draw and save the image.
+
+```{r, echo = TRUE, eval = FALSE}
+p <- visualize(mcn2, indo, annotate = T)
+ggsave(f10.3 <- paste0(tmp, "/indo_child.pdf"), p, height = 5)
+```
+
+
+```{r indo, echo = FALSE, eval = TRUE, message = FALSE, fig.cap = 'Annotated Nebulae: Indoles and derivatives'}
+knitr::include_graphics("temp_data/indo_child.pdf")
+```
+
+## Export for Cytoscape
+Export Child-Nebula of `indo` and others as '.graphml'.
+
+```{r, echo = TRUE, eval = FALSE}
+res <- igraph(child_nebulae(mcn2))
+lapply(names(res), function(name) {
+  igraph::write_graph(res[[name]], file = paste0(
+    tmp, "/",
+    name, ".graphml"
+  ), format = "graphml")
+})
+```
+
+
+```{r indoCyto, echo = FALSE, eval = TRUE, message = FALSE, fig.cap = 'Annotated Nebulae: Indoles and derivatives', fig.width = 7}
+knitr::include_graphics("screenCap_Indo.png")
+```
+
+# Session infomation
+```{r, echo = TRUE, eval = TRUE}
+sessionInfo()
+```
+

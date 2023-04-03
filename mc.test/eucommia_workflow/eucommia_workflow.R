@@ -260,7 +260,7 @@ s8.1 <- new_section2(
   rblock({
     n <- 20
     tops <- select_features(
-      mcn2, tani.score_cutoff = .5, order_by_coef = 1, togather = T
+      mcn, tani.score_cutoff = .5, order_by_coef = 1, togather = T
     )
     top20 <- tops[1:n]
     palette_set(melody(mcn)) <- colorRampPalette(palette_set(mcn))(n)
@@ -614,3 +614,15 @@ report <- do.call(new_report, sections)
 yaml(report)[1] <- c("title: Analysis on *E. ulmoides* dataset")
 render_report(report, file <- paste0(tmp, "/report.Rmd"))
 rmarkdown::render(file)
+
+# ==========================================================================
+# as biocStyle
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# library(MCnebula2)
+
+# write_biocStyle(report, file2 <- paste0(tmp, "/report_biocStyle.Rmd"),
+#   title <- yaml(report)[1]
+# )
+
+# rmarkdown::render(file2)
