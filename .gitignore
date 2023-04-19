@@ -1,7 +1,9 @@
 xcms_workflow.R
 
+*/**/*.swp
 */*.rdata
 */.R*
 mc.test/.R*
 */*/.R*
 */**/.tar
+*/**/.R*

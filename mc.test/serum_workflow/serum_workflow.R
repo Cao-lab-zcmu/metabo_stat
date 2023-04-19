@@ -806,8 +806,8 @@ rmarkdown::render(file.report)
 
 # library(MCnebula2)
 
-# write_biocStyle(report, file2 <- paste0(tmp, "/report_biocStyle.Rmd"),
-#   title <- yaml(report)[1]
+# write_biocStyle(report, file2 <- paste0(tmp, "/report_biocStyle_nofloat.Rmd"),
+#   title <- paste0(yaml(report)[1], "\nauther: 'LiChuang Huang'")
 # )
 
 # rmarkdown::render(file2)

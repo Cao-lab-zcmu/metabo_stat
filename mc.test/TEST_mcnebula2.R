@@ -1,7 +1,7 @@
 setwd("~/operation/sirius.test")
 # library(MCnebula2)
-
 test <- initialize_mcnebula(mcnebula())
+
 test1 <- filter_structure(test)
 test1 <- create_reference(test1)
 test1 <- filter_formula(test1, by_reference=T)
@@ -16,7 +16,7 @@ test1 <- draw_structures(test1, .features_id = ids)
 
 test1 <- create_nebula_index(test1)
 test1 <- compute_spectral_similarity(test1)
-test1 <- create_parent_nebula(test1, 0.01, T)
+test1 <- create_parent_nebula(test1, 0.01, 5, T)
 test1 <- create_child_nebulae(test1, 0.01, 5)
 
 test1 <- create_parent_layout(test1)
@@ -26,6 +26,7 @@ test1 <- activate_nebulae(test1)
 pdf("instance.pdf", width = 8, height = 8.5)
 visualize_all(test1)
 dev.off()
+
 pdftools::pdf_convert("instance.pdf", dpi = 150)
 
 re <- history_rblock(, "initialize_mcnebula\\(", "activate_nebulae\\(")

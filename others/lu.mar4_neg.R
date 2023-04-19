@@ -28,7 +28,7 @@ s1.1 <- new_section2(
     mcn <- mcnebula()
     mcn <- initialize_mcnebula(mcn, "sirius.v5", ".")
     ion_mode(mcn) <- "neg"
-  })
+  }, F)
 )
 
 load("mcn.rdata")
@@ -39,7 +39,7 @@ s1.5 <- new_section2(
     tmp <- paste0("temp_data")
     dir.create(tmp, F)
     export_path(mcn) <- tmp
-  }, F)
+  })
 )
 
 s2 <- new_heading("Filter candidates", 2)
@@ -299,9 +299,65 @@ s9.2 <- new_section2(
 s9.3 <- new_section2(
   c("Draw and save the image."),
   rblock({
-    pdf(f9.3 <- paste0(tmp, "/tracer_child_nebula_manual.pdf"), 12 * 1.2, 14 * 1.2)
+    pdf(f9.3 <- paste0(tmp, "/tracer_child_nebula_manual.pdf"), 7, 8)
     visualize_all(mcn2)
     dev.off()
+  })
+)
+
+s9.3.fig1 <- include_figure(f9.3, "tracerManual",
+  "Tracing top features (manually defined) in Child-Nebulae")
+
+s10 <- new_heading("Annotate Nebulae", 2)
+
+s10.1 <- new_section2(
+  c("Now, the available Nebulae contains:"),
+  rblock({
+    table.nebulae2 <- visualize(mcn2)
+    table.nebulae2
+  }, args = list(eval = T))
+)
+
+s10.2 <- new_section2(
+  c("Next, let us focus on Indoles and derivatives"),
+  rblock({
+    mcn2 <- set_nodes_color(mcn2, use_tracer = T)
+    colTreat <- colorRampPalette(c("lightblue", "blue"))(5)[1:3]
+    palette_stat(melody(mcn2)) <- c(
+      Control = "#B6DFB6", Model = "grey70", QC = "white", Pos = "lightyellow",
+      Treat_low = colTreat[1], Treat_medium = colTreat[2], Treat_high = colTreat[3]
+    )
+    indo <- "Indoles and derivatives"
+    mcn2 <- annotate_nebula(mcn2, indo)
+  })
+)
+
+s10.3 <- new_section2(
+  c("Draw and save the image."),
+  rblock({
+    p <- visualize(mcn2, indo, annotate = T)
+    ggsave(f10.3 <- paste0(tmp, "/indo_child.pdf"), p, height = 5)
+  })
+)
+
+s10.4.fig1 <- include_figure(f10.3,
+  "indo", paste0("Annotated Nebulae: ", indo))
+
+s12 <- new_heading("Export for Cytoscape", 2)
+
+s12.1 <- new_section2(
+  c("Export Child-Nebula of `indo` and others as '.graphml'."),
+  rblock({
+    res <- igraph(child_nebulae(mcn2))
+    lapply(
+      names(res),
+      function(name) {
+        igraph::write_graph(
+          res[[name]],
+          file = paste0(tmp, "/", name, ".graphml"),
+          format = "graphml"
+        )
+      })
   })
 )
 

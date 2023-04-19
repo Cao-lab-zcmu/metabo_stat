@@ -3,7 +3,7 @@
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 # setwd("/media/echo/王璐-1/mar4_analysis/pos")
-setwd("/media/echo/back/mar4_analysis/pos")
+setwd("/media/echo/ZWY/apr12_analysis")
 
 # workflow(mode = "print")
 
@@ -60,7 +60,7 @@ s3.1 <- new_section2(
   rblock({
     mcn <- create_stardust_classes(mcn)
     mcn <- create_features_annotation(mcn)
-    mcn <- cross_filter_stardust(mcn, min_number = 30, max_ratio = .07)
+    mcn <- cross_filter_stardust(mcn, min_number = 15, max_ratio = .07)
     classes <- unique(stardust_classes(mcn)$class.name)
     table.filtered.classes <- backtrack_stardust(mcn)
   })
@@ -73,12 +73,11 @@ s3.5 <- new_section2(
     "as their sub-structure."),
   rblock({
     classes
-    pattern <- c("stero", "fatty acid", "pyr", "hydroxy",
+    pattern <- c("fatty acid", "hydroxy",
       "^Ar", "^Alk", "^Ben", "^orga", "^Carbo")
     dis <- unlist(lapply(pattern, grep, x = classes, ignore.case = T))
     dis <- classes[dis]
     dis
-    dis <- dis[-1]
   }, args = list(eval = T))
 )
 
@@ -130,7 +129,7 @@ s5.3 <- new_section2(
 s5.6 <- new_section2(
   c("Draw and save as .png or .pdf image files."),
   rblock({
-    fig.s <- 1.5
+    fig.s <- 1.3
     p <- visualize(mcn, "parent")
     ggsave(f5.61 <- paste0(tmp, "/parent_nebula.png"), p)
     pdf(f5.62 <- paste0(tmp, "/child_nebula.pdf"), 12 * fig.s, 14 * fig.s)
@@ -195,9 +194,7 @@ s7.6 <- new_section2(
   c("Create the metadata table and store it in the `mcn` object",
     "along with the quantification data."),
   rblock({
-    gp <- c(Control = "^B", Model = "^M", QC = "^QC",
-      Pos = "^POS", Treat_low = "^CL", Treat_medium = "^CM",
-      Treat_high = "^CH")
+    gp <- c(Raw = "2-5mg_S", Pro = "2-5mg_C")
     metadata <- MCnebula2:::group_strings(colnames(quant), gp, "sample")
     features_quantification(mcn) <- dplyr::select(quant, -id)
     sample_metadata(mcn) <- metadata
@@ -213,9 +210,7 @@ s7.7 <- new_section2(
     "(use the default parameter 'fun_norm' of `binary_comparison()`)."),
   rblock({
     mcn <- binary_comparison(
-      mcn, Model - Control, Pos - Model,
-      Treat_high - Model, Treat_medium - Model,
-      Treat_low - Model
+      mcn, Pro - Raw
     )
     top.list <- top_table(statistic_set(mcn))
   })
@@ -274,41 +269,6 @@ s8.4 <- new_section2(
   }, args = list(eval = T, echo = T))
 )
 
-s9 <- new_heading("Set tracer in Child-Nebulae (customize the top Features)", 2)
-
-s9.1 <- new_section2(
-  c("Use custom defined Features to perform tracing mode of Child-Nebulae.",
-    "The table was from:"),
-  rblock({
-    tb <- openxlsx::read.xlsx("../manual_id.xlsx")
-    topsM <- tb[[2]]
-    topsM <- as.character(topsM[ !is.na(topsM) ])
-  })
-)
-
-s9.2 <- new_section2(
-  c("Similar to above section:"),
-  rblock({
-    mcn2 <- set_tracer(mcn, topsM)
-    mcn2 <- create_child_nebulae(mcn2)
-    mcn2 <- create_child_layouts(mcn2)
-    mcn2 <- activate_nebulae(mcn2)
-    mcn2 <- set_nodes_color(mcn2, use_tracer = T)
-  })
-)
-
-s9.3 <- new_section2(
-  c("Draw and save the image."),
-  rblock({
-    pdf(f9.3 <- paste0(tmp, "/tracer_child_nebula_manual.pdf"), 7, 8)
-    visualize_all(mcn2)
-    dev.off()
-  })
-)
-
-s9.3.fig1 <- include_figure(f9.3, "tracerManual",
-  "Tracing top features (manually defined) in Child-Nebulae")
-
 s10 <- new_heading("Annotate Nebulae", 2)
 
 s10.1 <- new_section2(
@@ -320,29 +280,40 @@ s10.1 <- new_section2(
 )
 
 s10.2 <- new_section2(
-  c("Next, let us focus on Indoles and derivatives"),
+  c("Next, let us focus on some specific classes."),
   rblock({
     mcn2 <- set_nodes_color(mcn2, use_tracer = T)
-    colTreat <- colorRampPalette(c("lightblue", "blue"))(5)[1:3]
     palette_stat(melody(mcn2)) <- c(
-      Control = "#B6DFB6", Model = "grey70", QC = "white", Pos = "lightyellow",
-      Treat_low = colTreat[1], Treat_medium = colTreat[2], Treat_high = colTreat[3]
+      Raw = "#B6DFB6", Pro = "lightyellow"
     )
-    indo <- "Indoles and derivatives"
-    mcn2 <- annotate_nebula(mcn2, indo)
+    focus_classes <- c("Flavones", "Triterpenoids", "Monoterpenoids",
+      "Steroids and steroid derivatives")
+    for (i in focus_classes) {
+      mcn2 <- annotate_nebula(mcn2, i)
+    }
   })
 )
 
 s10.3 <- new_section2(
   c("Draw and save the image."),
   rblock({
-    p <- visualize(mcn2, indo, annotate = T)
-    ggsave(f10.3 <- paste0(tmp, "/indo_child.pdf"), p, height = 5)
+    fs <- as.list(focus_classes)
+    names(fs) <- focus_classes
+    for (i in focus_classes) {
+      p <- visualize(mcn2, i, annotate = T)
+      ggsave(fs[[ i ]] <- paste0(tmp, "/", gsub(" ", "_", i), "_child.pdf"), p, height = 5)
+    }
+    pdf(leg <- paste0(tmp, "/feature_285.pdf"), 11, 6)
+    show_node(mcn2, "285")
+    dev.off()
   })
 )
 
-s10.4.fig1 <- include_figure(f10.3,
-  "indo", paste0("Annotated Nebulae: ", indo))
+s10.4.fig1 <- include_figure(fs[[1]], "ClassA", paste0("Annotated Nebulae: ", names(fs[1])))
+s10.4.fig1.5 <- include_figure(leg, "legendF", "Legend of Nodes")
+s10.4.fig2 <- include_figure(fs[[2]], "ClassB", paste0("Annotated Nebulae: ", names(fs[2])))
+s10.4.fig3 <- include_figure(fs[[3]], "ClassC", paste0("Annotated Nebulae: ", names(fs[3])))
+s10.4.fig4 <- include_figure(fs[[4]], "ClassD", paste0("Annotated Nebulae: ", names(fs[4])))
 
 s12 <- new_heading("Export for Cytoscape", 2)
 
@@ -361,10 +332,6 @@ s12.1 <- new_section2(
       })
   })
 )
-
-s12.2.fig1 <- include_figure("screenCap_Indo.png",
-  "indoCyto", paste0("Annotated Nebulae: ", indo))
-s12.2.fig1@command_args$fig.width <- 7
 
 s100 <- new_heading("Session infomation", 1)
 

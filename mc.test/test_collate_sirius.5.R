@@ -12,6 +12,11 @@ utils::unzip("./1_instance5_gnps1234/test.zip", list = T)
 t <- list.files("./1_instance5_gnps1234/ff/")[c(2, 4)]
 tt <- paste0("./1_instance5_gnps1234/fingerid", "/", t)
 
+
+
+setwd("~/operation/sirius_5_test/test/")
+
 mcn <- initialize_mcnebula(mcnebula(), "sirius.v5", ".")
 
 mcn1 <- collate_used(mcn)
+latest(filter_ppcp(mcn1))
