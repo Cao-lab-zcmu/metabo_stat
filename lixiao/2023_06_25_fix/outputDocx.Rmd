@@ -1,0 +1,208 @@
+---
+title: Report of Analysis
+bibliography: '`r system.file("extdata", "library.bib", package = "utils.tool")`'
+csl: '`r system.file("extdata", "nature.csl", package = "utils.tool")`'
+reference-section-title: "Reference"
+output:
+  custom_docx_document:
+    reference_docx: '`r system.file("extdata", "ch_thesis.docx", package = "utils.tool")`'
+---
+
+
+```{r setup, include = F}
+knitr::opts_chunk$set(echo = F, eval = F, message = F)
+devtools::load_all("~/utils.tool/")
+```
+
+# 第一部分
+
+## ETCM 中药丹参的化合物以及靶点基因
+
+丹参，ETCM ID 为73
+
+```{r}
+data <- get_tcm.components(73)[-3]
+genes.lst <- get_tcm.componentToGenes(data$ids$ids)
+genes.lstf <- merge.componentsGenes(data, genes.lst)
+# writeDatas(genes.lstf, "genes")
+genes.lstf <- data.table::rbindlist(genes.lstf, idcol = T)
+```
+
+丹参的96种化合物和相关靶基因概览
+（对应文件为`./components_and_target_genes.csv`）：
+
+```{r, eval = T}
+tibble::as_tibble(data <- dplyr::select(genes.lstf, components = .id, genes = ids, links))
+data.table::fwrite(data, "components_and_target_genes.csv")
+```
+
+# 第二部分
+
+## 在genecards网站上检索胃癌相关的基因
+
+根据Relevance score进行筛选（&gt; 5)。
+根据丹参靶点基因过滤数据集。
+
+```{r}
+rel.genes <- tibble::as_tibble(data.table::fread("./GeneCards-SearchResults.csv",
+  check.names = T))
+rel.genes <- dplyr::filter(rel.genes, Relevance.score > 5)
+rel.genes.inter <- dplyr::filter(rel.genes, Gene.Symbol %in% genes.lstf$ids)
+rel.genesCom.inter <- merge(rel.genes.inter,
+  dplyr::select(genes.lstf, components = .id, genes = ids),
+  by.x = 'Gene.Symbol', by.y = "genes", all.x = T
+)
+rel.genesCom.inter <- tibble::as_tibble(rel.genesCom.inter) %>% 
+  dplyr::relocate(components, Gene.Symbol) %>% 
+  dplyr::arrange(components)
+```
+
+所有胃癌相关基因概览
+(对应文件为`all_gastric_Cancer_related_genes.csv`)：
+
+```{r, eval = T}
+data.table::fwrite(rel.genes, "all_gastric_Cancer_related_genes.csv")
+data.table::fwrite(rel.genes.inter, "gastric_Cancer_related_genes_Intersect_with_targetGenes.csv")
+rel.genes
+```
+
+```{r}
+lst <- list(`All target` = unique(genes.lstf$ids),
+  `Gastric cancer related` = unique(rel.genes$Gene.Symbol))
+p <- ggVennDiagram::ggVennDiagram(lst) +
+  scale_fill_gradient(low = "grey90", high = "red")
+smallsvg(p, "venn_plot.pdf", 5, 3)
+```
+
+韦恩图见图\@ref(fig:fig2)
+对应文件为`figs/venn_plot.pdf`:
+
+```{r fig2, echo = F, eval = T, fig.cap = "靶点基因和胃癌相关基因交集韦恩图"}
+inclu.fig("figs/venn_plot.pdf")
+```
+
+96个化合物和胃癌相关基因的交集数据概览(包含交集基因以及对应化合物)
+（对应文件为`gastric_Cancer_related_genes_Intersect_with_targetGenes_components.csv`）：
+
+```{r, eval = T}
+data.table::fwrite(rel.genesCom.inter,
+  "gastric_Cancer_related_genes_Intersect_with_targetGenes_components.csv")
+rel.genesCom.inter
+```
+
+# 第三部分
+
+## 使用CellMiner数据库的NCI-60...
+
+```{r}
+nci60 <- get_nci60_data()
+cis <- dplyr::filter(nci60$comAct, `Drug name` == "Cisplatin")
+cis <- dplyr::select(cis, `Drug name`, dplyr::contains(":"))
+expr <- exprs <- dplyr::filter(nci60$rna, genes %in% rel.genesCom.inter$Gene.Symbol)
+```
+
+Cisplatin 活性数据：
+
+```{r eval = T}
+cis
+```
+
+NCI-60 表达数据：
+
+```{r eval = T}
+exprs
+```
+
+## 药物敏感性分析
+
+```{r}
+res.corTest <- mul_corTest(cis, expr)
+res.corTest1 <- res.corTest[[1]]
+data.table::fwrite(res.corTest1, "pearsonTest_results.csv")
+res.corTest1_compounds <- tibble::as_tibble(merge(res.corTest1, rel.genesCom.inter,
+  by.x = "name", by.y = "Gene.Symbol", all.x = T))
+# dic <- dplyr::filter(genes.lstf, ids %in% res.corTest1$name)
+# dic <- tibble::as_tibble(dplyr::select(dic, gene = ids, components = .id))
+```
+
+```{r}
+# visualize
+res.corTest1_data <- attr(res.corTest[[1]], "data")
+p <- vis_relcurve(res.corTest1_data, res.corTest1, rev = T)
+smallsvg(p, "pearsonTest.pdf", 9, 9)
+```
+
+其中有显著性意义的有13个基因（所有化合物），可视化见图\@ref(fig:fig3)
+（对应文件为`figs/pearsonTest.pdf`）
+
+```{r fig3, echo = F, eval = T, fig.cap = "关联性分析回归曲线图"}
+inclu.fig("figs/pearsonTest.pdf")
+```
+
+关联性分析（Pearson）结果概览（已包含基因和对应化合物数据）（对应文件为`./pearsonTest_allResults.csv` 和 `./pearsonTest_results_with_components.csv`）：
+
+```{r eval = T}
+data.table::fwrite(dplyr::select(res.corTest1_compounds, name, cor, p.value, components),
+  "pearsonTest_results_with_components.csv")
+res.corTest1_compounds
+```
+
+# 第四部分
+
+## 使用BiomaRt注释靶点基因
+
+获取Entrezgene id 以便后续分析……
+
+```{r}
+ensembl <- new_biomart()
+# attrs <- list_attrs(ensembl)
+attrs <- general_attrs()[1:3]
+anno.all <- filter_biomart(ensembl, attrs, "hgnc_symbol", data.weight$preferred_name)
+anno <- filter_biomart(ensembl, attrs, "hgnc_symbol", data.hubs$preferred_name)
+```
+
+```{r, eval = T}
+anno.all
+```
+
+将注释数据与筛选的化合物的靶点基因数据合并，并按照化合物分组。
+
+```{r}
+data.anno <- merge(res.corTest1_compounds, anno.all, by.x = "name",
+  by.y = "hgnc_symbol", all.x = T)
+data.anno <- tibble::as_tibble(data.anno)
+data.anno <- split(data.anno, data.anno$components)
+```
+
+各个化合物包含的显著性靶点基因数量信息：
+
+```{r, eval = T}
+lapply(data.anno, nrow)
+```
+
+所有化合物都不包含超过5个靶点基因
+
+## 使用`clusterProfiler`富集分析
+
+```{r}
+lst.ids <- lapply(data.anno, function(data) data$entrezgene_id)
+res.kegg <- multi_enrichKEGG(lst.ids)
+res.go <- multi_enrichGO(lst.ids)
+```
+
+说明：KEGG富集分析都有结果；但是对于GO 富集分析（BP，CC 或 MF）中，个别化合物有靶点基因，但未映射到通路中的基因，所以无结果， 这些是（TRUE表示有结果，而FALSE表示无结果）：
+
+```{r, eval = T}
+check_enrichGO(res.go)
+```
+
+```{r}
+p.kegg <- vis_enrich.kegg(res.kegg)
+p.go <- vis_enrich.go(res.go)
+writePlots(p.kegg, "enrichKEGG", 8)
+writePlots(p.go, "enrichGO", 8)
+```
+
+图片数量较多，不一一展示。
+对应文件为：`./enrichGO` 或 `./enrichKEGG` 文件夹下图片
+

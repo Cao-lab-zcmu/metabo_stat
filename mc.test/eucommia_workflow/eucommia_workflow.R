@@ -358,7 +358,7 @@ s10.4 <- new_section2(
     "for a feature. For example:"),
   rblock({
     ef <- "1642"
-    pdf(f10.4 <- paste0(tmp, "/features_", ef, ".pdf"), 10, 6)
+    pdf(f10.4 <- paste0(tmp, "/features_", ef, ".pdf"), 11, 4)
     show_node(mcn2, ef)
     dev.off()
   })
@@ -550,7 +550,7 @@ s13.3 <- new_section2(
     grob_struc2110 <- into(grecta("d"), grob_struc2110)
     grob_struc854 <- grid.grabExpr(show_structure(mcn2, "854"))
     grob_struc854 <- into(grecta("e"), grob_struc854)
-    grob_msms2110 <- as_grob(plot_msms_mirrors(mcn2, c("2110", "854"), structure_vp = NULL))
+    grob_msms2110 <- grid.grabExpr(plot_msms_mirrors(mcn2, c("2110", "854"), structure_vp = NULL))
     grob_msms2110 <- into(grecta("f"), grob_msms2110)
   })
 )
@@ -626,3 +626,57 @@ rmarkdown::render(file)
 # )
 
 # rmarkdown::render(file2)
+
+# ==========================================================================
+# draw extra...
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# p <- visualize(mcn, "parent")
+
+pgg <- modify_set_labs(mcn@parent_nebula@ggset, mcn)
+pgg <- mutate_layer(pgg, 3, stroke = 0, color = "transparent")
+# ggsave("herbal_parent.pdf", call_command(pgg), width = 7, height = 7)
+
+mcn@child_nebulae@ggset %<>%
+  lapply(function(ggset) {
+    mutate_layer(ggset, 3, stroke = 0, color = "transparent")
+})
+
+pc <- nebulae_as_grob(mcn)
+frame <- frame_col(c(p = 1.2, pc = 1), namel(p = as_grob(call_command(pgg)), pc))
+# dev.new(width = 23, height = 14)
+
+pdf("parent_and_child.pdf", 23 * .8, 14 * .8)
+draw(frame)
+dev.off()
+
+# 2110 -> 854
+# 2110 -> 1642
+
+# library(MCnebula2)
+
+# grob_struc2110 <- grid.grabExpr(show_structure(mcn2, "2110"))
+# grob_struc1642 <- grid.grabExpr(show_structure(mcn2, "1642"))
+# grob_struc854 <- grid.grabExpr(show_structure(mcn2, "854"))
+# lst <- namel(grob_struc2110, grob_struc1642, grob_struc854)
+# setwd(tmp)
+
+# ids <- c("2110", "1642", "854")
+# data <- dplyr::filter(feas, .features_id %in% ids)
+# data.table::fwrite(data, "compounds_1642s.csv")
+# for (i in names(lst)) {
+#   pdf(paste0(i, ".pdf"))
+#   draw(lst[[ i ]])
+#   dev.off()
+# }
+
+# pdf("compounds_1642_surounds.pdf", 8, 6)
+# draw(grob_iri)
+# dev.off()
+
+# mcn2 <- activate_nebulae(mcn2)
+# p <- visualize(mcn2, "Iridoids and derivatives",
+#   function(ggset, x = mcn2) {
+#     modify_default_child(modify_tracer_node(ggset), x)
+#   })
+# ggsave("iri.pdf", p, width = 4, height = 4)

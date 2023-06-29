@@ -1,0 +1,224 @@
+---
+title: R tips
+bibliography: '`r system.file("extdata", "library.bib", package = "MCnebula2")`'
+csl: '`r system.file("extdata", "vancouver.csl", package = "MCnebula2")`'
+reference-section-title: "Reference"
+link-citations: true
+output:
+  BiocStyle::html_document:
+    toc: true
+    toc_depth: 3
+    # toc_float: true
+---
+
+
+# Set-up
+
+```{r setup, include = T}
+devtools::load_all("~/utils.tool")
+library(ggplot2)
+# knitr::opts_chunk$set(echo = F)
+```
+
+# Overview
+
+```{r fig2, echo = T, fig.cap = "Learning Curve of R", fig.width = 4, fig.height = 2}
+x <- seq(1, 10, by = .05)
+work2time <- data.frame(Time = x, Work = -x^2 + 100)
+p <- ggplot(work2time) +
+  geom_line(aes(x = Work, y = Time)) +
+  theme_classic() +
+  theme(text = element_text(family = "Times"))
+p
+```
+
+# Data structure (S3)
+
+## 'character'
+
+```{r}
+x <- "this is character"
+y <- "this is \"character\""
+print(x)
+print(y)
+cat(x, "\n")
+cat(y, "\n")
+```
+
+## 'numeric'
+
+```{r}
+x <- 1
+y <- 1:10
+z <- seq(1, 10, by = .5)
+x
+y
+z
+```
+
+## 'data.frame'
+
+```{r}
+data <- data.frame(x = 1:10, y = 10:1, z = rep("character", 10))
+data
+tibble::as_tibble(data)
+## a inst data.frame
+tibble::as_tibble(mtcars)
+```
+
+## 'list'
+
+```{r}
+lst1 <- list(x = 1, y = 1:3)
+lst1
+lst2 <- list(
+  x = 1:10, 
+  y = rep("character", 20), z = tibble::as_tibble(mtcars)
+)
+lst2
+```
+
+# Packages and Functions
+
+## Package
+
+## Function
+
+```{r}
+fun <- function(x = 1, y = 2) {
+  x + y
+}
+res <- fun()
+res
+```
+
+```{r}
+fun2 <- function(x = seq(0.01, .99, length.out = 100)) {
+   df <- data.frame(
+     x = rep(x, 2),
+     y = c(qlogis(x), 2 * qlogis(x)),
+     group = rep(c("a","b"),
+     each = 100)
+   )
+   p <- ggplot(df, aes(x=x, y=y, group=group))
+   # These work
+   p + geom_line(linetype = 2)
+}
+p <- fun2()
+```
+
+```{r fig4, echo = F, fig.cap = "Demo figure"}
+p
+```
+
+# Regex match
+
+## `grep`
+
+```{r}
+letters
+grep("[a-z]", letters)
+txt <- c("arm","foot","lefroo", "bafoobar")
+if(length(i <- grep("foo", txt)))
+  cat("'foo' appears at least once in\n\t", txt, "\n")
+i
+txt[i]
+```
+
+## `stringr::str_extract`
+
+```{r}
+shopping_list <- c("apples x4", "bag of flour", "bag of sugar", "milk x2")
+stringr::str_extract(shopping_list, "\\d")
+stringr::str_extract(shopping_list, "[a-z]+")
+stringr::str_extract(shopping_list, "[a-z]{1,4}")
+stringr::str_extract(shopping_list, "\\b[a-z]{1,4}\\b")
+```
+
+# Common Packages
+
+```{r tab.id = "table2", echo = T, ft.keepnext = T}
+data <- tibble::tribble(
+  ~ Name, ~ Description, ~ Function,
+  "base", "data", "data.frame, c, list, ...",
+  "base", "Expression", "if, else ...",
+  "base", "String", "paste0, paste, print, cat, ...",
+  "base", "Match string", "grep, grepl, sub, gsub ...",
+  "base", "Loop", "for, lapply, apply, mapply ...",
+  "data.table", "For fast read and write table", "fread, fwrite",
+  "dplyr", "Modify table", "select, filter, arrange, distinct, slice, mutate ...",
+  "ggplot2", "Visualization", "...",
+  "stringr", "Match strings", "str_extract ..."
+)
+data <- dplyr::relocate(data, Name, Function)
+pretty_flex2(data, "Common Packages and Functions",
+  weight = c(
+Description = 1.5, Name = .7))
+```
+
+# * S4: Classes and Methods
+
+## Classes
+
+```{r}
+library(MCnebula2)
+mcn <- mcnebula()
+slotNames(mcn)
+mcn@mcn_dataset
+mcn_dataset(mcn)
+```
+
+## Methods
+
+### Demo (Not Run)
+
+```{r, eval = F}
+mcn <- mcn_5features
+mcn1 <- filter_structure(mcn)
+mcn1 <- create_reference(mcn1)
+mcn1 <- filter_formula(mcn1, by_reference = T)
+mcn1 <- create_stardust_classes(mcn1)
+mcn1 <- create_features_annotation(mcn1)
+mcn1 <- cross_filter_stardust(mcn1, 2, 1)
+mcn1 <- create_nebula_index(mcn1)
+mcn1 <- compute_spectral_similarity(mcn1)
+mcn1 <- create_parent_nebula(mcn1, 0.01)
+mcn1 <- create_child_nebulae(mcn1, 0.01)
+mcn1 <- create_parent_layout(mcn1)
+mcn1 <- create_child_layouts(mcn1)
+mcn1 <- activate_nebulae(mcn1)
+
+## optional Child-Nebulae
+visualize(mcn1)
+
+visualize(mcn1, "parent")
+visualize(mcn1, 1)
+visualize_all(mcn1)
+```
+
+### Demo (Run)
+
+```{r, eval = T}
+mcn <- mcn_5features
+mcn1 <- filter_structure(mcn)
+mcn1 <- create_reference(mcn1)
+mcn1 <- filter_formula(mcn1, by_reference = T)
+mcn1 <- create_stardust_classes(mcn1)
+mcn1 <- create_features_annotation(mcn1)
+mcn1 <- cross_filter_stardust(mcn1, 2, 1)
+mcn1 <- create_nebula_index(mcn1)
+mcn1 <- compute_spectral_similarity(mcn1)
+mcn1 <- create_parent_nebula(mcn1, 0.01)
+mcn1 <- create_child_nebulae(mcn1, 0.01)
+mcn1 <- create_parent_layout(mcn1)
+mcn1 <- create_child_layouts(mcn1)
+mcn1 <- activate_nebulae(mcn1)
+
+## optional Child-Nebulae
+visualize(mcn1)
+
+visualize(mcn1, "parent")
+visualize(mcn1, 1)
+visualize_all(mcn1)
+```
+

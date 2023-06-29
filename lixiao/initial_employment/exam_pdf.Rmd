@@ -1,0 +1,431 @@
+---
+title: 生信考核答卷
+author: 黄礼闯
+bibliography: '`r system.file("extdata", "library.bib", package = "utils.tool")`'
+csl: '`r system.file("extdata", "nature.csl", package = "utils.tool")`'
+reference-section-title: "Reference"
+link-citations: true
+output:
+  bookdown::pdf_document2:
+    pandoc_args: [
+      "--filter", "pandoc-fignos",
+      "--filter", "pandoc-tablenos"
+    ]
+    keep_tex: true
+    toc: true
+    toc_depth: 3
+    latex_engine: xelatex
+header-includes:
+  \usepackage{caption}
+  \captionsetup{font={footnotesize},width=6in}
+  \renewcommand{\dblfloatpagefraction}{.9}
+  \makeatletter
+  \renewenvironment{figure}
+  {\def\@captype{figure}}
+  \makeatletter
+  \definecolor{shadecolor}{RGB}{242,242,242}
+  \usepackage{xeCJK}
+  \usepackage{setspace}
+  \setstretch{1.3} 
+---
+
+
+```{r setup, include = F}
+knitr::opts_chunk$set(eval = F)
+```
+
+# 生信背景介绍
+
+## 主攻方向
+
+- 代谢组学: 在校主攻非靶向LC-MS/MS分析方法开发，该方法（R包）正投稿Analitical
+  Chemistry (Q1, top, IF=8.008) (详情见\@ref(prog))。
+- 转录组学: 熟悉Bioconductor，用 'limma' 分析过GEO转录组数据集。
+
+## 生信知识和相关软件
+
+- 对代谢组学分析最为熟悉，能独立完成整个流程的分析：
+    1. 熟悉质谱数据格式和转化。相关软件：[Proteowizard](http://www.proteowizard.org/)
+    2. 数据预处理：峰检测、对齐等。相关软件：[MZmine](http://mzmine.github.io/), [XCMS](https://bioconductor.org/packages/release/bioc/html/xcms.html) 等。
+    3. 统计分析：T-test, PCA, PLS-DA, OPLS-DA 等。相关软件：R。
+    4. 数据可视化：常规做图（条形图、点图等），热图，网络图等。相关软件：R。
+    5. 结构鉴定：机器预测，[SIRIUS](https://bio.informatik.uni-jena.de/software/sirius/)；可视化分析和光谱匹配，[GNPS](https://gnps.ucsd.edu/ProteoSAFe/static/gnps-splash.jsp), [CompMass](http://prime.psc.riken.jp/compms/msdial/main.html), [MCnebula2](https://bio.informatik.uni-jena.de/software/sirius/)等。
+    6. 通路分析富集分析。相关软件：R, [MetaboAnalyst](https://www.metaboanalyst.ca/)等。
+    7. 数据库：原始数据库[MASSIVE](https://massive.ucsd.edu/ProteoSAFe/static/massive.jsp)；参考光谱库：[GNPS](https://ccms-ucsd.github.io/GNPSDocumentation/gnpslibraries/), [HMDB](https://hmdb.ca/), [MassBank](http://www.massbank.jp/)等；分子结构库：[PubChem](https://pubchem.ncbi.nlm.nih.gov/)。
+- 转录组分析：
+    1. 平台：R的[Bioconductor](https://bioconductor.org/)。
+    2. R包：能熟练使用[limma](https://bioconductor.org/packages/release/bioc/html/limma.html)。
+    2. 数据库：[GEO](https://www.ncbi.nlm.nih.gov/geo/)。
+
+## 编程语言 {#prog}
+
+- 语言
+    - R: 精通R语言，从函数式编程到面向对象编程，从R包的开发、测试到编写说明文档。独立开发R包MCnebula2 (<https://github.com/Cao-lab-zcmu/MCnebula2>，近期独立完成了为其宣传的静态网站（<https://mcnebula.netlify.app/>，由于文章还在投稿，请勿宣传）。
+    - 其他: 使用Bash操作Linux系统，擅长VIM编辑，熟悉Python的使用，涉猎过Java。
+- 系统
+    - Linux: 学习、工作于Ubuntu发行版（使用Bash语言）。
+- 科研绘图、办公
+    - ggplot2, grid: 擅长ggplot2（R包）结合grid进行简单或复杂的科研绘图，编写新的可视化工具。
+    - Rmarkdown / Markdown / Latex: 替代Microsoft系列高效编写word、ppt、pdf。
+
+# 分析的案例
+
+## 转录组学案例
+
+曾以基因数据库（<https://tfbsdb.systemsbiology.net/>）结合GEO数据库，再结合用于基因的Java自然语言处理工具（<https://julielab.de/Resources/JCoRe.html>）处理文献，用以筛选泛组织芳烃受体（AHR）Signature（分析思路请参考文献[@sadik_il4i1_2020]）。
+
+以下说明流程（Fig. \@ref(fig:case1)）：
+
+```{r case1, eval = T, fig.cap = "转录组分析案例流程示例", echo = F}
+inclu.fig("./analysis_case.png")
+```
+
+1. 筛选基因结合：分析GEO数据库、筛选基因数据库、NLP处理文献。
+2. 分析GEO数据库，分析与AHR研究相关的疾病模型的数据集，根据差异性分析筛选基因。
+3. RNA-seq，分析的GEO数据集的类型。
+4. Microarray，分析的GEO数据集的类型。
+5. 差异表达基因，使用'limma'包分析得出，或者根据原研究者的研究数据筛选，根据'Q-value'、log~2~(FC)筛选。
+6. 检索转录因子靶向基因数据库（<https://tfbsdb.systemsbiology.net/>）
+7. 将第5步筛选的差异表达基因与第6步检索到的基因取合集。
+8. 使用Java包（<https://julielab.de/Resources/JCoRe.html>）处理报道有关AHR的文献。
+9. 将第7步和第8步取得的基因集取交集，获得泛组织AHR Signature基因
+
+## 代谢组学案例
+
+为了示例编写的R包[MCnebula2](https://github.com/Cao-lab-zcmu/MCnebula2)和其工作流的应用，在研究中曾重新分析MASSIVE中的代谢组数据集（[MSV000083593](https://massive.ucsd.edu/ProteoSAFe/QueryMSV?id=MSV000083593)）[@2020s]。流程如下所述（Fig. \@ref(fig:case2)，代码和详细说明可见于<https://mcnebula.netlify.app/docs/workflow/serum_report_biocstyle>）：
+
+```{r case2, eval = T, echo = F, fig.cap = "代谢组分析案例流程示意"}
+inclu.fig("./analysis_case2.png")
+```
+
+1. 下载MASSIVE数据，即[MSV000083593](https://massive.ucsd.edu/ProteoSAFe/QueryMSV?id=MSV000083593)
+2. LC-MS/MS预处理，使用MZmine2进行峰检测和对齐等处理，并导出MS/MS信息的.mgf，定量信息的.csv。
+3. 鉴定和预测化合物，使用SIRIUS软件预测化合物的分子式、结构式、化学类等。
+4. 注释数据预处理，使用MCnebula2（以下分析均采用）R包整合并处理SIRIUS的注释数据。
+5. 统计分析，包括步骤6和步骤20，进行差异性分析。
+6. 存活组 vs 致死组，筛选两组间的差异代谢物。
+7. 基于丰度筛选化学类，MCnebula2提供的算法，根据化合物的化学类在整体数据集中的丰富程度筛选。
+8. Tops 化合物，根据差异性分析的得分排名（例如Q-value），得到高排名的化合物。
+9. 多网络可视化，基于化学类将化合物聚类可视化为多个网络。
+10. 基于含量的可视化，将代谢物的含量变化水平呈现在网络图中。
+11. 追踪Tops的可视化，将Tops化合物标记在多网络图中，辅助筛选化学类。
+12. 筛选化学类，结合上述可视化筛选化学类。
+13. 化学信息查询，检索PubChem数据库，获取各类名称、ID和同义名信息（使用MCnebula2提供的函数）。
+14. 立体异构的InChIKey，质谱鉴定的程度达到分子骨架水平，可以以InChIKey2D表示，这一步在PubChem搜索所有InChIKey2D涵盖下的InChIKey（使用MCnebula2提供的函数）
+15. 同义名和ID，检索得到的化合物信息。
+16. KEGG ID，代谢物的ID，从步骤15得到的ID信息的CID（PubChem CID）通过'MetaboAnalystR'包转化为KEGG ID。
+17. 热图聚类分析，根据步骤12筛选的化学类绘制聚类热图，判断该化学类与疾病的关联性。
+18. 通路富集分析，通过步骤16得到的KEGG ID进行富集分析，可以使用R的'FELLA'包，也能使用MetaboAnalyst网站提供的服务。
+19. 获取分子式和结构式，得到化合物的鉴定数据，用于注释网络图。
+20. 对照组 vs 疾病组，筛选两组间的差异代谢物。
+21. 规范的分析鉴定表，将鉴定数据和统计分析数据整合，得到可以用于论文发表的规范表格。
+22. 判断疾病关联的化学类和化合物，结合上述得出分析的结论，以备进一步验证。
+
+# GEO 数据分析
+
+## 数据集和相关背景
+
+数据编号为：[GSE223325](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE223325)（Fig. \@ref(fig:gse)）。本数据集为较新的数据集，未见研究报道的记录。研究类风湿性关节炎单核细胞衍生巨噬细胞的促炎症和代谢功能。对极化的健康和类风湿关节炎单核细胞衍生的巨噬细胞进行了RNA测序。组别：
+
+- 对照组，24 hrs IL-4 (20ng/ml)。注：IL-4极化的巨噬细胞脂多糖（LPS）暴露后可建立一个高炎症基因表达程序[@czimmerer_epigenetic_2022]。
+- 模型组，24 hrs LPS (100ng/ml) and IFNg (20ng/ml)。注：由IFN-γ激活并由STAT1介导的前馈环路会放大细胞因子的信号，还会增强巨噬细胞对微生物诱导剂如Toll样受体（TLR）配体（例如LPS）的反应[@hu_regulation_2008; @chen_ifn-_2010]。
+
+```{r gse, eval = T, echo = F, fig.cap = "GSE223325数据集概览"}
+inclu.capt("./gse223325_capture.png")
+```
+
+## 软件、工具、语言包
+
+来源于CRAN的R包。
+
+```{r}
+pkgs <- c("dplyr", "data.table", "R.utils",
+  "ggplot2", "BiocManager", "ggrepel")
+lapply(pkgs,
+    function(pkg) {
+      if (!requireNamespace(pkg, quietly = T))
+        install.package(pkg)
+    })
+```
+
+来源于Bioconductor的包。
+
+```{r}
+pkgs.bio <- c("GEOquery", "edgeR", "limma", "pathview",
+  "clusterProfiler", "biomaRt")
+lapply(pkgs.bio,
+    function(pkg) {
+      if (!requireNamespace(pkg, quietly = T))
+        BiocManager::install(pkg)
+    })
+```
+
+## 分析流程
+
+本次分析的流程图见Fig. \@ref(fig:GEOflow)。详情见\@ref(steps)。
+
+```{r GEOflow, eval = T, echo = F, fig.cap = "分析流程示意图"}
+inclu.fig("./GEO_case.png")
+```
+
+## 数据分析 {#steps}
+
+### Set-up
+
+R的设定。只加载了`ggplot2`包，其他的包在使用时通过`::`调用。另外，个别函数用了自定义的函数，以免代码过于琐碎（对于关键性的步骤，没有使用自定义的函数）
+
+```{r}
+library(ggplot2)
+## The custom functions
+bin <- RCurl::getURLContent(
+  paste0("https://raw.githubusercontent.com/Cao-lab-zcmu/utils_tool/",
+    "master/R/tmp.ahr.R")
+)
+writeBin(bin, tmp <- tempfile(fileext = ".R"))
+source(tmp)
+```
+
+### 获取数据
+
+使用R包`GEOquery`获取GEO数据。
+
+```{r}
+gse <- "GSE223325"
+about <- GEOquery::getGEO(gse)
+```
+
+查看数据已进行过的处理。
+
+```{r, eval = T}
+about[[1]]$data_processing.3[1]
+```
+
+获取'GPL'的注释信息。
+
+```{r}
+gpl <- about[[1]]@annotation
+anno <- GEOquery::getGEO(gpl)
+org <- anno@header$organism
+```
+
+将补充材料信息下载到本地（原作者处理过的包含TPM的矩阵数据）。
+
+```{r}
+GEOquery::getGEOSuppFiles(gse)
+utils::untar(list.files(gse, full.names = T), exdir = gse)
+lapply(list.files(gse, "\\.gz$", full.names = T), R.utils::gunzip)
+```
+
+为样品信息创建元数据表格。
+
+```{r}
+metadata <- data.frame(files = list.files(gse, "\\.txt$", full.names = T)) %>% 
+  dplyr::mutate(group = ifelse(grepl("M1\\.txt", files), "M1", "M2"),
+    group.anno = ifelse(group == "M1", "LPC + IFN", "IL-4"),
+    sample = gsub("^.*/|\\.txt$", "", files)
+  )
+```
+
+检查元数据表格，并查看矩阵数据状态。
+
+```{r, eval = T}
+metadata
+tibble::as_tibble(data.table::fread("./GSE223325/GSM6945621_RA1M1.txt"))
+```
+
+### 差异性分析 {#diff}
+
+读取表达数据集。
+
+```{r}
+dge.list <- edgeR::readDGE(metadata$files, columns = c(1, 2))
+dge.list <- re.sample.group(dge.list, metadata)
+```
+
+使用R包'biomaRt'对基因信息进行注释。
+
+```{r}
+ensembl <- biomaRt::useEnsembl(biomart = "ensembl", dataset = "hsapiens_gene_ensembl")
+attr <- c("ensembl_gene_id", "hgnc_symbol", "chromosome_name",
+        "start_position", "end_position", "description")
+gene.anno <- biomaRt::getBM(attr, mart = ensembl)
+gene.anno <- tibble::as_tibble(gene.anno)
+dge.list <- anno.into.list(dge.list, gene.anno, "ensembl_gene_id")
+```
+
+创建设计矩阵和对比矩阵[@law_guide_2020]。
+
+```{r}
+group. <- dge.list$samples$group
+design <- model.matrix(~ 0 + group.)
+contr.matrix <- limma::makeContrasts(
+  M1_vs_M2 = group.M1 - group.M2,
+  levels = design
+)
+```
+
+滤除低表达的基因信息。
+
+```{r}
+keep.exprs <- edgeR::filterByExpr(dge.list, group = group., min.count = 10)
+dge.list <- edgeR::`[.DGEList`(dge.list, keep.exprs, , keep.lib.sizes = F)
+```
+
+数据归一化。
+
+```{r}
+dge.list <- edgeR::calcNormFactors(dge.list, method = "TMM")
+dge.list <- limma::voom(dge.list, design)
+```
+
+统计检验。
+
+```{r}
+fit <- limma::lmFit(dge.list, design)
+fit.cont <- limma::contrasts.fit(fit, contrasts = contr.matrix)
+ebayes <- limma::eBayes(fit.cont)
+```
+
+根据Q-value（FDR校正的P-value）和log~2~(FC)获取高排名的基因。
+
+```{r}
+res <- limma::topTable(ebayes, coef = 1, number = Inf)
+res <- tibble::as_tibble(res)
+res.tops <- dplyr::filter(res, adj.P.Val < .05, abs(logFC) > 1)
+res.top30 <- head(res.tops, n = 30)
+```
+
+检查结果。
+
+```{r, eval = T}
+res.top30
+```
+
+将结果可视化为火山图（Fig. \@ref(fig:vol)）。
+
+```{r}
+data <- dplyr::mutate(
+  res.tops, change = ifelse(logFC < -1, "down",
+    ifelse(logFC > 1, "up", "stable"))
+)
+p <- ggplot(data, aes(x = logFC, y = -log10(adj.P.Val), color = change)) + 
+		geom_point(alpha = 0.8, stroke = 0, size = 3) + 
+		scale_color_manual(values = c("down" = "#4DBBD5FF",
+			"stable" = "#8491B4FF",
+      "up" = "#DC0000FF")) +
+		ylim(1, max(-log10(data$adj.P.Val))) +
+		geom_hline(yintercept = -log10(0.05), linetype = 4, size = 0.8) +
+		geom_vline(xintercept = c(-1,1), linetype = 4, size = 0.8) + 
+		labs(x = "log2(FC)", y = "-log10(Q-value)") + 
+    ggrepel::geom_text_repel(
+      data = data[-log10(data$adj.P.Val) > 7.5 & abs(data$logFC) >= 7.5,],
+			aes(label = hgnc_symbol),
+			size = 3,family="Times") +
+		theme(text = element_text(family = "Times"))
+ggsave(p, file = paste0("volcano.png"), height = 5.5)
+```
+
+```{r vol, eval = T, echo = F, fig.cap = "差异性分析结果的火山图可视化"}
+inclu.fig("./volcano.png")
+```
+
+### 功能注释
+
+在上一节\@ref(diff)中，已经使用了`biomaRt`对基因进行了功能注释。Tab. \@ref(tab:topAnno)显示Top 30的注释结果。
+
+### 通路分析
+
+#### 使用`clusterProfiler`通路富集分析
+
+使用R包`clusterProfiler`进行通路富集分析，在此之前，需要先将'ensembl ID'转化为'entrez ID'（一并展示在了Tab. \@ref(tab:topAnno)中）。
+
+```{r}
+ids <- clusterProfiler::bitr(
+  res.top30$ensembl_gene_id, "ENSEMBL",
+  "ENTREZID", "org.Hs.eg.db", F
+)
+ids <- dplyr::distinct(ids, ENSEMBL, .keep_all = T)
+res.top30.ex <- dplyr::mutate(res.top30, entrezid = ids[[2]]) %>% 
+  dplyr::filter(!is.na(entrezid))
+```
+
+```{r tab.id = "topAnno", echo = F, eval = T}
+pretty_flex(dplyr::select(res.top30.ex, ensembl_gene_id, hgnc_symbol, entrezid, description),
+  "Top 30的基因功能注释（此处仅显示3列）", NULL,
+  weight = c(description = 2), form_body = F)
+```
+
+使用KEGG的数据库富集分析（结果`res.kegg@result`见Tab. \@ref(tab:richRes)）。
+
+```{r}
+res.kegg <- clusterProfiler::enrichKEGG(res.top30.ex$entrezid)
+```
+
+```{r tab.id = "richRes", eval = T, echo = F}
+pretty_flex(
+  dplyr::mutate(dplyr::select(res.kegg@result, ID, p.adjust, geneID, Description),
+    p.adjust = as.character(p.adjust)),
+  "KEGG通路富集分析结果", "注：'geneID'为'entrezid'",
+  form_body = F, form_header = F
+)
+```
+
+#### 使用`pathview`将富集分析结果绘制成通路。
+
+这里选择将log~2~(FC)数据可视化在通路图中，因为pathview仅支持范围$[-1, 1]$，所以先将log~2~(FC)归一化到$[-1, 1]$。
+
+```{r}
+gene.data <- res.top30.ex$logFC / max(abs(res.top30.ex$logFC))
+names(gene.data) <- res.top30.ex$entrezid
+pathways <- gsub("^[a-z]*", "", res.kegg@result$ID)
+```
+
+绘制显著的两条通路图。
+
+```{r}
+data(bods, package = "pathview")
+res.pathv <- sapply(pathways, simplify = F,
+  function(id) {
+    pathview::pathview(gene.data, pathway.id = id, species = "hsa")
+  })
+```
+
+```{r keggPath, eval = T, echo = F, fig.cap = "通路'Proteasome'（ID:hsa03050）"}
+inclu.capt("./hsa03050.pathview.png")
+```
+
+```{r fig10, eval = T, echo = F, fig.cap = "通路'Antigen processing and presentation'（ID:hsa04612）"}
+inclu.capt("./hsa04612.pathview.png")
+```
+
+### 结论与临床转化
+
+本次分析目的为探究类风湿性关节炎单核细胞衍生巨噬细胞的促炎症和代谢功能。巨噬细胞的激活和极化在炎症发展的前馈和反馈机制中起到了重要作用[@hu_regulation_2008]，了解其极化后功能的改变对治疗类风湿性关节炎具有启发意义。本次分析结果表明，相比于极化健康巨噬细胞（M2, IL-4处理组），类风湿关节炎单核细胞衍生的巨噬细胞（M1, LPC + IFN处理组）具有显著高表达的'PA28'基因（entrezid: 5720，见Tab. \@ref(tab:topAnno)），富集于'Antigen processing and presentation'和'Proteasome'通路（Tab. \@ref(tab:richRes)）。'PA28'基因可能成为治疗类风湿关节炎的临床用药靶点。
+
+## Github数据
+
+本次研究涉及的所有数据和脚本已上传至：
+<https://github.com/Cao-lab-zcmu/metabo_stat/tree/master/lixiao>。
+
+## 附：操作截图
+
+```{r fig12, eval = T, echo = F, fig.cap = "编写分析脚本（VIM界面）"}
+inclu.capt("./writeScript_capture.png")
+```
+
+```{r fig13, eval = T, echo = F, fig.cap = "编写分析报告"}
+inclu.capt("./writeReport_capture.png")
+```
+
+```{r fig14, eval = T, echo = F, fig.cap = "输出分析报告为PDF格式"}
+inclu.capt("./outputReport_capture.png")
+```
+
+```{r fig15, eval = T, echo = F, fig.cap = "工作目录"}
+inclu.capt("./workDir_capture.png")
+```
+
+```{r fig16, eval = T, echo = F, fig.cap = "查阅和管理文献"}
+inclu.capt("./manageRef.png")
+```
+

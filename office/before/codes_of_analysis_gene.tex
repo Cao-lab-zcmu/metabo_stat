@@ -1,0 +1,1609 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{caption} \captionsetup{font={footnotesize},width=6in} \renewcommand{\dblfloatpagefraction}{.9} \makeatletter \renewenvironment{figure} {\def\@captype{figure}} \makeatletter \definecolor{shadecolor}{RGB}{242,242,242} \usepackage{xeCJK} \usepackage{setspace} \setstretch{1.3}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={R codes of analysis gene},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{R codes of analysis gene}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\hypertarget{file-analysis_data.1.r}{%
+\section{File: analysis\_data.1.R}\label{file-analysis_data.1.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl")}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{1}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\NormalTok{meta.df }\OtherTok{\textless{}{-}} \FunctionTok{decomp\_tar2txt}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+\NormalTok{  meta.df, }
+  \AttributeTok{treatment =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(}
+\NormalTok{    file, }\StringTok{"(?\textless{}=D7{-}).*(?=\_RNA{-}seq)"}
+\NormalTok{    ),}
+  \AttributeTok{group =}\NormalTok{ treatment,}
+  \AttributeTok{sample =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(}
+\NormalTok{    file, }\StringTok{"(?\textless{}=\_).*(?=\_RNA{-}seq)"}
+\NormalTok{  )}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gene.anno.tmp }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file[}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\FunctionTok{grep}\NormalTok{(}\StringTok{"Symbol|Ensembl|reference sequence"}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(.))) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{ref =} \StringTok{\textasciigrave{}}\AttributeTok{Locus on reference sequence}\StringTok{\textasciigrave{}}\NormalTok{,}
+                \AttributeTok{chr =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(ref, }\StringTok{"\^{}chr[0{-}9]\{1,\}(?=:)"}\NormalTok{),}
+                \AttributeTok{seq.st =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(ref, }\StringTok{"(?\textless{}=:)[0{-}9]\{1,\}(?={-})"}\NormalTok{),}
+                \AttributeTok{seq.st =} \FunctionTok{as.integer}\NormalTok{(seq.st),}
+                \AttributeTok{seq.end =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(ref, }\StringTok{"(?\textless{}={-})[0{-}9]\{1,\}$"}\NormalTok{),}
+                \AttributeTok{seq.end =} \FunctionTok{as.integer}\NormalTok{(seq.end),}
+                \AttributeTok{eff.len =} \FunctionTok{abs}\NormalTok{(seq.st }\SpecialCharTok{{-}}\NormalTok{ seq.end)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Ensembl Gene ID}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{eff.len}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, }\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\DocumentationTok{\#\# add group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# add annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno.tmp, }\StringTok{"Ensembl Gene ID"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# fpkm to tpm}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{fpkm\_log2tpm}\NormalTok{(dge.list)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ dge.list}\SpecialCharTok{$}\NormalTok{samples}\SpecialCharTok{$}\NormalTok{group}
+\DocumentationTok{\#\# design}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \DocumentationTok{\#\# treat with CH223191}
+  \AttributeTok{treat\_ch.vs.contr =}\NormalTok{ group.CH }\SpecialCharTok{{-}}\NormalTok{ group.C,}
+  \DocumentationTok{\#\# treat with StemRegenin1}
+  \AttributeTok{treat\_sr.vs.contr =}\NormalTok{ group.SR1 }\SpecialCharTok{{-}}\NormalTok{ group.C, }
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix,}
+                        \AttributeTok{min.count =} \FloatTok{0.0001}\NormalTok{, }\AttributeTok{voom =}\NormalTok{ F)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# save}
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.10.r}{%
+\section{File: analysis\_data.10.R}\label{file-analysis_data.10.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = c("ensembl\_exon\_id", "go\_id"))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{10}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ GEOquery}\SpecialCharTok{::}\FunctionTok{getGEO}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df.raw }\OtherTok{\textless{}{-}}\NormalTok{ Biobase}\SpecialCharTok{::}\FunctionTok{phenoData}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]]) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  Biobase}\SpecialCharTok{::}\FunctionTok{pData}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(meta.df.raw, title) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ title,}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_[0{-}9]\{1,\}$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"U87\_shC\_"}\NormalTok{, }\StringTok{""}\NormalTok{, group))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat\_ficz.vs.contr =}\NormalTok{ group.FICZ100nM }\SpecialCharTok{{-}}\NormalTok{ group.DMSO,}
+  \AttributeTok{treat\_kyna.vs.contr =}\NormalTok{ group.KynA50uM }\SpecialCharTok{{-}}\NormalTok{ group.DMSO, }
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# show expression dataset}
+\CommentTok{\# exprs \textless{}{-} Biobase::assayData(info[[1]])$exprs }
+\CommentTok{\# print(head(exprs))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# genes \textless{}{-} fit$genes \%\textgreater{}\% }
+\CommentTok{\#   dplyr::as\_tibble()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream.eset}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]], design, contr.matrix) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{mutate,}
+              \AttributeTok{ensembl =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(gene\_assignment, }\StringTok{"ENS[A{-}Z][0{-}9]*"}\NormalTok{),}
+              \AttributeTok{symbol =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(gene\_assignment,}
+                \StringTok{"(?\textless{}= |\^{})[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{0,\}[0{-}9]\{0,3\}(?= |$)"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl, symbol)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.11.r}{%
+\section{File: analysis\_data.11.R}\label{file-analysis_data.11.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = c("ensembl\_exon\_id", "go\_id"))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{11}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ GEOquery}\SpecialCharTok{::}\FunctionTok{getGEO}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df.raw }\OtherTok{\textless{}{-}}\NormalTok{ Biobase}\SpecialCharTok{::}\FunctionTok{phenoData}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]]) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  Biobase}\SpecialCharTok{::}\FunctionTok{pData}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(meta.df.raw, title) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ title,}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_[0{-}9]\{1,\}$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"U87\_"}\NormalTok{, }\StringTok{""}\NormalTok{, group))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat\_i3ca.vs.contr =}\NormalTok{ group.I3CA50uM }\SpecialCharTok{{-}}\NormalTok{ group.DMSO,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# show expression dataset}
+\NormalTok{exprs }\OtherTok{\textless{}{-}}\NormalTok{ Biobase}\SpecialCharTok{::}\FunctionTok{assayData}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]])}\SpecialCharTok{$}\NormalTok{exprs }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream.eset}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]], design, contr.matrix) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{mutate,}
+              \AttributeTok{ensembl =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(gene\_assignment, }\StringTok{"ENS[A{-}Z][0{-}9]*"}\NormalTok{),}
+              \AttributeTok{symbol =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(gene\_assignment,}
+                \StringTok{"(?\textless{}= |\^{})[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{0,\}[0{-}9]\{0,3\}(?= |$)"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl, symbol)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.12.r}{%
+\section{File: analysis\_data.12.R}\label{file-analysis_data.12.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = c("ensembl\_exon\_id", "go\_id"))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{12}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ GEOquery}\SpecialCharTok{::}\FunctionTok{getGEO}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df.raw }\OtherTok{\textless{}{-}}\NormalTok{ Biobase}\SpecialCharTok{::}\FunctionTok{phenoData}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]]) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  Biobase}\SpecialCharTok{::}\FunctionTok{pData}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(meta.df.raw, title) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ title,}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_[0{-}9]\{1,\}$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\^{}.*U87\_"}\NormalTok{, }\StringTok{""}\NormalTok{, group))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat\_hpp.vs.contr =}\NormalTok{ group.HPP40uM }\SpecialCharTok{{-}}\NormalTok{ group.DMSO,}
+  \AttributeTok{treat\_i3p.vs.contr =}\NormalTok{ group.I3P40uM }\SpecialCharTok{{-}}\NormalTok{ group.DMSO,}
+  \AttributeTok{treat\_pp.vs.contr =}\NormalTok{ group.PP40uM }\SpecialCharTok{{-}}\NormalTok{ group.DMSO,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# show expression dataset}
+\CommentTok{\# exprs \textless{}{-} Biobase::assayData(info[[1]])$exprs }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream.eset}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]], design, contr.matrix) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{mutate,}
+              \AttributeTok{ensembl =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(gene\_assignment, }\StringTok{"ENS[A{-}Z][0{-}9]*"}\NormalTok{),}
+              \AttributeTok{symbol =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(gene\_assignment,}
+                \StringTok{"(?\textless{}= |\^{})[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{0,\}[0{-}9]\{0,3\}(?= |$)"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl, symbol)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.13.r}{%
+\section{File: analysis\_data.13.R}\label{file-analysis_data.13.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = c("ensembl\_exon\_id", "go\_id"))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{13}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ GEOquery}\SpecialCharTok{::}\FunctionTok{getGEO}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df.raw }\OtherTok{\textless{}{-}}\NormalTok{ Biobase}\SpecialCharTok{::}\FunctionTok{phenoData}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]]) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  Biobase}\SpecialCharTok{::}\FunctionTok{pData}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(meta.df.raw, title) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ title,}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_[0{-}9]\{1,\}$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\^{}.*U87\_"}\NormalTok{, }\StringTok{""}\NormalTok{, group))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \DocumentationTok{\#\# treat with L{-}trp}
+\CommentTok{\#   il4i1\_ahrKO.vs.ahrKO\_1 = group.IL4I1\_shAHR1 {-} group.C\_shAHR1,}
+\CommentTok{\#   il4i1\_ahrKO.vs.ahrKO\_2 = group.IL4I1\_shAHR2 {-} group.C\_shAHR2,}
+  \AttributeTok{ahrKO\_1.vs.control =}\NormalTok{ group.C\_shAHR1 }\SpecialCharTok{{-}}\NormalTok{ group.C\_shC,}
+  \AttributeTok{ahrKO\_2.vs.control =}\NormalTok{ group.C\_shAHR2 }\SpecialCharTok{{-}}\NormalTok{ group.C\_shC,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# show expression dataset}
+\CommentTok{\# exprs \textless{}{-} Biobase::assayData(info[[1]])$exprs }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream.eset}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]], design, contr.matrix) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{mutate,}
+              \AttributeTok{ensembl =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(gene\_assignment, }\StringTok{"ENS[A{-}Z][0{-}9]*"}\NormalTok{),}
+              \AttributeTok{symbol =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(gene\_assignment,}
+                \StringTok{"(?\textless{}= |\^{})[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{0,\}[0{-}9]\{0,3\}(?= |$)"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl, symbol)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.16.r}{%
+\section{File: analysis\_data.16.R}\label{file-analysis_data.16.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = c("ensembl\_exon\_id", "go\_id"))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{16}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ GEOquery}\SpecialCharTok{::}\FunctionTok{getGEO}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df.raw }\OtherTok{\textless{}{-}}\NormalTok{ Biobase}\SpecialCharTok{::}\FunctionTok{phenoData}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]]) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  Biobase}\SpecialCharTok{::}\FunctionTok{pData}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(meta.df.raw, title) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ title,}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{" [0{-}9]\{1,\}$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"{-}"}\NormalTok{, }\StringTok{"\_"}\NormalTok{, group))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat.vs.control =}\NormalTok{ group.Co\_culture }\SpecialCharTok{{-}}\NormalTok{ group.Single\_culture,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# show expression dataset}
+\CommentTok{\# exprs \textless{}{-} Biobase::assayData(info[[1]])$exprs }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream.eset}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]], design, contr.matrix) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{mutate,}
+              \AttributeTok{ensembl =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(SPOT\_ID}\FloatTok{.1}\NormalTok{, }\StringTok{"ENS[A{-}Z][0{-}9]*"}\NormalTok{),}
+              \AttributeTok{symbol =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(SPOT\_ID}\FloatTok{.1}\NormalTok{,}
+                \StringTok{"(?\textless{}=}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{()[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{1,\}[0{-}9]\{0,2\}[A{-}Z]\{0,\}[0{-}9]\{0,3\}(?=}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{))"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl, symbol)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.17.r}{%
+\section{File: analysis\_data.17.R}\label{file-analysis_data.17.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = c("ensembl\_exon\_id", "go\_id"))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{check }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{n }\OtherTok{\textless{}{-}} \DecValTok{0}
+\ControlFlowTok{while}\NormalTok{(check }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)\{}
+\NormalTok{  n }\OtherTok{\textless{}{-}}\NormalTok{ n }\SpecialCharTok{+} \DecValTok{1}
+\NormalTok{  check }\OtherTok{\textless{}{-}} \FunctionTok{try}\NormalTok{(gene.anno }\OtherTok{\textless{}{-}} \FunctionTok{anno.gene.biomart}\NormalTok{(}\StringTok{"hsapiens\_gene\_ensembl"}\NormalTok{,}
+                                              \AttributeTok{ex.attr =} \FunctionTok{c}\NormalTok{(}\StringTok{"go\_id"}\NormalTok{, }\StringTok{"refseq\_mrna"}\NormalTok{)),}
+               \AttributeTok{silent =}\NormalTok{ T)}
+  \ControlFlowTok{if}\NormalTok{(}\FunctionTok{class}\NormalTok{(check)[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \StringTok{"try{-}error"}\NormalTok{)\{}
+    \FunctionTok{print}\NormalTok{(check)}
+\NormalTok{    check }\OtherTok{\textless{}{-}} \DecValTok{0}
+\NormalTok{  \}}\ControlFlowTok{else}\NormalTok{\{}
+\NormalTok{    check }\OtherTok{\textless{}{-}} \DecValTok{1}
+\NormalTok{  \}}
+  \FunctionTok{cat}\NormalTok{(}\StringTok{"\#\#"}\NormalTok{, }\StringTok{"Try..."}\NormalTok{, n, }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{\}}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{17}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}} \FunctionTok{decomp\_tar2txt}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(meta.df, }\AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\^{}GSM[\^{}\_]*\_"}\NormalTok{, }\StringTok{""}\NormalTok{, file),}
+                         \AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.txt$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+                         \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_60\_S.*\_pool.*$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# format}
+\NormalTok{raw }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, data.table}\SpecialCharTok{::}\NormalTok{fread) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{distinct, tracking\_id, }\AttributeTok{.keep\_all =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{rename, }\AttributeTok{fpkm =} \DecValTok{6}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{mutate, }\AttributeTok{fpkm =} \FunctionTok{as.numeric}\NormalTok{(fpkm))}
+\DocumentationTok{\#\# filter NA}
+\NormalTok{nas }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(raw, dplyr}\SpecialCharTok{::}\NormalTok{filter, }\FunctionTok{is.na}\NormalTok{(fpkm)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{[[}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{"tracking\_id"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unlist}\NormalTok{(}\AttributeTok{use.names =}\NormalTok{ F) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unique}\NormalTok{()}
+\NormalTok{raw }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(raw, dplyr}\SpecialCharTok{::}\NormalTok{filter, }\SpecialCharTok{!}\NormalTok{tracking\_id }\SpecialCharTok{\%in\%} \FunctionTok{all\_of}\NormalTok{(nas))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gene.anno.tmp }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(raw[[}\DecValTok{1}\NormalTok{]], }\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)}
+\DocumentationTok{\#\# write into disk}
+\FunctionTok{mapply}\NormalTok{(write\_tsv, raw, meta.df}\SpecialCharTok{$}\NormalTok{file)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, }\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{6}\NormalTok{))}
+\DocumentationTok{\#\# add group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# add annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno.tmp, }\StringTok{"tracking\_id"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{fpkm\_log2tpm}\NormalTok{(dge.list)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ dge.list}\SpecialCharTok{$}\NormalTok{samples}\SpecialCharTok{$}\NormalTok{group}
+\DocumentationTok{\#\# design}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# contrast}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat\_bap.vs.contr =}\NormalTok{ group.MCF10AT1\_BA\_P }\SpecialCharTok{{-}}\NormalTok{ group.MCF10AT1\_NT,}
+  \AttributeTok{treat\_bpa.vs.contr =}\NormalTok{ group.MCF10AT1\_BPA }\SpecialCharTok{{-}}\NormalTok{ group.MCF10AT1\_NT,}
+  \AttributeTok{treat\_overlay.vs.contr =}\NormalTok{ group.MCF10AT1\_BPAplus\_Ba\_P }\SpecialCharTok{{-}}\NormalTok{ group.MCF10AT1\_NT,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix,}
+                        \AttributeTok{min.count =} \FloatTok{0.0001}\NormalTok{, }\AttributeTok{voom =}\NormalTok{ F)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.18.r}{%
+\section{File: analysis\_data.18.R}\label{file-analysis_data.18.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{18}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.gz$"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  R.utils}\SpecialCharTok{::}\FunctionTok{gunzip}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{raw }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\StringTok{"GSE130234\_processed\_data.txt"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{mapply}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(raw), }\FunctionTok{colnames}\NormalTok{(raw)[}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(raw)],}
+       \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(col, name)\{}
+\NormalTok{         df }\OtherTok{\textless{}{-}}\NormalTok{ raw[, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, col)]}
+         \FunctionTok{write\_tsv}\NormalTok{(df, }\FunctionTok{paste0}\NormalTok{(name, }\StringTok{"\_counts.tsv"}\NormalTok{))}
+\NormalTok{       \})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}
+  \AttributeTok{file =} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"\_counts.tsv$"}\NormalTok{) }
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_tagcount\_counts.tsv"}\NormalTok{, }\StringTok{""}\NormalTok{, file),}
+                \AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"{-}"}\NormalTok{, }\StringTok{"\_"}\NormalTok{, sample),}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_rep."}\NormalTok{, }\StringTok{""}\NormalTok{, sample))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\NormalTok{gene.anno }\OtherTok{\textless{}{-}} \FunctionTok{anno.gene.biomart}\NormalTok{(}\StringTok{"hsapiens\_gene\_ensembl"}\NormalTok{,}
+                               \AttributeTok{attr =} \FunctionTok{c}\NormalTok{(}\StringTok{"ensembl\_gene\_id"}\NormalTok{, }\StringTok{"hgnc\_symbol"}\NormalTok{, }\StringTok{"refseq\_mrna"}\NormalTok{))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, }\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\DocumentationTok{\#\# add group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# add annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno, }\StringTok{"refseq\_mrna"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# keeps \textless{}{-} !duplicated(dge.list$genes$ensembl\_gene\_id) | grepl("\^{}NM\_", dge.list$genes$refseq\_mrna)}
+\CommentTok{\# \#\# filter...}
+\CommentTok{\# dge.list \textless{}{-} edgeR::\textasciigrave{}[.DGEList\textasciigrave{}(dge.list, keeps, , keep.lib.sizes = F)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ dge.list}\SpecialCharTok{$}\NormalTok{samples}\SpecialCharTok{$}\NormalTok{group}
+\DocumentationTok{\#\# design}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat\_sga315.vs.contr =}\NormalTok{ group.LOV\_SGA315 }\SpecialCharTok{{-}}\NormalTok{ group.LOV,}
+  \AttributeTok{treat\_sga360.vs.contr =}\NormalTok{ group.LOV\_SGA360 }\SpecialCharTok{{-}}\NormalTok{ group.LOV,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# remove mRNA sequences of non{-}coding proteins}
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{filter, }\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"\^{}NR\_"}\NormalTok{, refseq\_mrna)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl\_gene\_id, hgnc\_symbol) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# remove duplicated genes}
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{distinct, ensembl\_gene\_id, }\AttributeTok{.keep\_all =}\NormalTok{ T)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# distribution}
+\CommentTok{\# exprs \textless{}{-} limma\_downstream(dge.list, group., design, contr.matrix, get\_normed.exprs = T)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.19.r}{%
+\section{File: analysis\_data.19.R}\label{file-analysis_data.19.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{19}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ GEOquery}\SpecialCharTok{::}\FunctionTok{getGEO}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df.raw }\OtherTok{\textless{}{-}}\NormalTok{ Biobase}\SpecialCharTok{::}\FunctionTok{phenoData}\NormalTok{(info[[}\DecValTok{1}\NormalTok{]]) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  Biobase}\SpecialCharTok{::}\FunctionTok{pData}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(meta.df.raw, title) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample =}\NormalTok{ title,}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\^{}HepG2 "}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{" "}\NormalTok{, }\StringTok{"\_"}\NormalTok{, group))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat\_mc3\_1h.vs.control =}\NormalTok{ group.MC3\_1\_h }\SpecialCharTok{{-}}\NormalTok{ group.NT,}
+  \AttributeTok{treat\_mc3\_24h.vs.control =}\NormalTok{ group.MC3\_24\_h }\SpecialCharTok{{-}}\NormalTok{ group.NT,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# show expression dataset}
+\CommentTok{\# exprs \textless{}{-} Biobase::assayData(info[[1]])$exprs }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# res \textless{}{-} limma\_downstream.eset(info[[1]], design, contr.matrix) }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.2.r}{%
+\section{File: analysis\_data.2.R}\label{file-analysis_data.2.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl")}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{2}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\NormalTok{meta.df }\OtherTok{\textless{}{-}} \FunctionTok{decomp\_tar2txt}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(meta.df, }\SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"peaks.txt"}\NormalTok{, file)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+    \AttributeTok{treatment =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(}
+\NormalTok{      file, }\StringTok{"(?\textless{}=D7{-}).*(?=\_RNA{-}seq)"}
+\NormalTok{      ),}
+    \AttributeTok{group =}\NormalTok{ treatment,}
+    \AttributeTok{sample =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(}
+\NormalTok{      file, }\StringTok{"(?\textless{}=\_).*(?=\_RNA{-}seq)"}
+\NormalTok{    )}
+\NormalTok{  )}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gene.anno.tmp }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file[}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\FunctionTok{grep}\NormalTok{(}\StringTok{"Symbol|Ensembl|reference sequence"}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(.))) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{ref =} \StringTok{\textasciigrave{}}\AttributeTok{Locus on reference sequence}\StringTok{\textasciigrave{}}\NormalTok{,}
+                \AttributeTok{chr =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(ref, }\StringTok{"\^{}chr[0{-}9]\{1,\}(?=:)"}\NormalTok{),}
+                \AttributeTok{seq.st =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(ref, }\StringTok{"(?\textless{}=:)[0{-}9]\{1,\}(?={-})"}\NormalTok{),}
+                \AttributeTok{seq.st =} \FunctionTok{as.integer}\NormalTok{(seq.st),}
+                \AttributeTok{seq.end =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(ref, }\StringTok{"(?\textless{}={-})[0{-}9]\{1,\}$"}\NormalTok{),}
+                \AttributeTok{seq.end =} \FunctionTok{as.integer}\NormalTok{(seq.end),}
+                \AttributeTok{eff.len =} \FunctionTok{abs}\NormalTok{(seq.st }\SpecialCharTok{{-}}\NormalTok{ seq.end)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Ensembl Gene ID}\StringTok{\textasciigrave{}}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{eff.len}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, }\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(}\DecValTok{12}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\DocumentationTok{\#\# add group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# add annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno.tmp, }\StringTok{"Ensembl Gene ID"}\NormalTok{)}
+\DocumentationTok{\#\# fpkm to tpm}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{fpkm\_log2tpm}\NormalTok{(dge.list)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# group}
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ dge.list}\SpecialCharTok{$}\NormalTok{samples}\SpecialCharTok{$}\NormalTok{group}
+\DocumentationTok{\#\# design}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \DocumentationTok{\#\# treat with CH223191}
+  \AttributeTok{treat\_ch.vs.contr =}\NormalTok{ group.CH }\SpecialCharTok{{-}}\NormalTok{ group.C,}
+  \DocumentationTok{\#\# treat with StemRegenin1}
+  \AttributeTok{treat\_sr.vs.contr =}\NormalTok{ group.SR1 }\SpecialCharTok{{-}}\NormalTok{ group.C, }
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix,}
+                        \AttributeTok{min.count =} \FloatTok{0.0001}\NormalTok{, }\AttributeTok{voom =}\NormalTok{ F)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# save}
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.20.r}{%
+\section{File: analysis\_data.20.R}\label{file-analysis_data.20.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{20}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.gz$"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  R.utils}\SpecialCharTok{::}\FunctionTok{gunzip}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{raw }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\StringTok{"GSE104869\_tablecounts.txt"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# remove the duplicated geneid}
+\NormalTok{raw }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(raw, }\AttributeTok{Geneid =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.[0{-}9]$"}\NormalTok{, }\StringTok{""}\NormalTok{, Geneid)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(Geneid, }\AttributeTok{.keep\_all =}\NormalTok{ T)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{mapply}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(raw), }\FunctionTok{colnames}\NormalTok{(raw)[}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(raw)],}
+       \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(col, name)\{}
+\NormalTok{         df }\OtherTok{\textless{}{-}}\NormalTok{ raw[, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, col)]}
+         \FunctionTok{write\_tsv}\NormalTok{(df, }\FunctionTok{paste0}\NormalTok{(name, }\StringTok{"\_counts.tsv"}\NormalTok{))}
+\NormalTok{       \})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}
+  \AttributeTok{file =} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"\_counts.tsv$"}\NormalTok{) }
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_counts.tsv"}\NormalTok{, }\StringTok{""}\NormalTok{, file),}
+                \AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{" "}\NormalTok{, }\StringTok{"\_"}\NormalTok{, sample),}
+                \AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{+"}\NormalTok{, }\StringTok{"\_plus\_"}\NormalTok{, sample),}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"[0{-}9]$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gene.anno }\OtherTok{\textless{}{-}} \FunctionTok{anno.gene.biomart}\NormalTok{(}\StringTok{"hsapiens\_gene\_ensembl"}\NormalTok{,}
+                               \AttributeTok{attr =} \FunctionTok{c}\NormalTok{(}\StringTok{"ensembl\_gene\_id"}\NormalTok{, }\StringTok{"hgnc\_symbol"}\NormalTok{, }\StringTok{"refseq\_mrna"}\NormalTok{))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, }\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\DocumentationTok{\#\# add group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# add annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno, }\StringTok{"hgnc\_symbol"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat\_R.vs.control =}\NormalTok{ group}\FloatTok{.501}\NormalTok{Mel\_R }\SpecialCharTok{{-}}\NormalTok{ group}\FloatTok{.501}\NormalTok{Mel\_Ctrl,}
+  \AttributeTok{treat\_T.vs.control =}\NormalTok{ group}\FloatTok{.501}\NormalTok{Mel\_T }\SpecialCharTok{{-}}\NormalTok{ group}\FloatTok{.501}\NormalTok{Mel\_Ctrl,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl\_gene\_id, hgnc\_symbol) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{filter, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(ensembl\_gene\_id))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.21.r}{%
+\section{File: analysis\_data.21.R}\label{file-analysis_data.21.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{21}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}} \FunctionTok{decomp\_tar2txt}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+\NormalTok{  meta.df,}
+  \AttributeTok{sample =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(file, }\StringTok{"(?\textless{}=\_).*(?=}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.count)"}\NormalTok{),}
+  \AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"{-}"}\NormalTok{, }\StringTok{"\_"}\NormalTok{, sample),}
+  \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_[0{-}9]$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample)}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl",}
+\CommentTok{\#                                attr = c("ensembl\_gene\_id", "hgnc\_symbol", "refseq\_mrna"))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, }\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\DocumentationTok{\#\# add group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# add annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno, }\StringTok{"hgnc\_symbol"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat\_d1.vs.control =}\NormalTok{ group.TCDD\_d1 }\SpecialCharTok{{-}}\NormalTok{ group.DMSO\_d1,}
+  \AttributeTok{treat\_d2.vs.control =}\NormalTok{ group.TCDD\_d2 }\SpecialCharTok{{-}}\NormalTok{ group.DMSO\_d2,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl\_gene\_id, hgnc\_symbol) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{filter, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(ensembl\_gene\_id))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.22.r}{%
+\section{File: analysis\_data.22.R}\label{file-analysis_data.22.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ==========  }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{22}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.23.r}{%
+\section{File: analysis\_data.23.R}\label{file-analysis_data.23.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{23}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.gz"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(R.utils}\SpecialCharTok{::}\NormalTok{gunzip)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{raw }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\StringTok{"GSE116637\_counts.txt"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{Geneid =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"{-}[0{-}9]\{1,\}$"}\NormalTok{, }\StringTok{""}\NormalTok{, Geneid)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(Geneid, }\AttributeTok{.keep\_all =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{lapply}\NormalTok{(}\DecValTok{7}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(raw), }\ControlFlowTok{function}\NormalTok{(col)\{}
+\NormalTok{         df }\OtherTok{\textless{}{-}}\NormalTok{ raw[, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{6}\NormalTok{, col)]}
+\NormalTok{         file }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(raw)[col]}
+         \FunctionTok{write\_tsv}\NormalTok{(df, }\FunctionTok{paste0}\NormalTok{(file, }\StringTok{"\_counts.tsv"}\NormalTok{))}
+\NormalTok{\})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}
+  \AttributeTok{file =} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"\_counts.tsv$"}\NormalTok{) }
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_counts.tsv"}\NormalTok{, }\StringTok{""}\NormalTok{, file),}
+                \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_[0{-}9]$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+                \AttributeTok{cell =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(group, }\StringTok{"\^{}[\^{}\_]\{1,\}"}\NormalTok{),}
+                \AttributeTok{agonist =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(group, }\StringTok{"[\^{}\_]\{1,\}$"}\NormalTok{))}
+\NormalTok{cell.type }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{cell }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unique}\NormalTok{()}
+\NormalTok{agonist.type }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{agonist }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unique}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gene.anno }\OtherTok{\textless{}{-}} \FunctionTok{anno.gene.biomart}\NormalTok{(}\StringTok{"hsapiens\_gene\_ensembl"}\NormalTok{,}
+                               \AttributeTok{attr =} \FunctionTok{c}\NormalTok{(}\StringTok{"ensembl\_gene\_id"}\NormalTok{, }\StringTok{"hgnc\_symbol"}\NormalTok{, }\StringTok{"refseq\_mrna"}\NormalTok{))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, }\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{7}\NormalTok{))}
+\DocumentationTok{\#\# add group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# add annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno, }\StringTok{"hgnc\_symbol"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{contr }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}
+  \AttributeTok{treat =} \FunctionTok{c}\NormalTok{(}\StringTok{"3MC"}\NormalTok{, }\StringTok{"GNF"}\NormalTok{),}
+  \AttributeTok{control =} \StringTok{"DMSO"}
+\NormalTok{)}
+\NormalTok{contr }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(cell.type, }\ControlFlowTok{function}\NormalTok{(cell)\{}
+\NormalTok{                  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(contr,}
+                    \AttributeTok{.treat =}\NormalTok{ treat,}
+                    \AttributeTok{treat =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"group."}\NormalTok{, cell, }\StringTok{"\_"}\NormalTok{, treat),}
+                    \AttributeTok{control =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"group."}\NormalTok{, cell, }\StringTok{"\_"}\NormalTok{, control),}
+                    \AttributeTok{contr =} \FunctionTok{paste0}\NormalTok{(treat, }\StringTok{" {-} "}\NormalTok{, control),}
+                    \AttributeTok{name =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"treat\_"}\NormalTok{, cell, }\StringTok{"\_"}\NormalTok{, .treat, }\StringTok{".vs.control"}\NormalTok{))}
+\NormalTok{\})}
+\NormalTok{contr }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{(contr)}
+\NormalTok{args }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(contr}\SpecialCharTok{$}\NormalTok{contr, }\ControlFlowTok{function}\NormalTok{(text)\{}
+                 \FunctionTok{parse}\NormalTok{(}\AttributeTok{text =}\NormalTok{ text)}
+\NormalTok{\})}
+\FunctionTok{names}\NormalTok{(args) }\OtherTok{\textless{}{-}}\NormalTok{ contr}\SpecialCharTok{$}\NormalTok{name}
+\NormalTok{args}\SpecialCharTok{$}\NormalTok{levels }\OtherTok{\textless{}{-}}\NormalTok{ design}
+\DocumentationTok{\#\# contrast matrix}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}} \FunctionTok{do.call}\NormalTok{(limma}\SpecialCharTok{::}\NormalTok{makeContrasts, args)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl\_gene\_id, hgnc\_symbol) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{filter, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(ensembl\_gene\_id))}
+\DocumentationTok{\#\# save}
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.24.r}{%
+\section{File: analysis\_data.24.R}\label{file-analysis_data.24.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{24}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.25.r}{%
+\section{File: analysis\_data.25.R}\label{file-analysis_data.25.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{25}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.26.r}{%
+\section{File: analysis\_data.26.R}\label{file-analysis_data.26.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{26}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}} \FunctionTok{decomp\_tar2txt}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{raw }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, data.table}\SpecialCharTok{::}\NormalTok{fread) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{names}\NormalTok{(raw) }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{file}
+\NormalTok{raw }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(raw, dplyr}\SpecialCharTok{::}\NormalTok{rename, }\AttributeTok{symbol =} \DecValTok{4}\NormalTok{, }\AttributeTok{counts =} \DecValTok{6}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{relocate, symbol, counts) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{distinct, symbol, }\AttributeTok{.keep\_all =}\NormalTok{ T)}
+\DocumentationTok{\#\# save as tibble}
+\FunctionTok{mapply}\NormalTok{(raw, }\FunctionTok{names}\NormalTok{(raw), }\AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(df, file)\{}
+         \FunctionTok{write\_tsv}\NormalTok{(df, file)}
+\NormalTok{\})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(meta.df, }
+                         \AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\^{}GSM[0{-}9]\{1,\}\_|\_RPKM.txt"}\NormalTok{, }\StringTok{""}\NormalTok{, file),}
+                         \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\^{}[0{-}9]\{1,\}{-}"}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+                         \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"{-}"}\NormalTok{, }\StringTok{"\_"}\NormalTok{, group),}
+                         \AttributeTok{.group =}\NormalTok{ group,}
+                         \AttributeTok{block =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(.group, }\StringTok{"\^{}[\^{}\_]\{1,\}"}\NormalTok{),}
+                         \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\^{}[\^{}\_]\{1,\}"}\NormalTok{, }\StringTok{"AML"}\NormalTok{, .group),}
+                         \AttributeTok{cell =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(group, }\StringTok{"\^{}[\^{}\_]*(?=\_)"}\NormalTok{),}
+                         \AttributeTok{agonist =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(group, }\StringTok{"(?\textless{}=\_).*$"}\NormalTok{))}
+\NormalTok{cell.type }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{cell }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unique}\NormalTok{()}
+\NormalTok{agonist.type }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{agonist }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unique}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gene.anno }\OtherTok{\textless{}{-}} \FunctionTok{anno.gene.biomart}\NormalTok{(}\StringTok{"hsapiens\_gene\_ensembl"}\NormalTok{,}
+                               \AttributeTok{attr =} \FunctionTok{c}\NormalTok{(}\StringTok{"ensembl\_gene\_id"}\NormalTok{, }\StringTok{"hgnc\_symbol"}\NormalTok{, }\StringTok{"refseq\_mrna"}\NormalTok{))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file, }\AttributeTok{columns =} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{))}
+\DocumentationTok{\#\# add group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# add annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno, }\StringTok{"hgnc\_symbol"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{group}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{contr }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}
+  \AttributeTok{treat =}\NormalTok{ agonist.type[}\DecValTok{3}\SpecialCharTok{:}\FunctionTok{length}\NormalTok{(agonist.type)],}
+  \AttributeTok{control =} \StringTok{"DMSO"}
+\NormalTok{)}
+\NormalTok{contr }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(cell.type, }\ControlFlowTok{function}\NormalTok{(cell)\{}
+\NormalTok{                  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(contr,}
+                    \AttributeTok{.treat =}\NormalTok{ treat,}
+                    \AttributeTok{treat =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"group."}\NormalTok{, cell, }\StringTok{"\_"}\NormalTok{, treat),}
+                    \AttributeTok{control =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"group."}\NormalTok{, cell, }\StringTok{"\_"}\NormalTok{, control),}
+                    \AttributeTok{contr =} \FunctionTok{paste0}\NormalTok{(treat, }\StringTok{" {-} "}\NormalTok{, control),}
+                    \AttributeTok{name =} \FunctionTok{paste0}\NormalTok{(}\StringTok{"treat\_"}\NormalTok{, cell, }\StringTok{"\_"}\NormalTok{, .treat, }\StringTok{".vs.control"}\NormalTok{))}
+\NormalTok{\})}
+\NormalTok{contr }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{(contr) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(treat }\SpecialCharTok{\%in\%} \FunctionTok{colnames}\NormalTok{(design))}
+\NormalTok{args }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(contr}\SpecialCharTok{$}\NormalTok{contr, }\ControlFlowTok{function}\NormalTok{(text)\{}
+                 \FunctionTok{parse}\NormalTok{(}\AttributeTok{text =}\NormalTok{ text)}
+\NormalTok{\})}
+\FunctionTok{names}\NormalTok{(args) }\OtherTok{\textless{}{-}}\NormalTok{ contr}\SpecialCharTok{$}\NormalTok{name}
+\NormalTok{args}\SpecialCharTok{$}\NormalTok{levels }\OtherTok{\textless{}{-}}\NormalTok{ design}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# contrast matrix}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}} \FunctionTok{do.call}\NormalTok{(limma}\SpecialCharTok{::}\NormalTok{makeContrasts, args)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix, }\AttributeTok{block =}\NormalTok{ meta.df}\SpecialCharTok{$}\NormalTok{block)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{relocate, ensembl\_gene\_id, hgnc\_symbol) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{filter, }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(ensembl\_gene\_id))}
+\DocumentationTok{\#\# save}
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.27.r}{%
+\section{File: analysis\_data.27.R}\label{file-analysis_data.27.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{27}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.28.r}{%
+\section{File: analysis\_data.28.R}\label{file-analysis_data.28.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{28}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.3.r}{%
+\section{File: analysis\_data.3.R}\label{file-analysis_data.3.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\NormalTok{gene.anno }\OtherTok{\textless{}{-}} \FunctionTok{anno.gene.biomart}\NormalTok{(}\StringTok{"hsapiens\_gene\_ensembl"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{3}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\CommentTok{\# meta.df \textless{}{-} decomp\_tar2txt()}
+\DocumentationTok{\#\# get infoma...}
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ GEOquery}\SpecialCharTok{::}\FunctionTok{getGEO}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# download data respectively}
+\FunctionTok{get\_gsm.data}\NormalTok{(info)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# control (scramble) siRNA + DMSO (GSM5579231, GSM5579232) vs }
+\CommentTok{\# control (scramble) siRNA + TCDD (GSM5579233)}
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}
+  \AttributeTok{file.xlsx =} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"\^{}GSM557923[1{-}3]\{1\}\_.*}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.xlsx"}\NormalTok{)}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{group =} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"control"}\NormalTok{, }\StringTok{"treatment"}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{1}\NormalTok{)),}
+                \AttributeTok{file =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.xlsx$"}\NormalTok{, }\StringTok{".txt"}\NormalTok{, file.xlsx),}
+                \AttributeTok{sample =} \FunctionTok{c}\NormalTok{(}\StringTok{"control\_1"}\NormalTok{, }\StringTok{"control\_2"}\NormalTok{, }\StringTok{"treat"}\NormalTok{))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# format data}
+\FunctionTok{mapply}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file.xlsx, meta.df}\SpecialCharTok{$}\NormalTok{file,}
+       \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(xlsx, txt)\{}
+\NormalTok{         df }\OtherTok{\textless{}{-}}\NormalTok{ readxl}\SpecialCharTok{::}\FunctionTok{read\_xlsx}\NormalTok{(xlsx) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{           dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(ENSEMBL, }\StringTok{\textasciigrave{}}\AttributeTok{Total exon reads}\StringTok{\textasciigrave{}}\NormalTok{)}
+         \FunctionTok{write\_tsv}\NormalTok{(df, txt)}
+\NormalTok{       \})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gene.anno.tmp }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file[}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(ENSEMBL, Name, Chromosome, }\StringTok{\textasciigrave{}}\AttributeTok{Exon length}\StringTok{\textasciigrave{}}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file)}
+\DocumentationTok{\#\# group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno.tmp, }\StringTok{"ENSEMBL"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ dge.list}\SpecialCharTok{$}\NormalTok{samples}\SpecialCharTok{$}\NormalTok{group}
+\DocumentationTok{\#\# design}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat.vs.contr =}\NormalTok{ group.treatment }\SpecialCharTok{{-}}\NormalTok{ group.control,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix)}
+\DocumentationTok{\#\# save}
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.4.r}{%
+\section{File: analysis\_data.4.R}\label{file-analysis_data.4.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl")}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{4}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# unzip}
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.gz"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(R.utils}\SpecialCharTok{::}\NormalTok{gunzip)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{df }\OtherTok{\textless{}{-}}\NormalTok{ readxl}\SpecialCharTok{::}\FunctionTok{read\_excel}\NormalTok{(}\StringTok{"GSE183606\_differentially\_expressed\_genes.xlsx"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# rutaecarpin vs contral}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\FunctionTok{abs}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{Log2FC(Rutaecar/Control)}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\textgreater{}} \FloatTok{0.3}\NormalTok{, Padjust }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{)}
+\FunctionTok{write\_tsv}\NormalTok{(df, }\StringTok{"treat.vs.contr\_results.tsv"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.5.r}{%
+\section{File: analysis\_data.5.R}\label{file-analysis_data.5.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# attr \textless{}{-} list.attr.biomart()}
+\CommentTok{\# check \textless{}{-} 0}
+\CommentTok{\# n \textless{}{-} 0}
+\CommentTok{\# while(check == 0)\{}
+\CommentTok{\#   n \textless{}{-} n + 1}
+\CommentTok{\#   check \textless{}{-} try(gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = "go\_id"),}
+\CommentTok{\#                silent = T)}
+\CommentTok{\#   if(class(check)[1] == "try{-}error")\{}
+\CommentTok{\#     print(check)}
+\CommentTok{\#     check \textless{}{-} 0}
+\CommentTok{\#   \}else\{}
+\CommentTok{\#     check \textless{}{-} 1}
+\CommentTok{\#   \}}
+\CommentTok{\#   cat("\#\#", "Try...", n, "\textbackslash{}n")}
+\CommentTok{\# \}}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = "go\_id")}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{5}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# unzip}
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.gz"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(R.utils}\SpecialCharTok{::}\NormalTok{gunzip)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{res }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\StringTok{"GSE188657\_processed\_data\_files.txt"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\FunctionTok{abs}\NormalTok{(log2FoldChange) }\SpecialCharTok{\textgreater{}} \FloatTok{0.3}\NormalTok{, qValue }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\CommentTok{\# treat.vs.contr:: AhR antagonist (StemRegenin 1) vs DMSO}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.6.r}{%
+\section{File: analysis\_data.6.R}\label{file-analysis_data.6.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = "go\_id")}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{6}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ GEOquery}\SpecialCharTok{::}\FunctionTok{getGEO}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{info }\OtherTok{\textless{}{-}}\NormalTok{ info[}\DecValTok{1}\NormalTok{]}
+\FunctionTok{get\_gsm.data}\NormalTok{(info)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{".tsv.gz$"}\NormalTok{, }\AttributeTok{recursive =}\NormalTok{ T, }\AttributeTok{full.names =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{sapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(path)\{}
+           \FunctionTok{system}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"mv"}\NormalTok{, path, }\StringTok{"{-}t ."}\NormalTok{))}
+\NormalTok{\})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{".tsv.gz$"}\NormalTok{, }\AttributeTok{recursive =}\NormalTok{ T, }\AttributeTok{full.names =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{sapply}\NormalTok{(R.utils}\SpecialCharTok{::}\NormalTok{gunzip)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# metadata}
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\StringTok{"metadata.csv"}\NormalTok{, }\AttributeTok{header =}\NormalTok{ F) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{sample =} \DecValTok{1}\NormalTok{, }\AttributeTok{anno =} \DecValTok{2}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{group =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(}\StringTok{"Untreated"}\NormalTok{, anno), }\StringTok{"control"}\NormalTok{, }\StringTok{"treatment"}\NormalTok{),}
+                \AttributeTok{time =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(anno, }\StringTok{"(?\textless{}=\_)[0{-}9]\{1,\}(?=hr\_)"}\NormalTok{),}
+                \AttributeTok{group =} \FunctionTok{paste0}\NormalTok{(group, }\StringTok{"\_"}\NormalTok{, time),}
+                \AttributeTok{file =} \FunctionTok{paste0}\NormalTok{(sample, }\StringTok{".tsv"}\NormalTok{))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# separate annotation}
+\NormalTok{gsm.file }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"abundance.tsv$"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{sapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(file)\{}
+\NormalTok{           df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(file) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{             dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{ensembl.v =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(target\_id,}
+                                                            \StringTok{"(?\textless{}=}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{|)ENSG[0{-}9]\{1,\}[\^{}}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{|]\{1,\}(?=}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{|)"}\NormalTok{),}
+                           \AttributeTok{ensembl =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(ensembl.v, }\StringTok{"\^{}ENSG[0{-}9]\{1,\}"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{             dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(ensembl, tpm) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{             dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(ensembl, }\AttributeTok{.keep\_all =}\NormalTok{ T)}
+\NormalTok{           file }\OtherTok{\textless{}{-}}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(file, }\StringTok{"\^{}GSM[0{-}9]\{1,\}(?=\_)"}\NormalTok{)}
+           \FunctionTok{write\_tsv}\NormalTok{(df, }\FunctionTok{paste0}\NormalTok{(file, }\StringTok{".tsv"}\NormalTok{))}
+           \FunctionTok{return}\NormalTok{(file)}
+\NormalTok{\})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gene.anno.tmp }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file[}\DecValTok{1}\NormalTok{]) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(ensembl, ensembl.v, eff\_length)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file)}
+\DocumentationTok{\#\# add group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# add annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno, }\StringTok{"ensembl\_gene\_id"}\NormalTok{)}
+\DocumentationTok{\#\# log2 tpm}
+\NormalTok{dge.list}\SpecialCharTok{$}\NormalTok{counts }\OtherTok{\textless{}{-}} \FunctionTok{apply}\NormalTok{(dge.list}\SpecialCharTok{$}\NormalTok{counts, }\DecValTok{2}\NormalTok{,}
+                         \ControlFlowTok{function}\NormalTok{(vec)\{}
+                           \FunctionTok{log2}\NormalTok{(vec }\SpecialCharTok{+} \DecValTok{1}\NormalTok{)}
+\NormalTok{                         \})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ dge.list}\SpecialCharTok{$}\NormalTok{samples}\SpecialCharTok{$}\NormalTok{group}
+\DocumentationTok{\#\# design}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat.vs.contr\_6 =}\NormalTok{ group.treatment\_6 }\SpecialCharTok{{-}}\NormalTok{ group.control\_6,}
+  \AttributeTok{treat.vs.contr\_18 =}\NormalTok{ group.treatment\_18 }\SpecialCharTok{{-}}\NormalTok{ group.control\_18, }
+  \AttributeTok{treat.vs.contr\_72 =}\NormalTok{ group.treatment\_72 }\SpecialCharTok{{-}}\NormalTok{ group.control\_72, }
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix,}
+                        \AttributeTok{min.count =} \FloatTok{0.0001}\NormalTok{, }\AttributeTok{voom =}\NormalTok{ F)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.7.r}{%
+\section{File: analysis\_data.7.R}\label{file-analysis_data.7.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = "go\_id")}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{7}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"txt}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.gz$"}\NormalTok{, }\AttributeTok{recursive =}\NormalTok{ T, }\AttributeTok{full.names =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{sapply}\NormalTok{(R.utils}\SpecialCharTok{::}\NormalTok{gunzip)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{raw.res }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"processed"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(data.table}\SpecialCharTok{::}\NormalTok{fread) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(df)\{}
+\NormalTok{           df[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{, ]}
+\NormalTok{\}) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{raw.res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(raw.res, }\ControlFlowTok{function}\NormalTok{(df)\{}
+\NormalTok{                    mutate.df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}
+                      \AttributeTok{ncol =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(df),}
+                      \AttributeTok{contrast =} \FunctionTok{unlist}\NormalTok{(df[}\DecValTok{1}\NormalTok{, ], }\AttributeTok{use.names =}\NormalTok{ F),}
+                      \AttributeTok{type =} \FunctionTok{unlist}\NormalTok{(df[}\DecValTok{2}\NormalTok{, ], }\AttributeTok{use.names =}\NormalTok{ F)}
+\NormalTok{                    )}
+                    \FunctionTok{return}\NormalTok{(mutate.df)}
+\NormalTok{\})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{form.res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(raw.res, }\ControlFlowTok{function}\NormalTok{(df)\{}
+\NormalTok{                     dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(df, contrast }\SpecialCharTok{==} \StringTok{""} \SpecialCharTok{|} \FunctionTok{grepl}\NormalTok{(}\StringTok{" vs "}\NormalTok{, contrast))}
+\NormalTok{\}) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(by\_group\_as\_list, }\AttributeTok{colnames =} \StringTok{"contrast"}\NormalTok{)}
+\DocumentationTok{\#\# the annotation col}
+\NormalTok{ex.anno.cal }\OtherTok{\textless{}{-}}\NormalTok{ form.res[[}\DecValTok{1}\NormalTok{]][[}\DecValTok{1}\NormalTok{]]}
+\DocumentationTok{\#\# contrast col}
+\NormalTok{form.res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(form.res, }\ControlFlowTok{function}\NormalTok{(lst)\{}
+\NormalTok{                     lst[[}\DecValTok{1}\NormalTok{]] }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{                     lst}
+\NormalTok{\})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{raw.res }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"processed"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(data.table}\SpecialCharTok{::}\NormalTok{fread, }\AttributeTok{skip =} \DecValTok{2}\NormalTok{, }\AttributeTok{header =}\NormalTok{ F) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{mapply}\NormalTok{(form.res, raw.res,}
+              \AttributeTok{SIMPLIFY =}\NormalTok{ F,}
+              \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(form, raw)\{}
+                \DocumentationTok{\#\# convert data.table to tibble}
+\NormalTok{                raw }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{(raw)}
+\NormalTok{                lst }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(form, }\AttributeTok{raw =}\NormalTok{ raw,}
+                              \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(entry, raw)\{}
+\NormalTok{                                col }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, entry}\SpecialCharTok{$}\NormalTok{ncol)}
+                                \DocumentationTok{\#\# colnames of data.frame}
+\NormalTok{                                col.name }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(ex.anno.cal}\SpecialCharTok{$}\NormalTok{type, }\StringTok{"log2FC"}\NormalTok{, }\StringTok{"p{-}value"}\NormalTok{, }\StringTok{"q{-}value"}\NormalTok{)}
+                                \DocumentationTok{\#\# extract column}
+\NormalTok{                                df }\OtherTok{\textless{}{-}}\NormalTok{ raw[, col]}
+                                \FunctionTok{colnames}\NormalTok{(df) }\OtherTok{\textless{}{-}}\NormalTok{ col.name}
+                                \DocumentationTok{\#\# filter data}
+\NormalTok{                                df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(df, }\FunctionTok{abs}\NormalTok{(log2FC) }\SpecialCharTok{\textgreater{}} \FloatTok{0.3}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{q{-}value}\StringTok{\textasciigrave{}} \SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{)}
+                                \FunctionTok{return}\NormalTok{(df)}
+\NormalTok{                    \})}
+\NormalTok{              \})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{unlist}\NormalTok{(res, }\AttributeTok{recursive =}\NormalTok{ F)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{contrast.entry }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(res)}
+\NormalTok{contrast }\OtherTok{\textless{}{-}}\NormalTok{ contrast.entry[}\FunctionTok{c}\NormalTok{(}\DecValTok{3}\NormalTok{, }\DecValTok{8}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{10}\NormalTok{)]}
+\NormalTok{res }\OtherTok{\textless{}{-}}\NormalTok{ res[}\FunctionTok{names}\NormalTok{(res) }\SpecialCharTok{\%in\%}\NormalTok{ contrast]}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{names}\NormalTok{(res), }
+       \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(df, names)\{}
+         \FunctionTok{write\_tsv}\NormalTok{(df, }\FunctionTok{paste0}\NormalTok{(names, }\StringTok{"\_results.tsv"}\NormalTok{))}
+\NormalTok{              \})}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.8.r}{%
+\section{File: analysis\_data.8.R}\label{file-analysis_data.8.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = "go\_id")}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{8}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res.raw }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"Results.xlsx"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  readxl}\SpecialCharTok{::}\FunctionTok{read\_xlsx}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res.raw }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(res.raw, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{, }\FunctionTok{contains}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"Log2FC"}\NormalTok{, }\StringTok{"pAdj"}\NormalTok{)))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}}\NormalTok{ reshape2}\SpecialCharTok{::}\FunctionTok{melt}\NormalTok{(res.raw, }\AttributeTok{id.vars =} \FunctionTok{colnames}\NormalTok{(res.raw)[}\DecValTok{1}\SpecialCharTok{:}\DecValTok{4}\NormalTok{],}
+                      \AttributeTok{variable.name =} \StringTok{"type"}\NormalTok{,}
+                      \AttributeTok{value.name =} \StringTok{"value"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{contrast =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_Log2FC|\_pAdj"}\NormalTok{, }\StringTok{""}\NormalTok{, type),}
+                \AttributeTok{stat =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(type, }\StringTok{"(?\textless{}=\_)[\^{}\_]\{1,\}$"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{type) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{by\_group\_as\_list}\NormalTok{(}\StringTok{"contrast"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, tidyr}\SpecialCharTok{::}\NormalTok{spread, }\AttributeTok{key =}\NormalTok{ stat, }\AttributeTok{value =}\NormalTok{ value)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{filter, }\FunctionTok{abs}\NormalTok{(Log2FC) }\SpecialCharTok{\textgreater{}} \FloatTok{0.3}\NormalTok{, pAdj }\SpecialCharTok{\textless{}} \FloatTok{0.05}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(res, dplyr}\SpecialCharTok{::}\NormalTok{mutate, }\AttributeTok{Ensembl =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.[0{-}9]\{1,\}$"}\NormalTok{, }\StringTok{""}\NormalTok{, GeneID)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(dplyr}\SpecialCharTok{::}\NormalTok{relocate, Ensembl, ID)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{contrast }\OtherTok{\textless{}{-}} \FunctionTok{names}\NormalTok{(res)[}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{)]}
+\NormalTok{res }\OtherTok{\textless{}{-}}\NormalTok{ res[}\FunctionTok{names}\NormalTok{(res) }\SpecialCharTok{\%in\%}\NormalTok{ contrast]}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{names}\NormalTok{(res), }
+       \AttributeTok{FUN =} \ControlFlowTok{function}\NormalTok{(df, names)\{}
+         \FunctionTok{write\_tsv}\NormalTok{(df, }\FunctionTok{paste0}\NormalTok{(names, }\StringTok{"\_results.tsv"}\NormalTok{))}
+\NormalTok{              \})}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-analysis_data.9.r}{%
+\section{File: analysis\_data.9.R}\label{file-analysis_data.9.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# meta}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# annotation}
+\CommentTok{\# gene.anno \textless{}{-} anno.gene.biomart("hsapiens\_gene\_ensembl", ex.attr = "go\_id")}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gse }\OtherTok{\textless{}{-}}\NormalTok{ meta}\SpecialCharTok{$}\NormalTok{Accession[}\DecValTok{9}\NormalTok{]}
+\FunctionTok{set.sig.wd}\NormalTok{(gse)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.gz$"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  R.utils}\SpecialCharTok{::}\FunctionTok{gunzip}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{raw }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.tab$"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{lapply}\NormalTok{(}\DecValTok{2}\SpecialCharTok{:}\FunctionTok{ncol}\NormalTok{(raw), }\ControlFlowTok{function}\NormalTok{(ncol)\{}
+\NormalTok{         file }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\FunctionTok{colnames}\NormalTok{(raw)[ncol], }\StringTok{".tsv"}\NormalTok{)}
+         \FunctionTok{write\_tsv}\NormalTok{(raw[, }\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, ncol)], file)}
+\NormalTok{\}) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}
+  \AttributeTok{file =} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"[0{-}9]}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.tsv$"}\NormalTok{)}
+\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}
+  \AttributeTok{sample =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.tsv$"}\NormalTok{, }\StringTok{""}\NormalTok{, file),}
+  \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"\_[0{-}9]$"}\NormalTok{, }\StringTok{""}\NormalTok{, sample),}
+  \AttributeTok{group =} \FunctionTok{gsub}\NormalTok{(}\StringTok{"{-}"}\NormalTok{, }\StringTok{"\_"}\NormalTok{, group)}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{dge.list }\OtherTok{\textless{}{-}}\NormalTok{ edgeR}\SpecialCharTok{::}\FunctionTok{readDGE}\NormalTok{(meta.df}\SpecialCharTok{$}\NormalTok{file)}
+\DocumentationTok{\#\# group}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{re.sample.group}\NormalTok{(dge.list, meta.df)}
+\DocumentationTok{\#\# annotation}
+\NormalTok{dge.list }\OtherTok{\textless{}{-}} \FunctionTok{anno.into.list}\NormalTok{(dge.list, gene.anno, }\StringTok{"ensembl\_gene\_id"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{group. }\OtherTok{\textless{}{-}}\NormalTok{ dge.list}\SpecialCharTok{$}\NormalTok{samples}\SpecialCharTok{$}\NormalTok{group}
+\DocumentationTok{\#\# design}
+\NormalTok{design }\OtherTok{\textless{}{-}} \FunctionTok{model.matrix}\NormalTok{(}\SpecialCharTok{\textasciitilde{}} \DecValTok{0} \SpecialCharTok{+}\NormalTok{ group.)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# contrast}
+\NormalTok{contr.matrix }\OtherTok{\textless{}{-}}\NormalTok{ limma}\SpecialCharTok{::}\FunctionTok{makeContrasts}\NormalTok{(}
+  \AttributeTok{treat\_4.vs.contr =}\NormalTok{ group.ahr\_lna\_4\_6 }\SpecialCharTok{{-}}\NormalTok{ group.nc\_lna\_6,}
+  \AttributeTok{treat\_7.vs.contr =}\NormalTok{ group.ahr\_lna\_7\_6 }\SpecialCharTok{{-}}\NormalTok{ group.nc\_lna\_6,}
+  \AttributeTok{levels =}\NormalTok{ design}
+\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{res }\OtherTok{\textless{}{-}} \FunctionTok{limma\_downstream}\NormalTok{(dge.list, group., design, contr.matrix)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\FunctionTok{mapply}\NormalTok{(res, }\FunctionTok{paste0}\NormalTok{(}\FunctionTok{names}\NormalTok{(res), }\StringTok{"\_results.tsv"}\NormalTok{), }\AttributeTok{FUN =}\NormalTok{ write\_tsv)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-from_dataset.r}{%
+\section{File: from\_dataset.R}\label{file-from_dataset.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# metadata}
+\DocumentationTok{\#\# path \textless{}{-} "\textasciitilde{}/operation/geo\_db/ahr\_sig"}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\NormalTok{meta }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\StringTok{"series.csv"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(}\StringTok{"Expression"}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{Series Type}\StringTok{\textasciigrave{}}\NormalTok{), }
+                \FunctionTok{grepl}\NormalTok{(}\StringTok{"Homo sapiens"}\NormalTok{, Taxonomy)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{() }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# Use wget to download data}
+\FunctionTok{apply}\NormalTok{(dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(meta, }\AttributeTok{seq =} \DecValTok{1}\SpecialCharTok{:}\FunctionTok{nrow}\NormalTok{(meta)), }\DecValTok{1}\NormalTok{,}
+      \ControlFlowTok{function}\NormalTok{(vec)\{}
+        \FunctionTok{cat}\NormalTok{(}\StringTok{"[Info] Downloading seq of"}\NormalTok{, vec[[}\StringTok{"seq"}\NormalTok{]], }\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
+\NormalTok{        gse }\OtherTok{\textless{}{-}}\NormalTok{ vec[[}\StringTok{"Accession"}\NormalTok{]]}
+\NormalTok{        gse.dir }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\StringTok{"[0{-}9]\{3\}$"}\NormalTok{, }\StringTok{"nnn"}\NormalTok{, gse)}
+\NormalTok{        ftp }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"ftp://ftp.ncbi.nlm.nih.gov/geo/series/"}\NormalTok{, gse.dir, }\StringTok{"/"}\NormalTok{, gse, }\StringTok{"/suppl/"}\NormalTok{)}
+        \FunctionTok{system}\NormalTok{(}\FunctionTok{paste}\NormalTok{(}\StringTok{"wget {-}np {-}m"}\NormalTok{, ftp))}
+\NormalTok{      \})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# test for download data}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# file \textless{}{-} list.files(pattern = test)}
+\CommentTok{\# info.t \textless{}{-} GEOquery::getGEO(filename = file)}
+\CommentTok{\# \#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# df \textless{}{-} Biobase::phenoData(info.t)}
+\CommentTok{\# name.sample \textless{}{-} Biobase::sampleNames(df)}
+\CommentTok{\# \#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# sample \textless{}{-} GEOquery::getGEO(name.sample[1])}
+\CommentTok{\# sample.df \textless{}{-} GEOquery::Table(sample)}
+\CommentTok{\# \#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-gather_results.r}{%
+\section{File: gather\_results.R}\label{file-gather_results.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# R}
+\DocumentationTok{\#\# gather analysis results}
+\FunctionTok{setwd}\NormalTok{(}\StringTok{"\textasciitilde{}/operation/geo\_db/ahr\_sig/"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{all\_results }\OtherTok{\textless{}{-}} \FunctionTok{list.files}\NormalTok{(}\AttributeTok{pattern =} \StringTok{"\_results.tsv"}\NormalTok{,}
+                          \AttributeTok{recursive =}\NormalTok{ T, }
+                          \AttributeTok{full.names =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{data.frame}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{file =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{filename =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(file, }\StringTok{"[\^{}/]*$"}\NormalTok{),}
+                \AttributeTok{contrast =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(filename, }\StringTok{"\^{}.*(?=\_results)"}\NormalTok{),}
+                \AttributeTok{series =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(file, }\StringTok{"(?\textless{}=/)GSE[0{-}9]\{1,\}(?=/)"}\NormalTok{))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# cell, treat.left, treat.right}
+\NormalTok{all\_series }\OtherTok{\textless{}{-}}\NormalTok{ all\_results}\SpecialCharTok{$}\NormalTok{series }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unique}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{lst.sum }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(all\_series, }\ControlFlowTok{function}\NormalTok{(gse)\{}
+\NormalTok{                    info }\OtherTok{\textless{}{-}} \FunctionTok{try\_do}\NormalTok{(}\StringTok{"GEOquery::getGEO(gse)"}\NormalTok{, }\AttributeTok{envir =} \FunctionTok{environment}\NormalTok{())}
+\NormalTok{                    info }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(info,}
+                                   \ControlFlowTok{function}\NormalTok{(obj)\{}
+\NormalTok{                                     obj }\OtherTok{\textless{}{-}}\NormalTok{ Biobase}\SpecialCharTok{::}\FunctionTok{experimentData}\NormalTok{(obj)}
+\NormalTok{                                     obj}\SpecialCharTok{@}\NormalTok{other}\SpecialCharTok{$}\NormalTok{summary}
+\NormalTok{                                   \})}
+\NormalTok{                \})}
+\FunctionTok{names}\NormalTok{(lst.sum) }\OtherTok{\textless{}{-}}\NormalTok{ all\_series}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{lst.sum }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(lst.sum, }\StringTok{\textasciigrave{}}\AttributeTok{[}\StringTok{\textasciigrave{}}\NormalTok{, }\DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{summary =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{Accession =}\NormalTok{ all\_series, }\AttributeTok{summary =} \FunctionTok{unlist}\NormalTok{(summary)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{meta.summary }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(meta, lst.sum, }\AttributeTok{by =} \StringTok{"Accession"}\NormalTok{, }\AttributeTok{all.y =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\FunctionTok{write\_tsv}\NormalTok{(meta.summary, }\StringTok{"meta.summary.tsv"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{gene.anno }\OtherTok{\textless{}{-}} \FunctionTok{anno.gene.biomart}\NormalTok{(}\StringTok{"hsapiens\_gene\_ensembl"}\NormalTok{,}
+                               \AttributeTok{attr =} \FunctionTok{c}\NormalTok{(}\StringTok{"ensembl\_gene\_id"}\NormalTok{, }\StringTok{"hgnc\_symbol"}\NormalTok{))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{screened.genes }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(all\_results}\SpecialCharTok{$}\NormalTok{file, data.table}\SpecialCharTok{::}\NormalTok{fread) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(df)\{}
+\NormalTok{           df }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{             dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{ensembl =} \DecValTok{1}\NormalTok{, }\AttributeTok{symbol =} \DecValTok{2}\NormalTok{)}
+           \DocumentationTok{\#\# if number \textgreater{} n, filter out the rest}
+\NormalTok{           n }\OtherTok{\textless{}{-}} \DecValTok{1000}
+           \ControlFlowTok{if}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(df) }\SpecialCharTok{\textgreater{}}\NormalTok{ n)\{}
+             \DocumentationTok{\#\# col of adjust p.value}
+\NormalTok{             adj.p }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(df) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{               .[}\FunctionTok{grepl}\NormalTok{(}\StringTok{"adj|q{-}value"}\NormalTok{, ., }\AttributeTok{ignore.case =}\NormalTok{ T)]}
+\NormalTok{             df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(df, }\AttributeTok{adj.p =} \FunctionTok{paste0}\NormalTok{(adj.p)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{               dplyr}\SpecialCharTok{::}\FunctionTok{arrange}\NormalTok{(adj.p) }\SpecialCharTok{\%\textgreater{}\%} 
+               \DocumentationTok{\#\# get top n}
+               \FunctionTok{head}\NormalTok{(}\AttributeTok{n =}\NormalTok{ n) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{               dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(ensembl, symbol)}
+\NormalTok{           \}}
+\NormalTok{           df }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(df, }\DecValTok{1}\SpecialCharTok{:}\DecValTok{2}\NormalTok{)}
+           \FunctionTok{return}\NormalTok{(df)}
+\NormalTok{                \}) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(ensembl) }\SpecialCharTok{\&} \SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(symbol) }\SpecialCharTok{\&}\NormalTok{ symbol }\SpecialCharTok{!=} \StringTok{""}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(ensembl }\SpecialCharTok{\%in\%} \FunctionTok{all\_of}\NormalTok{(gene.anno}\SpecialCharTok{$}\NormalTok{ensembl\_gene\_id)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \CommentTok{\# dplyr::mutate(symbol = gsub("\textbackslash{}\textbackslash{}.[0{-}9]$", "", symbol)) \%\textgreater{}\% }
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# AHR targets were retrieved from the Transcription Factor Target Gene Database}
+\DocumentationTok{\#\# \textless{}http://tfbsdb.systemsbiology.net/\textgreater{}}
+\NormalTok{tf.db }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{fread}\NormalTok{(}\StringTok{"TFTGD\_ahr\_targes.tsv"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{symbol =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(}\StringTok{"\^{}V\_"}\NormalTok{, Motif),}
+\NormalTok{                                stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(Motif, }\StringTok{"(?\textless{}=\^{}V\_)[\^{}\_]\{1,\}"}\NormalTok{),}
+\NormalTok{                                stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(Motif, }\StringTok{"\^{}[\^{}\_]\{1,\}"}\NormalTok{))) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(symbol) }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{tf.db }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(gene.anno, hgnc\_symbol }\SpecialCharTok{\%in\%} \FunctionTok{all\_of}\NormalTok{(tf.db}\SpecialCharTok{$}\NormalTok{symbol)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(ensembl\_gene\_id, hgnc\_symbol) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{distinct}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{ensembl =} \DecValTok{1}\NormalTok{, }\AttributeTok{symbol =} \DecValTok{2}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ========== Run block ========== }
+\DocumentationTok{\#\# merge genes from \textquotesingle{}screened.genes\textquotesingle{} and \textquotesingle{}tf.db\textquotesingle{}}
+\NormalTok{merge.scre\_tf }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{bind\_rows}\NormalTok{(screened.genes, tf.db) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{()}
+\FunctionTok{write\_tsv}\NormalTok{(merge.scre\_tf, }\StringTok{"merge.scre\_tf.tsv"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

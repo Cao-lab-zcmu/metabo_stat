@@ -6,11 +6,11 @@ setwd("~/MCnebula2/")
 # web_config[2] <- "baseURL = 'https://mcnebula.netlify.app'"
 # writeLines(web_config, file)
 
+devtools::load_all("~/utils.tool")
+set_hugoDir("~/MCnebula2")
 options(blogdown.method = "markdown")
 blogdown::serve_site()
 # blogdown::stop_server()
-
-devtools::load_all("~/utils.tool")
 
 description <- paste0(strwrap("Critical chemical classes to classify and boost
     identification by visualization for untargeted LC-MS/MS data analysis"),

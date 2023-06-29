@@ -1,0 +1,49 @@
+---
+---
+
+## 蛋白质互作分析
+
+R 包`STRINGdb`提供网站<https://www.string-db.org/>的API……
+
+```{r}
+sdb <- new_stringdb(network_type = "full")
+res.str <- create_interGraph(sdb, data.frame(res.corTest1))
+graph <- fast_layout.str(res.str, sdb)
+p <- plot_network.str(graph)
+smallsvg(p, "protein_interaction.pdf", 5, 5)
+```
+
+可视化的蛋白质互作网络图为见图\@ref(fig:fig4)
+（对应文件为`figs/protein_interaction.pdf`：
+
+```{r fig4, echo = F, eval = T, fig.cap = "药物敏感性基因的蛋白质互作图"}
+knitr::include_graphics("./figs/protein_interaction.pdf")
+```
+
+## 筛选Hubgenes
+
+关于CytoHubba的Local-based Method: Maximal Clique Centrality (MCC)[@chin_cytohubba_2014]。
+
+根据`igraph::page_rank`计算PR值，确定网络中节点的重要性。
+
+```{r}
+igraph.hub <- cal_pagerank(attr(graph, "igraph"))
+graph.hub <- fast_layout(igraph.hub, "circle")
+p.hub <- plot_networkFill.str(graph.hub)
+smallsvg(p.hub, "screen_hubgenes.pdf", 7, 7)
+```
+
+```{r}
+data.weight <- get_nodes(igraph.hub)
+data.weight <- dplyr::arrange(data.weight, dplyr::desc(weight))
+data.hubs <- head(data.weight, n = 5)
+```
+
+Hubgenes在蛋白互作网络中
+（对应的文件为`./figs/screen_hubgenes.pdf`）：
+
+```{r fig5, echo = F, eval = T, fig.cap = "根据PageRank算法筛选Hubgenes"}
+knitr::include_graphics("./figs/screen_hubgenes.pdf")
+```
+
+

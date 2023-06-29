@@ -1,0 +1,48 @@
+---
+title: R codes of analysis serum (mice / rat) (pos)
+bibliography: '`r system.file("extdata", "library.bib", package = "utils.tool")`'
+csl: '`r system.file("extdata", "nature.csl", package = "utils.tool")`'
+reference-section-title: "Reference"
+link-citations: true
+output:
+  bookdown::pdf_document2:
+    # pandoc_args: [
+      # "--filter", "pandoc-fignos",
+      # "--filter", "pandoc-tablenos"
+    # ]
+    keep_tex: true
+    toc: true
+    toc_depth: 3
+    latex_engine: xelatex
+header-includes:
+  \usepackage{caption}
+  \captionsetup{font={footnotesize},width=6in}
+  \renewcommand{\dblfloatpagefraction}{.9}
+  \makeatletter
+  \renewenvironment{figure}
+  {\def\@captype{figure}}
+  \makeatletter
+  \definecolor{shadecolor}{RGB}{242,242,242}
+  \usepackage{xeCJK}
+  \usepackage{setspace}
+  \setstretch{1.3} 
+---
+
+
+# File: serum_pos.R
+
+```{r eval = F, echo = T}
+## this script run source of serum_neg stat, to identically
+## stat serum pos data
+source("~/operation/superstat.R")
+file <- "~/operation/batch_serum_pos/batch_serum_pos.csv"
+## run script of serum_neg stat
+source("~/outline/serum_neg/serum_neg_stat.R")
+## the `export` is the stat results
+## ---------------------------------------------------------------------- 
+source("~/outline/serum_neg/serum_neg_stat_metabo.R")
+## ------------------------------------- 
+source("~/outline/serum_neg/serum_neg_stat_metabo_collate.R")
+## ---------------------------------------------------------------------- 
+```
+

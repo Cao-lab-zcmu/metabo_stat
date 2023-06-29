@@ -1,0 +1,807 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+\usepackage{caption} \captionsetup{font={footnotesize},width=6in} \renewcommand{\dblfloatpagefraction}{.9} \makeatletter \renewenvironment{figure} {\def\@captype{figure}} \makeatletter \definecolor{shadecolor}{RGB}{242,242,242} \usepackage{xeCJK} \usepackage{setspace} \setstretch{1.3}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={R codes of analysis eucommia (previous)},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{R codes of analysis eucommia (previous)}
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+\maketitle
+
+{
+\setcounter{tocdepth}{3}
+\tableofcontents
+}
+\hypertarget{file-bio_annotate_nebula.r}{%
+\section{File: bio\_annotate\_nebula.R}\label{file-bio_annotate_nebula.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# palette}
+\NormalTok{stat\_palette }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\AttributeTok{Blank =} \StringTok{"\#B8B8B8"}\NormalTok{,}
+                  \StringTok{\textasciigrave{}}\AttributeTok{EU{-}Raw}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"\#C6DBEF"}\NormalTok{,}
+                  \StringTok{\textasciigrave{}}\AttributeTok{EU{-}Pro}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"\#FDD0A2"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# show statistic legend for nebula}
+\NormalTok{m.stat\_palette }\OtherTok{\textless{}{-}}\NormalTok{ stat\_palette}
+\FunctionTok{names}\NormalTok{(m.stat\_palette) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"Blank"}\NormalTok{, }\StringTok{"Raw{-}Eucommia"}\NormalTok{, }\StringTok{"Pro{-}Eucommia"}\NormalTok{)}
+\FunctionTok{mutate\_show\_palette}\NormalTok{(m.stat\_palette, }\AttributeTok{font\_size =} \DecValTok{25}\NormalTok{,}
+             \AttributeTok{width =} \DecValTok{10}\NormalTok{,}
+             \AttributeTok{height =} \DecValTok{2}\NormalTok{,}
+             \AttributeTok{title =} \StringTok{""}\NormalTok{,}
+             \AttributeTok{fill\_lab =} \StringTok{"Group"}\NormalTok{,}
+             \AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{,}
+             \AttributeTok{legend.key.height =} \FunctionTok{unit}\NormalTok{(}\FloatTok{0.5}\NormalTok{, }\StringTok{"cm"}\NormalTok{),}
+             \AttributeTok{legend.key.width =} \FunctionTok{unit}\NormalTok{(}\DecValTok{3}\NormalTok{, }\StringTok{"cm"}\NormalTok{),}
+             \AttributeTok{xlab =} \StringTok{""}\NormalTok{, }\AttributeTok{ylab =} \StringTok{""}\NormalTok{, }\AttributeTok{re\_order =}\NormalTok{ F)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# nodes\_mark}
+\NormalTok{mark\_df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}\AttributeTok{.id =} \StringTok{"3918"}\NormalTok{,}
+                                  \AttributeTok{mark =} \StringTok{"ID:3918"}\NormalTok{)}
+\NormalTok{mark\_palette }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\AttributeTok{Others =} \StringTok{"\#D9D9D9"}\NormalTok{, }\StringTok{\textasciigrave{}}\AttributeTok{ID:3918}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{"\#EFC000"}\NormalTok{)}
+\DocumentationTok{\#\# Pyranones and derivatives}
+\DocumentationTok{\#\# Iridoid O{-}glycosides}
+\NormalTok{nebula\_name }\OtherTok{\textless{}{-}} \StringTok{"Iridoid O{-}glycosides"}
+\FunctionTok{vis\_via\_molconvert\_nebulae}\NormalTok{(nebula\_name, .MCn.nebula\_index,}
+                           \AttributeTok{output=}\StringTok{"mcnebula\_results/trace/tmp/structure"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{annotate\_child\_nebulae}\NormalTok{(nebula\_name,}
+                       \AttributeTok{layout =} \StringTok{"fr"}\NormalTok{,}
+                       \AttributeTok{output=}\StringTok{"mcnebula\_results/trace"}\NormalTok{,}
+                       \DocumentationTok{\#\# pie diagrame setting}
+                       \AttributeTok{nodes\_mark =}\NormalTok{ mark\_df,}
+                       \AttributeTok{palette =}\NormalTok{ mark\_palette,}
+                       \AttributeTok{ratio\_df =}\NormalTok{ mean.feature\_stat,}
+                       \AttributeTok{palette\_stat =}\NormalTok{ stat\_palette,}
+                       \AttributeTok{global.node.size =} \FloatTok{0.8}\NormalTok{,}
+                       \AttributeTok{theme\_args =} \FunctionTok{list}\NormalTok{(}\AttributeTok{panel.background =} \FunctionTok{element\_rect}\NormalTok{(),}
+                                         \AttributeTok{panel.grid =} \FunctionTok{element\_line}\NormalTok{()))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# show statistic legend for nebula}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-bio_generate_child_nebula.r}{%
+\section{File: bio\_generate\_child\_nebula.R}\label{file-bio_generate_child_nebula.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# classes}
+\NormalTok{classes }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(.MCn.nebula\_index, .id }\SpecialCharTok{\%in\%}\NormalTok{ log.fc\_stat}\SpecialCharTok{$}\NormalTok{.id)}\SpecialCharTok{$}\NormalTok{name }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unique}\NormalTok{()}
+\NormalTok{f.classes }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\AttributeTok{.data =}\NormalTok{ .MCn.nebula\_index, name }\SpecialCharTok{\%in\%} \FunctionTok{all\_of}\NormalTok{(classes)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .}\SpecialCharTok{$}\NormalTok{name }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{table}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  .[}\FunctionTok{which}\NormalTok{(. }\SpecialCharTok{\textless{}=} \DecValTok{300}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{names}\NormalTok{()}
+\DocumentationTok{\#\# generate\_child\_nebulae}
+\NormalTok{tmp\_nebula\_index }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(.MCn.nebula\_index,}
+\NormalTok{                                  .id }\SpecialCharTok{\%in\%}\NormalTok{ log.fc\_stat}\SpecialCharTok{$}\NormalTok{.id,}
+\NormalTok{                                  name }\SpecialCharTok{\%in\%}\NormalTok{ f.classes)}
+\FunctionTok{generate\_child\_nebulae}\NormalTok{(}\AttributeTok{nebula\_index =}\NormalTok{ tmp\_nebula\_index,}
+                       \AttributeTok{output =} \StringTok{"mcnebula\_results/trace"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-bio_visualize_child_nenula.r}{%
+\section{File: bio\_visualize\_child\_nenula.R}\label{file-bio_visualize_child_nenula.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# for tracing compounds}
+\DocumentationTok{\#\# set df to mark efs25 nodes}
+\NormalTok{mark\_df }\OtherTok{\textless{}{-}}\NormalTok{ data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}\AttributeTok{.id =} \FunctionTok{paste0}\NormalTok{(log.fc\_stat}\SpecialCharTok{$}\NormalTok{.id), }\AttributeTok{mark =}\NormalTok{ log.fc\_stat}\SpecialCharTok{$}\NormalTok{log2fc)}
+\DocumentationTok{\#\# set mark\_palette}
+\NormalTok{mark\_palette }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"\#FED439FF"}\NormalTok{, }\StringTok{"\#709AE1FF"}\NormalTok{)}
+\FunctionTok{names}\NormalTok{(mark\_palette) }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"10 times FC"}\NormalTok{, }\StringTok{"Others"}\NormalTok{)}
+\DocumentationTok{\#\# visualize\_child\_nebulae}
+\NormalTok{fill\_expression }\OtherTok{\textless{}{-}} \StringTok{"scale\_fill\_gradient2(low = \textquotesingle{}blue\textquotesingle{}, high = \textquotesingle{}red\textquotesingle{}, mid = \textquotesingle{}white\textquotesingle{}, midpoint = 0)"}
+\FunctionTok{visualize\_child\_nebulae}\NormalTok{(}\AttributeTok{output =} \StringTok{"mcnebula\_results/trace"}\NormalTok{,}
+                        \AttributeTok{nodes\_mark =}\NormalTok{ mark\_df,}
+                        \AttributeTok{scale\_fill\_expression =}\NormalTok{ fill\_expression,}
+                        \AttributeTok{remove\_legend\_lab =}\NormalTok{ T,}
+                        \AttributeTok{legend\_fill =}\NormalTok{ T,}
+                        \AttributeTok{legend\_position =} \StringTok{"bottom"}\NormalTok{,}
+                        \AttributeTok{width =} \DecValTok{15}\NormalTok{, }\AttributeTok{height =} \DecValTok{20}\NormalTok{)}
+\FunctionTok{file.rename}\NormalTok{(}\StringTok{"mcnebula\_results/trace/child\_nebulae.svg"}\NormalTok{, }\StringTok{"mcnebula\_results/trace/gradient\_nebula.svg"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{visualize\_child\_nebulae}\NormalTok{(}\AttributeTok{output =} \StringTok{"mcnebula\_results/trace"}\NormalTok{,}
+                        \AttributeTok{width =} \DecValTok{15}\NormalTok{, }\AttributeTok{height =} \DecValTok{20}\NormalTok{)}
+\FunctionTok{file.rename}\NormalTok{(}\StringTok{"mcnebula\_results/trace/child\_nebulae.svg"}\NormalTok{, }\StringTok{"mcnebula\_results/trace/struc\_nebula.svg"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# visualize legend for nebula{-}index}
+\NormalTok{label\_palette }\OtherTok{\textless{}{-}}\NormalTok{ .MCn.palette\_label[}\DecValTok{3}\SpecialCharTok{:}\DecValTok{6}\NormalTok{]}
+\FunctionTok{names}\NormalTok{(label\_palette) }\OtherTok{\textless{}{-}}\NormalTok{ Hmisc}\SpecialCharTok{::}\FunctionTok{capitalize}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"level 5"}\NormalTok{, }\StringTok{"subclass"}\NormalTok{, }\StringTok{"class"}\NormalTok{, }\StringTok{"superclass"}\NormalTok{))[}\DecValTok{4}\SpecialCharTok{:}\DecValTok{1}\NormalTok{]}
+\FunctionTok{mutate\_show\_palette}\NormalTok{(label\_palette, }\AttributeTok{font\_size =} \DecValTok{25}\NormalTok{,}
+             \AttributeTok{width =} \DecValTok{3}\NormalTok{,}
+             \AttributeTok{title =} \StringTok{""}\NormalTok{,}
+             \AttributeTok{fill\_lab =} \StringTok{"Class{-}Hierarchy"}\NormalTok{,}
+             \AttributeTok{xlab =} \StringTok{""}\NormalTok{, }\AttributeTok{ylab =} \StringTok{""}\NormalTok{, }\AttributeTok{re\_order =}\NormalTok{ F)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.extra1_syno.r}{%
+\section{File: export.extra1\_syno.R}\label{file-export.extra1_syno.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# get cid and inchikey set}
+\NormalTok{rdata }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(}\StringTok{"pubchem"}\NormalTok{, }\StringTok{"/"}\NormalTok{, }\StringTok{"inchikey.rdata"}\NormalTok{)}
+\DocumentationTok{\#\# extract as list}
+\NormalTok{cid\_inchikey }\OtherTok{\textless{}{-}} \FunctionTok{extract\_rdata\_list}\NormalTok{(rdata) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(df)\{}
+           \ControlFlowTok{if}\NormalTok{(}\StringTok{"CID"} \SpecialCharTok{\%in\%} \FunctionTok{colnames}\NormalTok{(df))}
+             \FunctionTok{return}\NormalTok{(df)}
+\NormalTok{  \}) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{(}\AttributeTok{idcol =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{inchikey2D =}\NormalTok{ .id)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# get cid}
+\NormalTok{cid }\OtherTok{\textless{}{-}}\NormalTok{ cid\_inchikey}\SpecialCharTok{$}\NormalTok{CID}
+\DocumentationTok{\#\# create dir}
+\FunctionTok{dir.create}\NormalTok{(}\StringTok{"syno"}\NormalTok{)}
+\DocumentationTok{\#\# curl synonyms}
+\FunctionTok{pubchem\_get\_synonyms}\NormalTok{(cid, }\AttributeTok{dir =} \StringTok{"syno"}\NormalTok{, }\AttributeTok{curl\_cl =} \DecValTok{4}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.extra2_syno.filter.r}{%
+\section{File: export.extra2\_syno.filter.R}\label{file-export.extra2_syno.filter.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# extract data}
+\NormalTok{cid\_syno }\OtherTok{\textless{}{-}} \FunctionTok{extract\_rdata\_list}\NormalTok{(}\StringTok{"syno/cid.rdata"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# filter the syno, according to character }
+\NormalTok{filter.syno }\OtherTok{\textless{}{-}}\NormalTok{ cid\_syno }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# na}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(syno)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# specific ID}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{stringr}\SpecialCharTok{::}\FunctionTok{str\_detect}\NormalTok{(syno, }\StringTok{"[\^{}[a{-}z]]\{5,\}$"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# id filter}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{stringr}\SpecialCharTok{::}\FunctionTok{str\_detect}\NormalTok{(syno, }\StringTok{"[0{-}9]\{4,\}$"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# alphabet number \textgreater{}= 4}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(stringr}\SpecialCharTok{::}\FunctionTok{str\_detect}\NormalTok{(syno, }\StringTok{"[a{-}z]\{4,\}"}\NormalTok{))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# show results}
+\NormalTok{filter.syno }\SpecialCharTok{\%\textgreater{}\%}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{print}\NormalTok{(}\AttributeTok{n =} \DecValTok{20}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.extra3_read.pdf.r}{%
+\section{File: export.extra3\_read.pdf.R}\label{file-export.extra3_read.pdf.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# read pdf as string document}
+\NormalTok{path }\OtherTok{\textless{}{-}} \StringTok{"\textasciitilde{}/Documents/eucommia/"}
+\NormalTok{lite.bib }\OtherTok{\textless{}{-}} \FunctionTok{paste0}\NormalTok{(path, }\StringTok{"eucommia.bib"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# use package \textquotesingle{}bib2df\textquotesingle{} to parse .bib file}
+\NormalTok{lite.df }\OtherTok{\textless{}{-}}\NormalTok{  bib2df}\SpecialCharTok{::}\FunctionTok{bib2df}\NormalTok{(lite.bib)}
+\DocumentationTok{\#\# do filter}
+\NormalTok{lite.df.file }\OtherTok{\textless{}{-}}\NormalTok{ lite.df }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# keep with file}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(FILE)) }\SpecialCharTok{\%\textgreater{}\%}
+  \DocumentationTok{\#\# absolute path}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{FILE =} \FunctionTok{paste0}\NormalTok{(path, FILE)) }\SpecialCharTok{\%\textgreater{}\%}
+  \DocumentationTok{\#\# filter according to year}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(YEAR }\SpecialCharTok{\textgreater{}=} \DecValTok{2000}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# multi threashold read pdf}
+\NormalTok{pdf\_list }\OtherTok{\textless{}{-}}\NormalTok{ pbapply}\SpecialCharTok{::}\FunctionTok{pblapply}\NormalTok{(lite.df.file}\SpecialCharTok{$}\NormalTok{FILE,}
+                              \ControlFlowTok{function}\NormalTok{(pdf)\{}
+\NormalTok{                                check }\OtherTok{\textless{}{-}} \FunctionTok{try}\NormalTok{(text }\OtherTok{\textless{}{-}}\NormalTok{ pdftools}\SpecialCharTok{::}\FunctionTok{pdf\_ocr\_text}\NormalTok{(pdf))}
+                                \ControlFlowTok{if}\NormalTok{(}\FunctionTok{class}\NormalTok{(check)[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \StringTok{"try{-}error"}\NormalTok{)\{}
+                                  \FunctionTok{return}\NormalTok{(}\StringTok{"error"}\NormalTok{)}
+\NormalTok{                                \}}\ControlFlowTok{else}\NormalTok{\{}
+                                  \FunctionTok{return}\NormalTok{(text)}
+\NormalTok{                                \}}
+\NormalTok{                              \})}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.extra4_df.pre.r}{%
+\section{File: export.extra4\_df.pre.R}\label{file-export.extra4_df.pre.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# check error number}
+\CommentTok{\# check \textless{}{-} rapply(pdf\_list,}
+                \CommentTok{\# function(vec)\{}
+                \CommentTok{\#   check \textless{}{-} lapply(vec,}
+                \CommentTok{\#                   function(vec)\{}
+                \CommentTok{\#                     if(vec == "error")}
+                \CommentTok{\#                       return("error")}
+                \CommentTok{\#                   \})}
+                \CommentTok{\#   return(check)}
+                \CommentTok{\# \}) \%\textgreater{}\% }
+  \CommentTok{\# unlist()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# syno.metadata: filter.syno}
+\DocumentationTok{\#\# cid\_inchikey.metadata: cid\_inchikey}
+\DocumentationTok{\#\# gether syno with inchikey2D}
+\NormalTok{syno.metadata }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(filter.syno, cid\_inchikey,}
+                       \AttributeTok{all.x =}\NormalTok{ T, }\AttributeTok{by.x =} \StringTok{"cid"}\NormalTok{, }\AttributeTok{by.y =} \StringTok{"CID"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# pdf.metadata: lite.df.file}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# format each pdf}
+\NormalTok{format.lite }\OtherTok{\textless{}{-}}\NormalTok{ pdf\_list }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(paste0, }\AttributeTok{collapse =} \StringTok{""}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(str)\{}
+\NormalTok{           str }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}n}\StringTok{"}\NormalTok{, }\StringTok{" "}\NormalTok{, str)}
+           \FunctionTok{return}\NormalTok{(str)}
+\NormalTok{                       \}) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unlist}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.extra5.str_dist.r}{%
+\section{File: export.extra5.str\_dist.R}\label{file-export.extra5.str_dist.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# stringdist::afind}
+\DocumentationTok{\#\# test}
+\NormalTok{res.list }\OtherTok{\textless{}{-}}\NormalTok{ pbapply}\SpecialCharTok{::}\FunctionTok{pblapply}\NormalTok{(format.lite,}
+                              \ControlFlowTok{function}\NormalTok{(lite)\{}
+\NormalTok{                                res.vec }\OtherTok{\textless{}{-}}\NormalTok{ stringdist}\SpecialCharTok{::}\FunctionTok{amatch}\NormalTok{(syno.metadata}\SpecialCharTok{$}\NormalTok{syno,}
+\NormalTok{                                                              lite,}
+                                                              \AttributeTok{nthread =} \DecValTok{10}\NormalTok{,}
+                                                              \AttributeTok{maxDist =} \DecValTok{3}\NormalTok{)}
+                                \FunctionTok{return}\NormalTok{(res.vec)}
+\NormalTok{                              \})}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.step0_manual.select.class.r}{%
+\section{File: export.step0\_manual.select.class.R}\label{file-export.step0_manual.select.class.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# extract classyfire data}
+\DocumentationTok{\#\# do a rough filter}
+\NormalTok{class\_df }\OtherTok{\textless{}{-}} \FunctionTok{extract\_rdata\_list}\NormalTok{(}\StringTok{"classyfire/class.rdata"}\NormalTok{,}
+\NormalTok{                                 export.struc\_set}\SpecialCharTok{$}\NormalTok{inchikey2D) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{(}\AttributeTok{idcol =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{inchikey2d =}\NormalTok{ .id) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\NormalTok{Level }\SpecialCharTok{\%in\%} \FunctionTok{all\_of}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{"kingdom"}\NormalTok{, }\StringTok{"level 7"}\NormalTok{, }\StringTok{"level 8"}\NormalTok{, }\StringTok{"level 9"}\NormalTok{)),}
+                \SpecialCharTok{!}\FunctionTok{grepl}\NormalTok{(}\StringTok{"[0{-}9]|Organ|Phenylpropanoids and polyketides"}\NormalTok{, Classification))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# the classes keeped}
+\DocumentationTok{\#\# do further filter}
+\NormalTok{keep }\OtherTok{\textless{}{-}}\NormalTok{ class\_df}\SpecialCharTok{$}\NormalTok{Classification }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{table}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(N }\SpecialCharTok{\textgreater{}=} \DecValTok{7}\NormalTok{, N }\SpecialCharTok{\textless{}} \DecValTok{100}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{class =} \DecValTok{1}\NormalTok{, }\AttributeTok{abund =} \DecValTok{2}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# set abundance db}
+\NormalTok{abund.db }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(keep}\SpecialCharTok{$}\NormalTok{abund, c)}
+\FunctionTok{names}\NormalTok{(abund.db) }\OtherTok{\textless{}{-}}\NormalTok{ keep}\SpecialCharTok{$}\NormalTok{class}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# get parent class}
+\NormalTok{parent.class }\OtherTok{\textless{}{-}} \FunctionTok{mutate\_get\_parent\_class}\NormalTok{(keep}\SpecialCharTok{$}\NormalTok{class, }\AttributeTok{class\_cutoff =} \DecValTok{3}\NormalTok{, }\AttributeTok{this\_class =}\NormalTok{ F)}
+\DocumentationTok{\#\# final auto discard}
+\NormalTok{discard }\OtherTok{\textless{}{-}} \FunctionTok{mapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(c.name, vec)\{}
+                    \ControlFlowTok{if}\NormalTok{(}\FunctionTok{is.null}\NormalTok{(vec))\{}
+                      \FunctionTok{return}\NormalTok{()}
+\NormalTok{                    \}}
+\NormalTok{                    vec }\OtherTok{\textless{}{-}}\NormalTok{ vec[vec }\SpecialCharTok{\%in\%} \FunctionTok{names}\NormalTok{(abund.db)]}
+                    \ControlFlowTok{if}\NormalTok{(}\FunctionTok{length}\NormalTok{(vec) }\SpecialCharTok{==} \DecValTok{0}\NormalTok{)}
+                      \FunctionTok{return}\NormalTok{()}
+\NormalTok{                    vec }\OtherTok{\textless{}{-}} \FunctionTok{lapply}\NormalTok{(vec, }\ControlFlowTok{function}\NormalTok{(class)\{abund.db[[class]]\}) }\SpecialCharTok{\%\textgreater{}\%} 
+                      \FunctionTok{unlist}\NormalTok{(}\AttributeTok{use.names =}\NormalTok{ F)}
+\NormalTok{                    ref }\OtherTok{\textless{}{-}}\NormalTok{ abund.db[[c.name]]}
+\NormalTok{                    check }\OtherTok{\textless{}{-}}\NormalTok{ vec }\SpecialCharTok{{-}}\NormalTok{ ref}
+\NormalTok{                    check }\OtherTok{\textless{}{-}} \DecValTok{0}\SpecialCharTok{:}\DecValTok{3} \SpecialCharTok{\%in\%}\NormalTok{ check}
+                    \ControlFlowTok{if}\NormalTok{(T }\SpecialCharTok{\%in\%}\NormalTok{ check)\{}
+                      \FunctionTok{return}\NormalTok{(c.name)}
+\NormalTok{                    \}}
+\NormalTok{                \}, }\FunctionTok{names}\NormalTok{(parent.class), parent.class) }\SpecialCharTok{\%\textgreater{}\%}
+  \FunctionTok{unlist}\NormalTok{(}\AttributeTok{use.names =}\NormalTok{ F)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{keep2 }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(keep, }\SpecialCharTok{!}\NormalTok{class }\SpecialCharTok{\%in\%} \FunctionTok{all\_of}\NormalTok{(discard))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{manual\_exclude }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\StringTok{"O{-}glycosyl compounds"}\NormalTok{,}
+                    \StringTok{"Oligosaccharides"}\NormalTok{,}
+                    \StringTok{"Medium{-}chain hydroxy acids and derivatives"}\NormalTok{,}
+                    \StringTok{"Monosaccharides"}\NormalTok{,}
+                    \StringTok{"Benzenediols"}\NormalTok{,}
+                    \StringTok{"Benzenoids"}\NormalTok{,}
+                    \StringTok{"Benzoic acids and derivatives"}\NormalTok{,}
+                    \StringTok{"Aldehydes"}\NormalTok{,}
+                    \StringTok{"Hydroxy acids and derivatives"}\NormalTok{,}
+                    \StringTok{"Hydroxy fatty acids"}\NormalTok{,}
+                    \StringTok{"Keto acids and derivatives"}\NormalTok{,}
+                    \StringTok{"Ketones"}\NormalTok{,}
+                    \StringTok{"Hydroxybenzoic acid derivatives"}\NormalTok{,}
+                    \StringTok{"Benzene and substituted derivatives"}\NormalTok{,}
+                    \StringTok{"Carbonyl compounds"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{keep3 }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(keep2, }\SpecialCharTok{!}\NormalTok{class }\SpecialCharTok{\%in\%} \FunctionTok{all\_of}\NormalTok{(manual\_exclude))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{class\_meta }\OtherTok{\textless{}{-}}\NormalTok{ class\_df }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(Classification }\SpecialCharTok{\%in\%}\NormalTok{ keep3}\SpecialCharTok{$}\NormalTok{class)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.step1_class.r}{%
+\section{File: export.step1\_class.R}\label{file-export.step1_class.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# select cols to export}
+\DocumentationTok{\#\# format table}
+\NormalTok{export.all }\OtherTok{\textless{}{-}}\NormalTok{ export.struc\_set }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(.id, name, molecularFormula, tanimotoSimilarity, inchikey2D, smiles) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{arrange}\NormalTok{(inchikey2D, }\FunctionTok{desc}\NormalTok{(tanimotoSimilarity)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(inchikey2D, }\AttributeTok{.keep\_all =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# get mz and rt}
+  \FunctionTok{merge}\NormalTok{(mz\_rt, }\AttributeTok{by =} \StringTok{".id"}\NormalTok{, }\AttributeTok{all.x =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(.id, mz, rt) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# merge with classyfire Classification}
+\NormalTok{export.class }\OtherTok{\textless{}{-}}\NormalTok{ export.all }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{merge}\NormalTok{(dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(class\_meta, inchikey2d, Classification),}
+        \AttributeTok{by.x =} \StringTok{"inchikey2D"}\NormalTok{, }\AttributeTok{by.y =} \StringTok{"inchikey2d"}\NormalTok{, }\AttributeTok{all.x =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\NormalTok{na.class.id }\OtherTok{\textless{}{-}}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(export.class, }\FunctionTok{is.na}\NormalTok{(Classification))}\SpecialCharTok{$}\NormalTok{.id }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{unique}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# get canopus Classification annotation}
+\NormalTok{canopus\_anno }\OtherTok{\textless{}{-}} \StringTok{"canopus\_summary.tsv"} \SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{read\_tsv}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\NormalTok{(}\FunctionTok{ncol}\NormalTok{(.) }\SpecialCharTok{{-}} \DecValTok{1}\NormalTok{), }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{.id =} \DecValTok{1}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# get .id}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{.id =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(.id, }\StringTok{"[0{-}9]\{1,\}$"}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  reshape2}\SpecialCharTok{::}\FunctionTok{melt}\NormalTok{(}\AttributeTok{id.vars =} \StringTok{".id"}\NormalTok{, }\AttributeTok{variable.name =} \StringTok{"level"}\NormalTok{, }\AttributeTok{value.name =} \StringTok{"canopus"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(level }\SpecialCharTok{!=} \StringTok{"most specific class"}\NormalTok{,}
+\NormalTok{                canopus }\SpecialCharTok{!=} \StringTok{""}\NormalTok{,}
+\NormalTok{                .id }\SpecialCharTok{\%in\%}\NormalTok{ na.class.id) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(.id, canopus) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# fill na Classification annotation}
+\NormalTok{export.class.cano }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(export.class, canopus\_anno, }\AttributeTok{all.x =}\NormalTok{ T, }\AttributeTok{by =} \StringTok{".id"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{Classification =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(Classification), canopus, Classification)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{canopus) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(Classification)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.step2_name.diff.vari.r}{%
+\section{File: export.step2\_name.diff.vari.R}\label{file-export.step2_name.diff.vari.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# add supplementation data}
+\NormalTok{export.supp }\OtherTok{\textless{}{-}}\NormalTok{ export.class.cano }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# get name}
+  \FunctionTok{merge}\NormalTok{(iupac, }\AttributeTok{by.x =} \StringTok{"inchikey2D"}\NormalTok{, }\AttributeTok{by.y =} \StringTok{"inchikey2d"}\NormalTok{, }\AttributeTok{all.x =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# get mass difference}
+  \FunctionTok{merge}\NormalTok{(.MCn.formula\_set[, }\FunctionTok{c}\NormalTok{(}\StringTok{".id"}\NormalTok{, }\StringTok{"massErrorPrecursor(ppm)"}\NormalTok{)], ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# get content variation}
+  \FunctionTok{merge}\NormalTok{(log.fc\_stat.ori[, }\FunctionTok{c}\NormalTok{(}\StringTok{".id"}\NormalTok{, }\StringTok{"log2fc"}\NormalTok{)], }\AttributeTok{by =} \StringTok{".id"}\NormalTok{, }\AttributeTok{all.x =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+  \DocumentationTok{\#\# format data}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{name =} \FunctionTok{ifelse}\NormalTok{(name }\SpecialCharTok{==} \StringTok{"null"}\NormalTok{,}
+                              \DocumentationTok{\#\# get better name}
+                              \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(IUPACName), name, IUPACName),}
+                              \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{nchar}\NormalTok{(name) }\SpecialCharTok{\textless{}} \FunctionTok{nchar}\NormalTok{(IUPACName), name, IUPACName)),}
+                \AttributeTok{name =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{grepl}\NormalTok{(}\StringTok{"\^{}bmse|\^{}ACMC"}\NormalTok{, name), IUPACName, name),}
+                \DocumentationTok{\#\# round rt min}
+                \AttributeTok{rt =} \FunctionTok{round}\NormalTok{(rt, }\DecValTok{1}\NormalTok{),}
+                \DocumentationTok{\#\# variation}
+                \AttributeTok{log2fc =} \FunctionTok{unlist}\NormalTok{(}\FunctionTok{lapply}\NormalTok{(log2fc, }\ControlFlowTok{function}\NormalTok{(num)\{}
+                                         \ControlFlowTok{if}\NormalTok{(}\FunctionTok{abs}\NormalTok{(num) }\SpecialCharTok{\textless{}} \DecValTok{1}\NormalTok{)}
+                                           \FunctionTok{return}\NormalTok{(}\StringTok{"{-}"}\NormalTok{)}
+\NormalTok{                                         sig }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(num }\SpecialCharTok{\textgreater{}} \DecValTok{0}\NormalTok{, }\StringTok{"↑"}\NormalTok{, }\StringTok{"↓"}\NormalTok{)}
+\NormalTok{                                         ch }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{rep}\NormalTok{(sig, }\FunctionTok{floor}\NormalTok{(}\FunctionTok{abs}\NormalTok{(num))), }\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+                                         \DocumentationTok{\#\# log2fc \textgreater{}= 5, omit as ...}
+                                         \ControlFlowTok{if}\NormalTok{(}\FunctionTok{nchar}\NormalTok{(ch) }\SpecialCharTok{\textgreater{}=} \DecValTok{5}\NormalTok{)}
+\NormalTok{                                           ch }\OtherTok{\textless{}{-}} \FunctionTok{paste}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\FunctionTok{rep}\NormalTok{(sig, }\DecValTok{5}\NormalTok{), }\StringTok{"..."}\NormalTok{), }\AttributeTok{collapse =} \StringTok{""}\NormalTok{)}
+                                         \FunctionTok{return}\NormalTok{(ch)}
+\NormalTok{                                       \})))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.step3_format.r}{%
+\section{File: export.step3\_format.R}\label{file-export.step3_format.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{export }\OtherTok{\textless{}{-}}\NormalTok{ export.supp }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# exclude useless}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{IUPACName) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# relocate name}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(name, .id, mz, }\StringTok{\textasciigrave{}}\AttributeTok{massErrorPrecursor(ppm)}\StringTok{\textasciigrave{}}\NormalTok{, rt) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{relocate}\NormalTok{(inchikey2D, smiles, }\AttributeTok{.after =} \FunctionTok{last\_col}\NormalTok{()) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# get hierarchy rank}
+  \FunctionTok{get\_hierarchy.in\_df}\NormalTok{(}\AttributeTok{col =} \StringTok{"Classification"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# duplicated in class}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{arrange}\NormalTok{(}\FunctionTok{desc}\NormalTok{(hierarchy), inchikey2D) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(inchikey2D, }\AttributeTok{.keep\_all =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# remove hierarchy}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{hierarchy) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# order df}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{arrange}\NormalTok{(Classification, name) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{id =}\NormalTok{ .id, }\StringTok{\textasciigrave{}}\AttributeTok{precursor m/z}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ mz,}
+                \AttributeTok{variation =}\NormalTok{ log2fc,}
+                \StringTok{\textasciigrave{}}\AttributeTok{RT (min)}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ rt, }\AttributeTok{formula =}\NormalTok{ molecularFormula,}
+                \StringTok{\textasciigrave{}}\AttributeTok{tanimoto similarity}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ tanimotoSimilarity,}
+                \StringTok{\textasciigrave{}}\AttributeTok{InChIKey planar}\StringTok{\textasciigrave{}} \OtherTok{=}\NormalTok{ inchikey2D,}
+                \StringTok{\textasciigrave{}}\AttributeTok{mass error (ppm)}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textasciigrave{}}\AttributeTok{massErrorPrecursor(ppm)}\StringTok{\textasciigrave{}}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{export.dominant }\OtherTok{\textless{}{-}}\NormalTok{ export }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(name }\SpecialCharTok{!=} \StringTok{"null"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{set\_export.no}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{export.extra }\OtherTok{\textless{}{-}}\NormalTok{ export }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(name }\SpecialCharTok{==} \StringTok{"null"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-export.step9_gt.r}{%
+\section{File: export.step9\_gt.R}\label{file-export.step9_gt.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# export}
+\NormalTok{gt\_table }\OtherTok{\textless{}{-}} \FunctionTok{pretty\_table}\NormalTok{(dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(export.dominant[, }\SpecialCharTok{{-}}\FunctionTok{ncol}\NormalTok{(export.dominant)], }\AttributeTok{info =}\NormalTok{ Classification),}
+  \AttributeTok{title =} \StringTok{"E. ulmoides compounds summary"}\NormalTok{,}
+  \AttributeTok{subtitle =} \StringTok{"LC{-}MS in negative ion mode"}\NormalTok{,}
+  \AttributeTok{footnote =} \StringTok{"Compounds listed in table were identified from Raw{-}Eucommia or Pro{-}Eucommia. These compounds are grouped by classes which selected manually. As compounds not only belong to one class and also belong to its parent classes, for this case, the compounds are preferentially grouped for subtile classes."}\NormalTok{,}
+  \AttributeTok{default =}\NormalTok{ F) }\SpecialCharTok{\%\textgreater{}\%} 
+\DocumentationTok{\#\# add footnote}
+\DocumentationTok{\#\# name}
+\FunctionTok{tab\_footnote}\NormalTok{(}\AttributeTok{footnote =} \StringTok{"The names are synonyms or IUPAC names of these compounds or their stereoisomers."}\NormalTok{,}
+  \AttributeTok{locations =} \FunctionTok{cells\_column\_labels}\NormalTok{(}\AttributeTok{columns =}\NormalTok{ Name)) }\SpecialCharTok{\%\textgreater{}\%} 
+\DocumentationTok{\#\# similarity}
+\FunctionTok{tab\_footnote}\NormalTok{(}\AttributeTok{footnote =} \StringTok{"Tanimoto similarities were obtained via CSI:fingerID for evaluation of compound fingerprints match."}\NormalTok{,}
+  \AttributeTok{locations =} \FunctionTok{cells\_column\_labels}\NormalTok{(}\AttributeTok{columns =} \StringTok{\textasciigrave{}}\AttributeTok{Tanimoto similarity}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\DocumentationTok{\#\# InChIKey}
+\FunctionTok{tab\_footnote}\NormalTok{(}\AttributeTok{footnote =} \StringTok{"The \textquotesingle{}InChIKey planar\textquotesingle{} is the first hash block of InChIKey that represents a molecular skeleton."}\NormalTok{,}
+  \AttributeTok{locations =} \FunctionTok{cells\_column\_labels}\NormalTok{(}\AttributeTok{columns =} \StringTok{\textasciigrave{}}\AttributeTok{InChIKey planar}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{tab\_footnote}\NormalTok{(}\AttributeTok{footnote =} \StringTok{"All identified formulae are in adduct of \textquotesingle{}[M {-} H]{-}\textquotesingle{}."}\NormalTok{,}
+  \AttributeTok{locations =} \FunctionTok{cells\_column\_labels}\NormalTok{(}\AttributeTok{columns =} \StringTok{\textasciigrave{}}\AttributeTok{Formula}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{tab\_footnote}\NormalTok{(}\AttributeTok{footnote =} \StringTok{"Ids were generated while MZmine2 processing and were inherited in subsequent MCnebula workflow."}\NormalTok{,}
+  \AttributeTok{locations =} \FunctionTok{cells\_column\_labels}\NormalTok{(}\AttributeTok{columns =} \StringTok{\textasciigrave{}}\AttributeTok{Id}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{tab\_footnote}\NormalTok{(}\AttributeTok{footnote =} \StringTok{"The mass error were obtained via SIRIUS while predicting formula of compounds."}\NormalTok{,}
+  \AttributeTok{locations =} \FunctionTok{cells\_column\_labels}\NormalTok{(}\AttributeTok{columns =} \StringTok{\textasciigrave{}}\AttributeTok{Mass error (ppm)}\StringTok{\textasciigrave{}}\NormalTok{)) }\SpecialCharTok{\%\textgreater{}\%} 
+\FunctionTok{tab\_footnote}\NormalTok{(}\AttributeTok{footnote =} \StringTok{"The variation are difined as: ↑ or ↓ indicates increasing or decreasing of compound level while comparing Pro{-}Eucommia with Raw{-}Eucommia.  {-} indicates no apparent alteration (|log2(FC)| \textless{} 1); the number of arrow implies the magnitude of alteration, i.e., integer of |log2(FC)|. FC is defined as Pro{-}Eucommia compare with Raw{-}Eucommia."}\NormalTok{,}
+  \AttributeTok{locations =} \FunctionTok{cells\_column\_labels}\NormalTok{(}\AttributeTok{columns =} \StringTok{\textasciigrave{}}\AttributeTok{Variation}\StringTok{\textasciigrave{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-figure.eu_iso.r}{%
+\section{File: figure.eu\_iso.R}\label{file-figure.eu_iso.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\#  re{-}draw heartmap for specific id}
+\NormalTok{sp.idset }\OtherTok{\textless{}{-}} \FunctionTok{c}\NormalTok{(}\DecValTok{3380}\NormalTok{, }\DecValTok{2824}\NormalTok{, }\DecValTok{3938}\NormalTok{, }\DecValTok{2664}\NormalTok{, }\DecValTok{2529}\NormalTok{,}
+              \DecValTok{2227}\NormalTok{, }\DecValTok{3918}\NormalTok{, }\DecValTok{1445}\NormalTok{, }\DecValTok{1107}\NormalTok{,}
+              \DecValTok{574}\NormalTok{, }\DecValTok{458}\NormalTok{, }\DecValTok{279}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{as.character}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{test }\OtherTok{\textless{}{-}}\NormalTok{ tmp\_nebula\_index }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(.id }\SpecialCharTok{\%in\%} \FunctionTok{all\_of}\NormalTok{(sp.idset))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-get_iupacname.r}{%
+\section{File: get\_iupacname.R}\label{file-get_iupacname.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# via pubchem, fill with name in witch compound}
+\DocumentationTok{\#\# idenfication table is \textquotesingle{}null\textquotesingle{}}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{dir.create}\NormalTok{(}\StringTok{"iupac\_name"}\NormalTok{)}
+\FunctionTok{pubchem\_curl\_inchikey}\NormalTok{(}\FunctionTok{unique}\NormalTok{(export.class.cano}\SpecialCharTok{$}\NormalTok{inchikey2D),}
+                      \AttributeTok{dir =} \StringTok{"iupac\_name"}\NormalTok{,}
+                      \AttributeTok{get =} \StringTok{"IUPACName"}\NormalTok{,}
+                      \AttributeTok{curl\_cl =} \DecValTok{8}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# extract data witch has curl down}
+\DocumentationTok{\#\# format}
+\NormalTok{iupac }\OtherTok{\textless{}{-}} \FunctionTok{extract\_rdata\_list}\NormalTok{(}\StringTok{"iupac\_name/inchikey.rdata"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{rbindlist}\NormalTok{(}\AttributeTok{idcol =}\NormalTok{ T, }\AttributeTok{fill =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{inchikey2d =}\NormalTok{ .id) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# filter na}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(x), }\SpecialCharTok{!}\FunctionTok{is.na}\NormalTok{(IUPACName)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \DocumentationTok{\#\# length of character}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{n.ch =} \FunctionTok{nchar}\NormalTok{(IUPACName)) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{arrange}\NormalTok{(inchikey2d, n.ch) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# get the unique name}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{distinct}\NormalTok{(inchikey2d, }\AttributeTok{.keep\_all =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(inchikey2d, IUPACName)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-get_real_class.r}{%
+\section{File: get\_real\_class.R}\label{file-get_real_class.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# stat all identified structure, find}
+\DocumentationTok{\#\# high confidence score compound}
+\DocumentationTok{\#\# and collate them for group of classification}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# get the real classification via classyfire}
+\NormalTok{export.struc\_set }\OtherTok{\textless{}{-}}\NormalTok{ .MCn.structure\_set }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(tanimotoSimilarity }\SpecialCharTok{\textgreater{}=} \FloatTok{0.5}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# curl pubchem to get possibbly inchikey3d}
+\FunctionTok{dir.create}\NormalTok{(}\StringTok{"pubchem"}\NormalTok{)}
+\FunctionTok{pubchem\_curl\_inchikey}\NormalTok{(}\FunctionTok{unique}\NormalTok{(export.struc\_set}\SpecialCharTok{$}\NormalTok{inchikey2D), }\AttributeTok{dir =} \StringTok{"pubchem"}\NormalTok{,}
+                      \AttributeTok{curl\_cl =} \DecValTok{8}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# classify}
+\FunctionTok{dir.create}\NormalTok{(}\StringTok{"classyfire"}\NormalTok{)}
+\FunctionTok{batch\_get\_classification}\NormalTok{(}\FunctionTok{unique}\NormalTok{(export.struc\_set}\SpecialCharTok{$}\NormalTok{inchikey2D),}
+                         \AttributeTok{dir\_pubchem =} \StringTok{"pubchem"}\NormalTok{,}
+                         \AttributeTok{dir\_classyfire =} \StringTok{"classyfire"}\NormalTok{,}
+                         \AttributeTok{classyfire\_cl =} \DecValTok{8}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-help.export.r}{%
+\section{File: help.export.R}\label{file-help.export.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# no filter}
+\FunctionTok{source}\NormalTok{(}\StringTok{"\textasciitilde{}/outline/mcnebula\_cell\_validation/export.step0\_manual.select.class.R"}\NormalTok{)}
+\FunctionTok{source}\NormalTok{(}\StringTok{"\textasciitilde{}/outline/eucommia\_neg/export.step1\_class.R"}\NormalTok{)}
+\DocumentationTok{\#\# source(\textasciitilde{}/outline/eucommia\_neg/get\_iupacname.R)}
+\FunctionTok{source}\NormalTok{(}\StringTok{"\textasciitilde{}/outline/eucommia\_neg/export.step2\_name.diff.vari.R"}\NormalTok{)}
+\FunctionTok{source}\NormalTok{(}\StringTok{"\textasciitilde{}/outline/eucommia\_neg/export.step3\_format.R"}\NormalTok{)}
+\FunctionTok{source}\NormalTok{(}\StringTok{"\textasciitilde{}/outline/eucommia\_neg/export.step9\_gt.R"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# insert reference}
+\CommentTok{\# export.extra1\_syno.R}
+\CommentTok{\# export.extra2\_syno.filter.R}
+\CommentTok{\# export.extra3\_read.pdf.R}
+\CommentTok{\# export.extra4\_df.pre.R}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-mcnebula_run.r}{%
+\section{File: mcnebula\_run.R}\label{file-mcnebula_run.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# }
+\FunctionTok{load\_all}\NormalTok{(}\StringTok{"\textasciitilde{}/MCnebula/R"}\NormalTok{)}
+\FunctionTok{load\_all}\NormalTok{(}\StringTok{"\textasciitilde{}/extra/R"}\NormalTok{)}
+\FunctionTok{initialize\_mcnebula}\NormalTok{(}\StringTok{"."}\NormalTok{)}
+\FunctionTok{collate\_structure}\NormalTok{()}
+\FunctionTok{build\_classes\_tree\_list}\NormalTok{()}
+\FunctionTok{collate\_ppcp}\NormalTok{(}\AttributeTok{min\_possess =} \DecValTok{30}\NormalTok{, }\AttributeTok{max\_possess\_pct =} \FloatTok{0.07}\NormalTok{)}
+\FunctionTok{generate\_parent\_nebula}\NormalTok{()}
+\FunctionTok{generate\_child\_nebulae}\NormalTok{()}
+\FunctionTok{visualize\_parent\_nebula}\NormalTok{()}
+\FunctionTok{visualize\_child\_nebulae}\NormalTok{(}\AttributeTok{width =} \DecValTok{15}\NormalTok{, }\AttributeTok{height =} \DecValTok{20}\NormalTok{, }\AttributeTok{nodes\_size\_range =} \FunctionTok{c}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-stat_ratio.r}{%
+\section{File: stat\_ratio.R}\label{file-stat_ratio.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# stat peak area}
+\NormalTok{mzmine\_table }\OtherTok{\textless{}{-}} \StringTok{"mcnebula\_results/mzmine\_table.tsv"} \SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{read\_tsv}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\NormalTok{mz\_rt }\OtherTok{\textless{}{-}}\NormalTok{ mzmine\_table }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{.id =} \DecValTok{1}\NormalTok{, }\AttributeTok{mz =} \DecValTok{2}\NormalTok{, }\AttributeTok{rt =} \DecValTok{3}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{.id =} \FunctionTok{as.character}\NormalTok{(.id))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# reset name}
+\FunctionTok{colnames}\NormalTok{(mzmine\_table) }\OtherTok{\textless{}{-}} \FunctionTok{gsub}\NormalTok{(}\StringTok{"}\SpecialCharTok{\textbackslash{}\textbackslash{}}\StringTok{.mzML Peak area"}\NormalTok{, }\StringTok{""}\NormalTok{, }\FunctionTok{colnames}\NormalTok{(mzmine\_table))}
+\DocumentationTok{\#\# metadata}
+\NormalTok{meta\_feature\_stat }\OtherTok{\textless{}{-}} \FunctionTok{colnames}\NormalTok{(mzmine\_table)[}\FunctionTok{c}\NormalTok{(}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{2}\NormalTok{, }\SpecialCharTok{{-}}\DecValTok{3}\NormalTok{)] }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{(}\AttributeTok{name =}\NormalTok{ .) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{subgroup =}\NormalTok{ stringr}\SpecialCharTok{::}\FunctionTok{str\_extract}\NormalTok{(name, }\StringTok{".*(?=[0{-}9])"}\NormalTok{),}
+                \AttributeTok{subgroup =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(subgroup), }\StringTok{"Blank"}\NormalTok{, subgroup))}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# summarise mean of each .id in groups}
+\NormalTok{mean.feature\_stat }\OtherTok{\textless{}{-}}\NormalTok{ mzmine\_table }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{.id =} \StringTok{\textasciigrave{}}\AttributeTok{row ID}\StringTok{\textasciigrave{}}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(.id, }\FunctionTok{all\_of}\NormalTok{(meta\_feature\_stat}\SpecialCharTok{$}\NormalTok{name)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# as long table}
+\NormalTok{  reshape2}\SpecialCharTok{::}\FunctionTok{melt}\NormalTok{(}\AttributeTok{id.vars =} \StringTok{".id"}\NormalTok{, }\AttributeTok{variable.name =} \StringTok{"name"}\NormalTok{, }\AttributeTok{value.name =} \StringTok{"value"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%}
+  \DocumentationTok{\#\# get group info}
+  \FunctionTok{merge}\NormalTok{(meta\_feature\_stat, }\AttributeTok{by =} \StringTok{"name"}\NormalTok{, }\AttributeTok{all.x =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# as numeric}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{value =} \FunctionTok{as.numeric}\NormalTok{(value)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# group by .id and subgroup}
+\NormalTok{  .[, }\FunctionTok{list}\NormalTok{(}\AttributeTok{mean =} \FunctionTok{mean}\NormalTok{(value, }\AttributeTok{na.rm =}\NormalTok{ T)), by }\OtherTok{=} \FunctionTok{list}\NormalTok{(.id, subgroup)] }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# calculate mean}
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{mean =} \FunctionTok{ifelse}\NormalTok{(}\FunctionTok{is.nan}\NormalTok{(mean), }\DecValTok{0}\NormalTok{, mean)) }\SpecialCharTok{\%\textgreater{}\%} 
+  \DocumentationTok{\#\# as wide data}
+\NormalTok{  data.table}\SpecialCharTok{::}\FunctionTok{dcast}\NormalTok{(.id }\SpecialCharTok{\textasciitilde{}}\NormalTok{ subgroup, }\AttributeTok{value.var =} \StringTok{"mean"}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{as\_tibble}\NormalTok{()}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\DocumentationTok{\#\# ten times fold change}
+\NormalTok{log.fc\_stat.ori }\OtherTok{\textless{}{-}}\NormalTok{ mean.feature\_stat }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{EU{-}Pro}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textasciigrave{}}\AttributeTok{EU{-}Pro}\StringTok{\textasciigrave{}} \SpecialCharTok{+} \DecValTok{1}\NormalTok{,}
+                \StringTok{\textasciigrave{}}\AttributeTok{EU{-}Raw}\StringTok{\textasciigrave{}} \OtherTok{=} \StringTok{\textasciigrave{}}\AttributeTok{EU{-}Raw}\StringTok{\textasciigrave{}} \SpecialCharTok{+} \DecValTok{1}\NormalTok{,}
+                \AttributeTok{log2fc =} \FunctionTok{log2}\NormalTok{(}\StringTok{\textasciigrave{}}\AttributeTok{EU{-}Pro}\StringTok{\textasciigrave{}} \SpecialCharTok{/} \StringTok{\textasciigrave{}}\AttributeTok{EU{-}Raw}\StringTok{\textasciigrave{}}\NormalTok{))}
+\NormalTok{log.fc\_stat }\OtherTok{\textless{}{-}}\NormalTok{ log.fc\_stat.ori }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{filter}\NormalTok{(}\FunctionTok{abs}\NormalTok{(log2fc) }\SpecialCharTok{\textgreater{}=} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{file-variation_abundance.r}{%
+\section{File: variation\_abundance.R}\label{file-variation_abundance.r}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# stat variation relativa abundance}
+\DocumentationTok{\#\# gather data}
+\NormalTok{var\_rel.abund }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{(tmp\_nebula\_index, .MCn.nebula\_index) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{lapply}\NormalTok{(}\ControlFlowTok{function}\NormalTok{(df)\{}
+\NormalTok{           df }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(df}\SpecialCharTok{$}\NormalTok{name) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{             data.table}\SpecialCharTok{::}\FunctionTok{data.table}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{             dplyr}\SpecialCharTok{::}\FunctionTok{rename}\NormalTok{(}\AttributeTok{class =}\NormalTok{ V1, }\AttributeTok{abund =}\NormalTok{ N)}
+           \FunctionTok{return}\NormalTok{(df)}
+\NormalTok{                \}) }
+\DocumentationTok{\#\# stat rel.adund}
+\NormalTok{var\_rel.abund }\OtherTok{\textless{}{-}} \FunctionTok{merge}\NormalTok{(var\_rel.abund[[}\DecValTok{1}\NormalTok{]], var\_rel.abund[[}\DecValTok{2}\NormalTok{]], }\AttributeTok{by =} \StringTok{"class"}\NormalTok{, }\AttributeTok{all.x =}\NormalTok{ T) }\SpecialCharTok{\%\textgreater{}\%} 
+\NormalTok{  dplyr}\SpecialCharTok{::}\FunctionTok{mutate}\NormalTok{(}\AttributeTok{rel.abund =}\NormalTok{ abund.x }\SpecialCharTok{/}\NormalTok{ abund.y)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\FunctionTok{generic\_horizon\_bar}\NormalTok{(}\AttributeTok{df =}\NormalTok{ dplyr}\SpecialCharTok{::}\FunctionTok{select}\NormalTok{(df, class, rel.abund),}
+                    \AttributeTok{xlab =} \StringTok{"classification"}\NormalTok{,}
+                    \AttributeTok{ylab =} \StringTok{"variation relative abundance"}\NormalTok{,}
+                    \AttributeTok{save =} \StringTok{"mcnebula\_results/trace/rank.svg"}\NormalTok{)}
+\DocumentationTok{\#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# main \textless{}{-} read\_svg("mcnebula\_results/trace/stru\_child\_nebulae.svg", as\_cairo = F)}
+\CommentTok{\# legend \textless{}{-} read\_svg("mcnebula\_results/trace/rank.svg")}
+\CommentTok{\# \#\# {-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-}{-} }
+\CommentTok{\# grid\_draw\_svg.legend(main, legend,}
+\CommentTok{\#                      width = 16,}
+\CommentTok{\#                      position.main = 0.7,}
+                     \CommentTok{\# savename = "mcnebula\_results/trace/merge\_gradient.svg")}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}

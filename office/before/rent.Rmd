@@ -1,0 +1,66 @@
+---
+output:
+  bookdown::pdf_document2:
+    keep_tex: true
+    toc: false
+    toc_depth: 3
+    latex_engine: xelatex
+header-includes:
+  \usepackage{caption}
+  \captionsetup{font={footnotesize},width=6in}
+  \renewcommand{\dblfloatpagefraction}{.9}
+  \makeatletter
+  \renewenvironment{figure}{\def\@captype{figure}}
+  \makeatletter
+  \definecolor{shadecolor}{RGB}{242,242,242}
+  \usepackage{setspace}
+  \setstretch{1.5} 
+  \linespread{1.5}
+  \usepackage{geometry} 
+  \usepackage{indentfirst}
+  \setlength{\parindent}{2em}
+  \usepackage{pdfpages}
+  \usepackage{lscape}
+  \newcommand{\landstart}{\begin{landscape}}
+  \newcommand{\landend}{\end{landscape}}
+  \usepackage{titletoc}
+  \titlecontents{section}[3em]{\vspace{6pt}}{\contentslabel{1em}}{\hspace*{-4em}}{\titlerule*[0.3pc]{$.$}{\hspace*{-0.5em}}\contentspage}
+  \titlecontents{subsection}[3em]{\vspace{5pt}}{\contentslabel{1em}}{\hspace*{-4em}}{\titlerule*[0.3pc]{$.$}{\hspace*{-0.5em}}\contentspage}
+  \titlecontents{subsubsection}[3em]{\vspace{5pt}}{\contentslabel{1em}}{\hspace*{-3em}}{\titlerule*[0.3pc]{$.$}{\hspace*{-0.5em}}\contentspage}
+---
+
+```{r setup, include = F}
+library(gt)
+knitr::opts_chunk$set(echo = F)
+devtools::load_all("~/utils.tool/")
+```
+
+\pagestyle{empty}
+
+\landstart
+
+```{r}
+item <- c("Sound insulation" = 7, "Utilities (summer, winter)" = 4, "Rent" = 7,
+  "Other service charges" = 3,
+  "Express delivery" = 2, "Reservation deposit" = 3,
+  "Deposit" = 3, "Room N-S orientation" = 6,
+  "Contract method" = 3, "Air conditioner" = 4,
+  "Water dispenser" = 2, "Microwave" = 2, "Other home appliances" = 2,
+  "Commuting distance" = 2, "Tables" = 8, "Chairs" = 8, "Bathing" = 5, "Renewal Period" = 4,
+  "Drying conditions" = 5,
+  "Surroundings" = 4
+)
+item <- sort(item, T)
+data <- data.frame(
+  Item = c(names(item), rep("", 2)),
+  Weight = c(item, rep(1, 2))
+)
+args <- as.list(rep("@", 12))
+names(args) <- c("……", LETTERS[ 1:(length(args) -1) ])
+data <- do.call(dplyr::mutate, c(list(data), args))
+gt <- as_latex_with_caption(gt(data), "test", "Weighted assessment of rental satisfaction")
+gt[[ 1 ]] <- gsub("@", "\\\\qquad \\\\quad \\\\quad", gt[[ 1 ]])
+gt
+```
+
+\landend

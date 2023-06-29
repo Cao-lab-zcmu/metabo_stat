@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns
+         http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+<!-- Created by igraph -->
+  <key id="v_name" for="node" attr.name="name" attr.type="string"/>
+  <key id="v_preferred_name" for="node" attr.name="preferred_name" attr.type="string"/>
+  <key id="v_protein_size" for="node" attr.name="protein_size" attr.type="double"/>
+  <key id="v_annotation" for="node" attr.name="annotation" attr.type="string"/>
+  <key id="e_combined_score" for="edge" attr.name="combined_score" attr.type="double"/>
+  <graph id="G" edgedefault="directed">
+    <node id="n0">
+      <data key="v_name">9606.ENSP00000199936</data>
+      <data key="v_preferred_name">HSD17B2</data>
+      <data key="v_protein_size">387</data>
+      <data key="v_annotation">Estradiol 17-beta-dehydrogenase 2; Capable of catalyzing the interconversion of testosterone and androstenedione, as well as estradiol and estrone. Also has 20-alpha-HSD activity. Uses NADH while EDH17B3 uses NADPH; Short chain dehydrogenase/reductase superfamily</data>
+    </node>
+    <node id="n1">
+      <data key="v_name">9606.ENSP00000242057</data>
+      <data key="v_preferred_name">AHR</data>
+      <data key="v_protein_size">848</data>
+      <data key="v_annotation">Aryl hydrocarbon receptor; Ligand-activated transcriptional activator. Binds to the XRE promoter region of genes it activates. Activates the expression of multiple phase I and II xenobiotic chemical metabolizing enzyme genes (such as the CYP1A1 gene). Mediates biochemical and toxic effects of halogenated aromatic hydrocarbons. Involved in cell-cycle regulation. Likely to play an important role in the development and maturation of many tissues. Regulates the circadian clock by inhibiting the basal and circadian expression of the core circadian component PER1. Inhibits PER1 by repressing [...]</data>
+    </node>
+    <node id="n2">
+      <data key="v_name">9606.ENSP00000249373</data>
+      <data key="v_preferred_name">SMO</data>
+      <data key="v_protein_size">787</data>
+      <data key="v_annotation">Smoothened homolog; G protein-coupled receptor that probably associates with the patched protein (PTCH) to transduce the hedgehog&apos;s proteins signal. Binding of sonic hedgehog (SHH) to its receptor patched is thought to prevent normal inhibition by patched of smoothened (SMO). Required for the accumulation of KIF7, GLI2 and GLI3 in the cilia. Interacts with DLG5 at the ciliary base to induce the accumulation of KIF7 and GLI2 at the ciliary tip for GLI2 activation (By similarity)</data>
+    </node>
+    <node id="n3">
+      <data key="v_name">9606.ENSP00000261196</data>
+      <data key="v_preferred_name">SLCO1B3</data>
+      <data key="v_protein_size">702</data>
+      <data key="v_annotation">Solute carrier organic anion transporter family member 1B3; Mediates the Na(+)-independent uptake of organic anions such as 17-beta-glucuronosyl estradiol, taurocholate, triiodothyronine (T3), leukotriene C4, dehydroepiandrosterone sulfate (DHEAS), methotrexate and sulfobromophthalein (BSP). Involved in the clearance of bile acids and organic anions from the liver; Belongs to the organo anion transporter (TC 2.A.60) family</data>
+    </node>
+    <node id="n4">
+      <data key="v_name">9606.ENSP00000287820</data>
+      <data key="v_preferred_name">PPARG</data>
+      <data key="v_protein_size">505</data>
+      <data key="v_annotation">Peroxisome proliferator-activated receptor gamma; Nuclear receptor that binds peroxisome proliferators such as hypolipidemic drugs and fatty acids. Once activated by a ligand, the nuclear receptor binds to DNA specific PPAR response elements (PPRE) and modulates the transcription of its target genes, such as acyl-CoA oxidase. It therefore controls the peroxisomal beta-oxidation pathway of fatty acids. Key regulator of adipocyte differentiation and glucose homeostasis. ARF6 acts as a key regulator of the tissue-specific adipocyte P2 (aP2) enhancer. Acts as a critical regulator of gut ho [...]</data>
+    </node>
+    <node id="n5">
+      <data key="v_name">9606.ENSP00000300093</data>
+      <data key="v_preferred_name">PLK1</data>
+      <data key="v_protein_size">603</data>
+      <data key="v_annotation">Serine/threonine-protein kinase PLK1; Serine/threonine-protein kinase that performs several important functions throughout M phase of the cell cycle, including the regulation of centrosome maturation and spindle assembly, the removal of cohesins from chromosome arms, the inactivation of anaphase-promoting complex/cyclosome (APC/C) inhibitors, and the regulation of mitotic exit and cytokinesis. Polo-like kinase proteins acts by binding and phosphorylating proteins are that already phosphorylated on a specific motif recognized by the POLO box domains. Phosphorylates BORA, BUB1B/BUBR1, CC [...]</data>
+    </node>
+    <node id="n6">
+      <data key="v_name">9606.ENSP00000305355</data>
+      <data key="v_preferred_name">PRKCB</data>
+      <data key="v_protein_size">673</data>
+      <data key="v_annotation">Protein kinase C beta type; Calcium-activated, phospholipid- and diacylglycerol (DAG)-dependent serine/threonine-protein kinase involved in various cellular processes such as regulation of the B-cell receptor (BCR) signalosome, oxidative stress-induced apoptosis, androgen receptor-dependent transcription regulation, insulin signaling and endothelial cells proliferation. Plays a key role in B-cell activation by regulating BCR-induced NF-kappa-B activation. Mediates the activation of the canonical NF-kappa-B pathway (NFKB1) by direct phosphorylation of CARD11/CARMA1 at &apos;Ser-559&apos;, &apos;Ser-64 [...]</data>
+    </node>
+    <node id="n7">
+      <data key="v_name">9606.ENSP00000319788</data>
+      <data key="v_preferred_name">NQO1</data>
+      <data key="v_protein_size">274</data>
+      <data key="v_annotation">NAD(P)H dehydrogenase [quinone] 1; The enzyme apparently serves as a quinone reductase in connection with conjugation reactions of hydroquinons involved in detoxification pathways as well as in biosynthetic processes such as the vitamin K-dependent gamma-carboxylation of glutamate residues in prothrombin synthesis; Belongs to the NAD(P)H dehydrogenase (quinone) family</data>
+    </node>
+    <node id="n8">
+      <data key="v_name">9606.ENSP00000349252</data>
+      <data key="v_preferred_name">ITGAL</data>
+      <data key="v_protein_size">1170</data>
+      <data key="v_annotation">Integrin alpha-L; Integrin alpha-L/beta-2 is a receptor for ICAM1, ICAM2, ICAM3 and ICAM4. Integrin alpha-L/beta-2 is also a receptor for F11R. Involved in a variety of immune phenomena including leukocyte-endothelial cell interaction, cytotoxic T-cell mediated killing, and antibody dependent killing by granulocytes and monocytes. Contributes to natural killer cell cytotoxicity. Involved in leukocyte adhesion and transmigration of leukocytes including T-cells and neutrophils. Required for generation of common lymphoid progenitor cells in bone marrow, indicating a role in lymphopoiesis  [...]</data>
+    </node>
+    <node id="n9">
+      <data key="v_name">9606.ENSP00000350815</data>
+      <data key="v_preferred_name">NR3C2</data>
+      <data key="v_protein_size">984</data>
+      <data key="v_annotation">Mineralocorticoid receptor; Receptor for both mineralocorticoids (MC) such as aldosterone and glucocorticoids (GC) such as corticosterone or cortisol. Binds to mineralocorticoid response elements (MRE) and transactivates target genes. The effect of MC is to increase ion and water transport and thus raise extracellular fluid volume and blood pressure and lower potassium levels; Nuclear hormone receptors</data>
+    </node>
+    <node id="n10">
+      <data key="v_name">9606.ENSP00000352121</data>
+      <data key="v_preferred_name">PIK3CG</data>
+      <data key="v_protein_size">1102</data>
+      <data key="v_annotation">Phosphatidylinositol 4,5-bisphosphate 3-kinase catalytic subunit gamma isoform; Phosphoinositide-3-kinase (PI3K) that phosphorylates PtdIns(4,5)P2 (Phosphatidylinositol 4,5-bisphosphate) to generate phosphatidylinositol 3,4,5-trisphosphate (PIP3). PIP3 plays a key role by recruiting PH domain-containing proteins to the membrane, including AKT1 and PDPK1, activating signaling cascades involved in cell growth, survival, proliferation, motility and morphology. Links G-protein coupled receptor activation to PIP3 production. Involved in immune, inflammatory and allergic responses. Modulates [...]</data>
+    </node>
+    <node id="n11">
+      <data key="v_name">9606.ENSP00000362108</data>
+      <data key="v_preferred_name">LCN2</data>
+      <data key="v_protein_size">198</data>
+      <data key="v_annotation">Neutrophil gelatinase-associated lipocalin; Iron-trafficking protein involved in multiple processes such as apoptosis, innate immunity and renal development. Binds iron through association with 2,5-dihydroxybenzoic acid (2,5- DHBA), a siderophore that shares structural similarities with bacterial enterobactin, and delivers or removes iron from the cell, depending on the context. Iron-bound form (holo-24p3) is internalized following binding to the SLC22A17 (24p3R) receptor, leading to release of iron and subsequent increase of intracellular iron concentration. In contrast, association o [...]</data>
+    </node>
+    <node id="n12">
+      <data key="v_name">9606.ENSP00000380948</data>
+      <data key="v_preferred_name">ITGB2</data>
+      <data key="v_protein_size">769</data>
+      <data key="v_annotation">Integrin beta-2; Integrin ITGAL/ITGB2 is a receptor for ICAM1, ICAM2, ICAM3 and ICAM4. Integrins ITGAM/ITGB2 and ITGAX/ITGB2 are receptors for the iC3b fragment of the third complement component and for fibrinogen. Integrin ITGAX/ITGB2 recognizes the sequence G-P-R in fibrinogen alpha-chain. Integrin ITGAM/ITGB2 recognizes P1 and P2 peptides of fibrinogen gamma chain. Integrin ITGAM/ITGB2 is also a receptor for factor X. Integrin ITGAD/ITGB2 is a receptor for ICAM3 and VCAM1. Contributes to natural killer cell cytotoxicity. Involved in leukocyte adhesion and transmigration of leukocyte [...]</data>
+    </node>
+    <edge source="n0" target="n3">
+      <data key="e_combined_score">211</data>
+    </edge>
+    <edge source="n0" target="n3">
+      <data key="e_combined_score">211</data>
+    </edge>
+    <edge source="n1" target="n3">
+      <data key="e_combined_score">324</data>
+    </edge>
+    <edge source="n1" target="n3">
+      <data key="e_combined_score">324</data>
+    </edge>
+    <edge source="n1" target="n4">
+      <data key="e_combined_score">573</data>
+    </edge>
+    <edge source="n1" target="n4">
+      <data key="e_combined_score">573</data>
+    </edge>
+    <edge source="n4" target="n6">
+      <data key="e_combined_score">275</data>
+    </edge>
+    <edge source="n4" target="n6">
+      <data key="e_combined_score">275</data>
+    </edge>
+    <edge source="n1" target="n7">
+      <data key="e_combined_score">688</data>
+    </edge>
+    <edge source="n1" target="n7">
+      <data key="e_combined_score">688</data>
+    </edge>
+    <edge source="n4" target="n7">
+      <data key="e_combined_score">419</data>
+    </edge>
+    <edge source="n4" target="n7">
+      <data key="e_combined_score">419</data>
+    </edge>
+    <edge source="n6" target="n8">
+      <data key="e_combined_score">276</data>
+    </edge>
+    <edge source="n6" target="n8">
+      <data key="e_combined_score">276</data>
+    </edge>
+    <edge source="n4" target="n9">
+      <data key="e_combined_score">200</data>
+    </edge>
+    <edge source="n4" target="n9">
+      <data key="e_combined_score">200</data>
+    </edge>
+    <edge source="n4" target="n10">
+      <data key="e_combined_score">252</data>
+    </edge>
+    <edge source="n4" target="n10">
+      <data key="e_combined_score">252</data>
+    </edge>
+    <edge source="n5" target="n10">
+      <data key="e_combined_score">240</data>
+    </edge>
+    <edge source="n5" target="n10">
+      <data key="e_combined_score">240</data>
+    </edge>
+    <edge source="n6" target="n10">
+      <data key="e_combined_score">688</data>
+    </edge>
+    <edge source="n6" target="n10">
+      <data key="e_combined_score">688</data>
+    </edge>
+    <edge source="n8" target="n10">
+      <data key="e_combined_score">279</data>
+    </edge>
+    <edge source="n8" target="n10">
+      <data key="e_combined_score">279</data>
+    </edge>
+    <edge source="n9" target="n10">
+      <data key="e_combined_score">330</data>
+    </edge>
+    <edge source="n9" target="n10">
+      <data key="e_combined_score">330</data>
+    </edge>
+    <edge source="n1" target="n11">
+      <data key="e_combined_score">240</data>
+    </edge>
+    <edge source="n1" target="n11">
+      <data key="e_combined_score">240</data>
+    </edge>
+    <edge source="n4" target="n11">
+      <data key="e_combined_score">414</data>
+    </edge>
+    <edge source="n4" target="n11">
+      <data key="e_combined_score">414</data>
+    </edge>
+    <edge source="n7" target="n11">
+      <data key="e_combined_score">203</data>
+    </edge>
+    <edge source="n7" target="n11">
+      <data key="e_combined_score">203</data>
+    </edge>
+    <edge source="n9" target="n11">
+      <data key="e_combined_score">269</data>
+    </edge>
+    <edge source="n9" target="n11">
+      <data key="e_combined_score">269</data>
+    </edge>
+    <edge source="n4" target="n12">
+      <data key="e_combined_score">216</data>
+    </edge>
+    <edge source="n4" target="n12">
+      <data key="e_combined_score">216</data>
+    </edge>
+    <edge source="n6" target="n12">
+      <data key="e_combined_score">423</data>
+    </edge>
+    <edge source="n6" target="n12">
+      <data key="e_combined_score">423</data>
+    </edge>
+    <edge source="n8" target="n12">
+      <data key="e_combined_score">999</data>
+    </edge>
+    <edge source="n8" target="n12">
+      <data key="e_combined_score">999</data>
+    </edge>
+    <edge source="n10" target="n12">
+      <data key="e_combined_score">355</data>
+    </edge>
+    <edge source="n10" target="n12">
+      <data key="e_combined_score">355</data>
+    </edge>
+  </graph>
+</graphml>

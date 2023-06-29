@@ -824,3 +824,25 @@ rmarkdown::render(file.report)
 # file.copy(gsub("\\.Rmd", ".docx", file3),
 #   "/mnt/data/wizard/Documents/article/MCnebula2/others/report_serum.docx", T)
 
+# ==========================================================================
+# extra picture
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+# pgg <- modify_set_labs(mcn@parent_nebula@ggset, mcn)
+# pgg <- mutate_layer(pgg, 3, stroke = 0, color = "transparent")
+# # ggsave("herbal_parent.pdf", call_command(pgg), width = 7, height = 7)
+
+# mcn@child_nebulae@ggset %<>%
+#   lapply(function(ggset) {
+#     mutate_layer(ggset, 3, stroke = 0, color = "transparent")
+# })
+
+# pc <- nebulae_as_grob(mcn)
+# frame <- frame_col(c(p = 1.2, pc = 1), namel(p = as_grob(call_command(pgg)), pc))
+# # dev.new(width = 23, height = 14)
+
+# pdf("parent_and_child.pdf", 23 * .8, 14 * .8)
+# draw(frame)
+# dev.off()
+
+
